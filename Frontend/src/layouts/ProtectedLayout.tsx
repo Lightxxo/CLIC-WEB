@@ -1,15 +1,10 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
-
-interface ProtectedLayoutProps {
-  element: React.ReactElement;
-}
+import { Navigate, Outlet } from "react-router-dom";
 
 const isAuthenticated = true; // Replace with your real auth check
 
-export default function ProtectedLayout({ element }: ProtectedLayoutProps) {
+export default function ProtectedLayout() {
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
-  return element;
+  return <Outlet />;
 }
