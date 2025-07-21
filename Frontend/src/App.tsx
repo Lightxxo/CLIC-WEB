@@ -1,23 +1,64 @@
-import React from "react";
-import Iridescence from "./blocks/Backgrounds/Iridescence/Iridescence";
+import React, { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import ProtectedLayout from "./layouts/ProtectedLayout";
+import Landing from "./pages/Landing/Landing";
+// Pages
+// import Login from "./routes/Login";
+
+
+// // Lazy public route (future use)
+// const About = lazy(() => import("./routes/About"));
+
+// // Eager private route (future use)
+// import Profile from "./routes/Profile";
+
+// // Lazy private route (future use)
+// const Dashboard = lazy(() => import("./routes/Dashboard"));
+
+
+
 export default function App() {
   return (
-    <>
-      {/* Fixed full-screen shader background */}
-      <Iridescence
-        color={[1, 1, 1]}
-        mouseReact={false}
-        amplitude={0.1}
-        speed={1.0}
-        className="fixed top-0 left-0 w-screen h-screen -z-10"
-      />
+    <Routes>
+      {/* Public route */}
+      <Route path="/" element={<Landing />} />
 
-      {/* Tall scrollable content to produce vertical scrolling */}
-      <div className="h-[5000px] text-white flex items-center justify-center">
-        <h1 className="text-4xl font-bold">
-          Scroll down to see shader react to scroll position!
-        </h1>
-      </div>
-    </>
+      {/*
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/about"
+        element={
+          <Suspense fallback={<div>Loading About...</div>}>
+            <About />
+          </Suspense>
+        }
+      />
+      */}
+
+      {/* Protected routes */}
+      {/*
+      <Route
+        path="dashboard"
+        element={
+          <ProtectedLayout
+            element={
+              <Suspense fallback={<div>Loading Dashboard...</div>}>
+                <Dashboard />
+              </Suspense>
+            }
+          />
+        }
+      />
+      */}
+
+      {/*
+      <Route
+        path="profile"
+        element={
+          <ProtectedLayout element={<Profile />} />
+        }
+      />
+      */}
+    </Routes>
   );
 }
