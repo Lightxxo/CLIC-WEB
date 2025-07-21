@@ -15,6 +15,7 @@ import Landing from "./pages/Landing/Landing";
 
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import MainLayout from "./layouts/MainLayout";
+import Signup from "./pages/Signup/Signup";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
       {/* Routes WITH navbar */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<Landing />} />
+        <Route path="/signup" element={<Signup />} />
         {/* Public routes with navbar */}
         {/*
         <Route
