@@ -24,12 +24,17 @@ export default function Landing() {
         <div className="absolute bottom-0 left-0 w-full h-[20%] bg-gradient-to-t from-black/60 to-transparent z-10" />
 
         <button
-          onClick={() => scrollRef.current?.scrollIntoView({ behavior: "smooth" })}
+          onClick={() =>
+            scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+          }
           aria-label="Scroll down"
           className="absolute bottom-0 left-0 w-full z-20 px-4 py-6 flex flex-col items-center justify-center gap-1 focus:outline-none hover:bg-black/10 active:bg-black/20 transition"
         >
           <span className="text-white text-sm tracking-wide">Scroll down</span>
-          <ChevronDown className="text-white opacity-80 animate-bounce" size={32} />
+          <ChevronDown
+            className="text-white opacity-80 animate-bounce"
+            size={32}
+          />
         </button>
       </section>
 
@@ -38,13 +43,13 @@ export default function Landing() {
         className="flex flex-col items-center justify-center text-center py-24 px-4 bg-white"
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          Don’t Swipe,
-          <span className="inline-block mx-2 text-pink-500 font-black animate-pulse">
+          Don't Swipe,
+          <span className="inline-block mx-2 text-figma-orange font-black animate-pulse">
             CLIC
           </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-700 max-w-md">
-          Let’s start speaking to each other again.
+          Let's start speaking to each other again.
         </p>
       </section>
 
@@ -54,15 +59,15 @@ export default function Landing() {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 flex items-center gap-1 hover:text-pink-500 transition"
+            className="px-4 flex items-center gap-1 hover:text-figma-orange transition"
           >
             <Instagram className="w-4 h-4" />
             Instagram
           </a>
-          <Link to="/privacy" className="px-4 hover:text-pink-500 transition">
+          <Link to="/" className="px-4 hover:text-figma-orange transition">
             Privacy Policy
           </Link>
-          <Link to="/terms" className="px-4 hover:text-pink-500 transition">
+          <Link to="/" className="px-4 hover:text-figma-orange transition">
             Terms of Service
           </Link>
         </div>
