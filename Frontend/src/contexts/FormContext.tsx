@@ -8,12 +8,13 @@ export type FormDataType = {
   lastName: string;
   username: string;
   gender: string;
-  answers: string[];
+  answers: { question: string; selectedAns: string }[];
   verificationStatus: boolean;
   newUser: boolean;
   dateOfBirth: Date | null;
   password: string | null;
   confirmPassword: string | null;
+  signupSuccess: boolean;
 };
 
 const defaultFormData: FormDataType = {
@@ -28,6 +29,7 @@ const defaultFormData: FormDataType = {
   dateOfBirth: null,
   password: null,
   confirmPassword: null,
+  signupSuccess: false,
 };
 
 type FormContextType = {

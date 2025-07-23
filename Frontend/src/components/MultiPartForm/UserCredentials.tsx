@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "@/contexts/FormContext";
 import { format } from "date-fns";
@@ -27,7 +27,7 @@ export default function UserCredentials({
 }: UserCredentialsProps) {
   const { data, setData } = useFormContext();
 
-  // Initialize local state from context or defaults
+  // Local states
   const [dob, setDob] = useState<Date | null>(data.dateOfBirth);
   const [password, setPassword] = useState(data.password || "");
   const [confirmPassword, setConfirmPassword] = useState(
@@ -37,22 +37,24 @@ export default function UserCredentials({
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Sync local dob with context
+  // Sync dob to context, debounced effect to avoid rapid updates
   useEffect(() => {
-    setData((prev) => ({ ...prev, dateOfBirth: dob }));
+    const handler = setTimeout(() => {
+      setData((prev) => ({ ...prev, dateOfBirth: dob }));
+    }, 100);
+    return () => clearTimeout(handler);
   }, [dob, setData]);
 
-  // Sync local password with context
+  // Sync password & confirmPassword with context
   useEffect(() => {
     setData((prev) => ({ ...prev, password }));
   }, [password, setData]);
 
-  // Sync local confirmPassword with context
   useEffect(() => {
     setData((prev) => ({ ...prev, confirmPassword }));
   }, [confirmPassword, setData]);
 
-  // Update username based on first and last name changes
+  // Update username when first/last name changes
   useEffect(() => {
     setData((prev) => ({
       ...prev,
@@ -60,7 +62,7 @@ export default function UserCredentials({
     }));
   }, [data.firstName, data.lastName, setData]);
 
-  // Validate all required fields + passwords match
+  // Validate all fields + passwords match
   const isValid =
     !!data.firstName?.trim() &&
     !!data.lastName?.trim() &&
@@ -70,28 +72,36 @@ export default function UserCredentials({
     password === confirmPassword &&
     !!data.gender;
 
-  // Report validity changes to parent
+  // Notify parent about validity
   useEffect(() => {
     onValidityChange(isValid);
   }, [isValid, onValidityChange]);
 
-  const onDateSelect = (date: Date | undefined) => {
+  // Memoize the date select handler to avoid re-renders
+  const onDateSelect = useCallback((date: Date | undefined) => {
     setDob(date || null);
-  };
+  }, []);
+
+  // Memoize formatted DOB to avoid recalculating on every render
+  const formattedDob = useMemo(() => (dob ? format(dob, "PPP") : "Pick a date"), [
+    dob,
+  ]);
 
   return (
-    <div className="space-y-4">
+    <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
       {/* First and Last Name side by side */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Input
           placeholder="First Name"
           value={data.firstName || ""}
           onChange={(e) => setData({ ...data, firstName: e.target.value })}
+          autoComplete="given-name"
         />
         <Input
           placeholder="Last Name"
           value={data.lastName || ""}
           onChange={(e) => setData({ ...data, lastName: e.target.value })}
+          autoComplete="family-name"
         />
       </div>
 
@@ -108,7 +118,7 @@ export default function UserCredentials({
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {dob ? format(dob, "PPP") : "Pick a date"}
+              {formattedDob}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
@@ -124,15 +134,15 @@ export default function UserCredentials({
         </Popover>
       </div>
 
-      {/* Password and Confirm Password stacked vertically with eye icons */}
+      {/* Password and Confirm Password with eye toggles */}
       <div className="space-y-3">
-        {/* Password */}
         <div className="relative">
           <Input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
           />
           <Button
             variant="ghost"
@@ -146,7 +156,6 @@ export default function UserCredentials({
           </Button>
         </div>
 
-        {/* Confirm Password */}
         <div className="relative">
           <Input
             type={showConfirmPassword ? "text" : "password"}
@@ -158,6 +167,7 @@ export default function UserCredentials({
                 ? "border-red-600 ring-0 focus-visible:border-red-400 focus-visible:ring-red-400 !border-red-600"
                 : ""
             }
+            autoComplete="new-password"
           />
           <Button
             variant="ghost"
@@ -177,11 +187,12 @@ export default function UserCredentials({
         value={data.gender || ""}
         onChange={(e) => setData({ ...data, gender: e.target.value })}
         className="w-full border rounded-md p-2 focus:outline-none focus:ring"
+        autoComplete="sex"
       >
         <option value="">Select Gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
-    </div>
+    </form>
   );
 }

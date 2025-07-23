@@ -22,11 +22,14 @@ export default function QuestionForm({
 }: QuestionFormProps) {
   const { data, setData } = useFormContext();
 
-  const selected = data.answers[index] || "";
+  const selected = data.answers[index]?.selectedAns || "";
 
   const setAnswer = (ans: string) => {
     const newAnswers = [...data.answers];
-    newAnswers[index] = ans;
+    newAnswers[index] = {
+      question: question.question,
+      selectedAns: ans,
+    };
     setData({ ...data, answers: newAnswers });
   };
 
