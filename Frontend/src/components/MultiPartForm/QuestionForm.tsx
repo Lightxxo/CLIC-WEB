@@ -1,4 +1,6 @@
-// components/MultiPartForm/QuestionForm.tsx
+"use client";
+
+import { useEffect } from "react";
 import { useFormContext } from "@/contexts/FormContext";
 import { cn } from "@/lib/utils";
 
@@ -10,9 +12,14 @@ type Question = {
 interface QuestionFormProps {
   index: number;
   question: Question;
+  onValidityChange: (valid: boolean) => void;
 }
 
-export default function QuestionForm({ index, question }: QuestionFormProps) {
+export default function QuestionForm({
+  index,
+  question,
+  onValidityChange,
+}: QuestionFormProps) {
   const { data, setData } = useFormContext();
 
   const selected = data.answers[index] || "";
@@ -22,6 +29,11 @@ export default function QuestionForm({ index, question }: QuestionFormProps) {
     newAnswers[index] = ans;
     setData({ ...data, answers: newAnswers });
   };
+
+  // Report validity (answer selected)
+  useEffect(() => {
+    onValidityChange(selected.trim() !== "");
+  }, [selected, onValidityChange]);
 
   return (
     <div className="space-y-4">

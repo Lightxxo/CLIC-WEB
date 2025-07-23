@@ -6,20 +6,28 @@ export type FormDataType = {
   email: string;
   firstName: string;
   lastName: string;
+  username: string;
   gender: string;
   answers: string[];
   verificationStatus: boolean;
-  newUser: boolean
+  newUser: boolean;
+  dateOfBirth: Date | null;
+  password: string | null;
+  confirmPassword: string | null;
 };
 
 const defaultFormData: FormDataType = {
   email: "",
   firstName: "",
   lastName: "",
+  username: "",
   gender: "",
   answers: [],
   verificationStatus: false,
   newUser: true,
+  dateOfBirth: null,
+  password: null,
+  confirmPassword: null,
 };
 
 type FormContextType = {

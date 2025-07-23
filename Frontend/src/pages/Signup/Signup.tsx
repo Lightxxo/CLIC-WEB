@@ -20,31 +20,26 @@ const quiz = [
     id: 1,
     question: "What is the capital of France?",
     options: ["Berlin", "Madrid", "Paris", "Rome"],
-    answer: "Paris",
   },
   {
     id: 2,
     question: "Which language runs in a web browser?",
     options: ["Java", "C", "Python", "JavaScript"],
-    answer: "JavaScript",
   },
   {
     id: 3,
     question: "Who wrote 'To Kill a Mockingbird'?",
     options: ["Harper Lee", "Mark Twain", "Jane Austen", "F. Scott Fitzgerald"],
-    answer: "Harper Lee",
   },
   {
     id: 4,
     question: "What is the smallest prime number?",
     options: ["0", "1", "2", "3"],
-    answer: "2",
   },
   {
     id: 5,
     question: "Which planet is known as the Red Planet?",
     options: ["Earth", "Mars", "Venus", "Jupiter"],
-    answer: "Mars",
   },
 ];
 
@@ -69,7 +64,7 @@ const Signup = () => {
         component: (
           <>
             {/* Multi-Step Quiz Form for New Users */}
-            <p className="text-center text-sm text-muted-foreground mb-4">
+            <p className="text-center text-sm text-muted-foreground mt-8">
               New User Onboarding
             </p>
             <MultiPartForm questions={quiz} />
