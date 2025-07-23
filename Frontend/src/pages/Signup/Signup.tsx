@@ -1,4 +1,5 @@
 import { Input } from "@/components/ui/input"
+import { Skeleton } from "@/components/ui/skeleton"
 import { useEffect, useState } from "react";
 
 const Signup = () => {
@@ -8,6 +9,7 @@ const Signup = () => {
     const [email, setEmail] = useState("");
     const [isVerified, setIsVerified] = useState(false);
     const [newUser, setNewUser] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     // useEffect(() => {
     //     fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -22,7 +24,8 @@ const Signup = () => {
                 setError("Please enter a valid email address!"); return;
             }
             setEmail(input.value.trim());
-            fetch("http://localhost:5000/email-verification-code", {
+            setIsLoading(true);
+            fetch("http://192.168.68.72:5000/email-verification-code", {
                 method: 'POST',
                 headers: {
                     'content-type':'application/json',
@@ -32,6 +35,7 @@ const Signup = () => {
             .then(res => {
                 if (res.status == 200) setEnteredEmail(true);
                 else alert("an error occurred!");
+                setIsLoading(false);
             });
         }
     }
@@ -42,7 +46,8 @@ const Signup = () => {
             if (!(Number(input.value.trim()) >= 100000 && Number(input.value.trim()) <= 999999)) {
                 setCodeError("Code didn't match!"); return;
             }
-            fetch("http://localhost:5000/match-verification-code", {
+            setIsLoading(true);
+            fetch("http://192.168.68.72:5000/match-verification-code", {
                 method: 'POST',
                 headers: {
                     'content-type':'application/json',
@@ -52,15 +57,24 @@ const Signup = () => {
                 if (res.status == 201) setIsVerified(true);
                 else if (res.status == 200) {setIsVerified(true); setNewUser(false);}
                 else setCodeError("Code didn't match!");
+                setIsLoading(false);
             })
         }
     }
     return (
         <div className="mt-20 text-center">
             <p className="text-xl">talk to people at online events <br /> the events pool the people we know you will clic with</p>
-            {isVerified ? <>{newUser ?
-                <p>Please continue to Signup.</p>
-            : <p>Welcome!</p>}</> 
+            
+    {isLoading ?
+    <div className="w-1/2 m-auto mt-5">
+      <Skeleton className="h-[125px] rounded-xl" />
+      
+        <Skeleton className="h-4 mt-3" />
+      
+    </div>
+    : <>{isVerified ? <>{newUser ?
+                <p className="my-5">Please continue to Signup.</p>
+            : <p className="my-5">Welcome!</p>}</> 
             : 
             <>{!enteredEmail ?
                 <section>
@@ -71,11 +85,10 @@ const Signup = () => {
                 :
                 <section>
                     <p className="my-5">We have sent you a verification code to your email (<b>{email}</b>). <br /> 
-                      Check your email (also spam).</p>
+                      Check your inbox (also spam).</p>
                     <Input type="number" className="w-1/2 m-auto p-5" min="100000" max="999999" onKeyDown={codeInput} placeholder="enter your code" />
                     {codeError != "" && <p className="text-left w-1/2 m-auto text-red-600 text-xs">{codeError}</p>}
-                </section>}</>}
-            
+                </section>}</>}</>}
         </div>
     );
 };
