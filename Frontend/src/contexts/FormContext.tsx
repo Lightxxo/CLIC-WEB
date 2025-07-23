@@ -3,17 +3,23 @@ import React, { useState, createContext, useContext } from "react";
 import type { ReactNode } from "react";
 
 export type FormDataType = {
+  email: string;
   firstName: string;
   lastName: string;
   gender: string;
   answers: string[];
+  verificationStatus: boolean;
+  newUser: boolean
 };
 
 const defaultFormData: FormDataType = {
+  email: "",
   firstName: "",
   lastName: "",
   gender: "",
   answers: [],
+  verificationStatus: false,
+  newUser: true,
 };
 
 type FormContextType = {

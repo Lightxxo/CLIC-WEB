@@ -1,12 +1,115 @@
 import EmailVerification from "@/components/EmailVerification/EmailVerification";
+import MultiPartForm from "@/components/MultiPartForm/MultiPartForm";
+import { useFormContext } from "@/contexts/FormContext";
+import { AnimatePresence, motion } from "framer-motion";
+
+const fadeVariant = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: { duration: 0.4, ease: "easeInOut" as const },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.3, ease: "easeInOut" as const },
+  },
+};
+
+const quiz = [
+  {
+    id: 1,
+    question: "What is the capital of France?",
+    options: ["Berlin", "Madrid", "Paris", "Rome"],
+    answer: "Paris",
+  },
+  {
+    id: 2,
+    question: "Which language runs in a web browser?",
+    options: ["Java", "C", "Python", "JavaScript"],
+    answer: "JavaScript",
+  },
+  {
+    id: 3,
+    question: "Who wrote 'To Kill a Mockingbird'?",
+    options: ["Harper Lee", "Mark Twain", "Jane Austen", "F. Scott Fitzgerald"],
+    answer: "Harper Lee",
+  },
+  {
+    id: 4,
+    question: "What is the smallest prime number?",
+    options: ["0", "1", "2", "3"],
+    answer: "2",
+  },
+  {
+    id: 5,
+    question: "Which planet is known as the Red Planet?",
+    options: ["Earth", "Mars", "Venus", "Jupiter"],
+    answer: "Mars",
+  },
+];
 
 const Signup = () => {
+  const { data } = useFormContext();
 
-    return (
-       <EmailVerification />
-    );
+  const getCurrentComponent = () => {
+    if (!data.verificationStatus) {
+      return {
+        key: "email-verification",
+        component: (
+          <>
+            <EmailVerification></EmailVerification>
+          </>
+        ),
+      };
+    }
+
+    if (data.newUser) {
+      return {
+        key: "multi-form",
+        component: (
+          <>
+            {/* Multi-Step Quiz Form for New Users */}
+            <p className="text-center text-sm text-muted-foreground mb-4">
+              New User Onboarding
+            </p>
+            <MultiPartForm questions={quiz} />
+          </>
+        ),
+      };
+    }
+
+    return {
+      key: "existing-user",
+      component: (
+        <>
+          {/* Existing User Screen */}
+          <p className="text-center text-sm text-muted-foreground mb-4">
+            Welcome Back
+          </p>
+          {/* <ExistingUserComponent /> */}
+        </>
+      ),
+    };
+  };
+
+  const { key, component } = getCurrentComponent();
+
+  return (
+    <div className="relative min-h-screen w-full flex  justify-center">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={key}
+          variants={fadeVariant}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="w-full"
+        >
+          {component}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
 };
 
 export default Signup;
-
-
