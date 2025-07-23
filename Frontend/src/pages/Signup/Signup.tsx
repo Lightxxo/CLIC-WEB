@@ -47,16 +47,16 @@ const Signup = () => {
   const { data } = useFormContext();
 
   const getCurrentComponent = () => {
-    if (!data.verificationStatus) {
-      return {
-        key: "email-verification",
-        component: (
-          <>
-            <EmailVerification></EmailVerification>
-          </>
-        ),
-      };
-    }
+    // if (!data.verificationStatus) {
+    //   return {
+    //     key: "email-verification",
+    //     component: (
+    //       <>
+    //         <EmailVerification></EmailVerification>
+    //       </>
+    //     ),
+    //   };
+    // }
 
     if (data.newUser) {
       return {

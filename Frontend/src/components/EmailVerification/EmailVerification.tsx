@@ -8,15 +8,9 @@ const EmailVerification = () => {
   const [enteredEmail, setEnteredEmail] = useState(false);
   const [codeError, setCodeError] = useState("");
   const [email, setEmail] = useState("");
-  const [isVerified, setIsVerified] = useState(false);
-  const [newUser, setNewUser] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const { setData } = useFormContext();
-  // useEffect(() => {
-  //     fetch('https://jsonplaceholder.typicode.com/todos/1')
-  //   .then(response => console.log(response.status))
-  // }, [])
 
   function emailInput(e: any) {
     setError("");
@@ -73,7 +67,6 @@ const EmailVerification = () => {
             email,
             newUser: true,
           }));
-          setIsVerified(true);
         } else if (res.status == 200) {
           setData((prev) => ({
             ...prev,
@@ -81,8 +74,6 @@ const EmailVerification = () => {
             email,
             newUser: false,
           }));
-          setIsVerified(true);
-          setNewUser(false);
         } else setCodeError("Code didn't match!");
         setIsLoading(false);
       });
@@ -103,16 +94,6 @@ const EmailVerification = () => {
         </div>
       ) : (
         <>
-          {isVerified ? (
-            <>
-              {newUser ? (
-                <p className="my-5">Please continue to Signup.</p>
-              ) : (
-                <p className="my-5">Welcome!</p>
-              )}
-            </>
-          ) : (
-            <>
               {!enteredEmail ? (
                 <section>
                   <p className="my-5">
@@ -153,8 +134,6 @@ const EmailVerification = () => {
                 </section>
               )}
             </>
-          )}
-        </>
       )}
     </div>
   );
