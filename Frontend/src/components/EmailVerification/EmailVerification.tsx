@@ -1,37 +1,39 @@
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import config from "@/config";
 import { useFormContext } from "@/contexts/FormContext";
 import { useState } from "react";
+import { Button } from "@/components/ui/button"
 
 const EmailVerification = () => {
   const [error, setError] = useState("");
   const [enteredEmail, setEnteredEmail] = useState(false);
   const [codeError, setCodeError] = useState("");
   const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { REMOTE, API_BASE_URL, API_PORT } = config;
 
   const { setData } = useFormContext();
 
   function emailInput(e: any) {
     setError("");
     if (e.key === "Enter") {
-      const input = e.target as HTMLInputElement;
       if (
         !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-          input.value.trim()
+          email
         )
       ) {
         setError("Please enter a valid email address!");
         return;
       }
-      setEmail(input.value.trim());
       setIsLoading(true);
-      fetch("http://192.168.68.72:5000/email-verification-code", {
+      fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/email-verification-code`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ email: input.value.trim() }),
+        body: JSON.stringify({ email }),
       }).then((res) => {
         if (res.status == 200) setEnteredEmail(true);
         else alert("an error occurred!");
@@ -39,26 +41,48 @@ const EmailVerification = () => {
       });
     }
   }
+  function emailSubmit() {
+    setError("");
+          if (
+        !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+          email
+        )
+      ) {
+        setError("Please enter a valid email address!");
+        return;
+      }
+      setIsLoading(true);
+      fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/email-verification-code`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      }).then((res) => {
+        if (res.status == 200) setEnteredEmail(true);
+        else alert("an error occurred!");
+        setIsLoading(false);
+      });
+  }
   function codeInput(e: any) {
     setCodeError("");
     if (e.key === "Enter") {
-      const input = e.target as HTMLInputElement;
       if (
         !(
-          Number(input.value.trim()) >= 100000 &&
-          Number(input.value.trim()) <= 999999
+          Number(code) >= 100000 &&
+          Number(code) <= 999999
         )
       ) {
         setCodeError("Code didn't match!");
         return;
       }
       setIsLoading(true);
-      fetch("http://192.168.68.72:5000/match-verification-code", {
+      fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/match-verification-code`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ email, code: input.value.trim() }),
+        body: JSON.stringify({ email, code }),
       }).then((res) => {
         if (res.status == 201) {
           setData((prev) => ({
@@ -79,6 +103,43 @@ const EmailVerification = () => {
       });
     }
   }
+  function codeSubmit() {
+    setCodeError("");
+          if (
+        !(
+          Number(code) >= 100000 &&
+          Number(code) <= 999999
+        )
+      ) {
+        setCodeError("Code didn't match!");
+        return;
+      }
+      setIsLoading(true);
+      fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/match-verification-code`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email, code }),
+      }).then((res) => {
+        if (res.status == 201) {
+          setData((prev) => ({
+            ...prev,
+            verificationStatus: true,
+            email,
+            newUser: true,
+          }));
+        } else if (res.status == 200) {
+          setData((prev) => ({
+            ...prev,
+            verificationStatus: true,
+            email,
+            newUser: false,
+          }));
+        } else setCodeError("Code didn't match!");
+        setIsLoading(false);
+      });
+  }
   return (
     <div className="mt-20 text-center">
       <p className="text-xl">
@@ -89,7 +150,6 @@ const EmailVerification = () => {
       {isLoading ? (
         <div className="w-1/2 m-auto mt-5">
           <Skeleton className="h-[125px] rounded-xl" />
-
           <Skeleton className="h-4 mt-3" />
         </div>
       ) : (
@@ -101,8 +161,9 @@ const EmailVerification = () => {
                   </p>
                   <Input
                     type="email"
-                    className="w-1/2 m-auto p-5"
+                    className="w-4/5 sm:w-1/2 md:w-1/3 m-auto p-5"
                     onKeyDown={emailInput}
+                    onChange={(e) => setEmail(e.target.value.trim())}
                     placeholder="Email"
                   />
                   {error != "" && (
@@ -110,6 +171,7 @@ const EmailVerification = () => {
                       {error}
                     </p>
                   )}
+                  <Button variant="outline" className="cursor-pointer mt-4" onClick={emailSubmit}>Submit</Button>
                 </section>
               ) : (
                 <section>
@@ -120,10 +182,11 @@ const EmailVerification = () => {
                   </p>
                   <Input
                     type="number"
-                    className="w-1/2 m-auto p-5"
+                    className="w-4/5 sm:w-1/2 md:w-1/3 m-auto p-5"
                     min="100000"
                     max="999999"
                     onKeyDown={codeInput}
+                    onChange={e => setCode(e.target.value.trim())}
                     placeholder="enter your code"
                   />
                   {codeError != "" && (
@@ -131,6 +194,7 @@ const EmailVerification = () => {
                       {codeError}
                     </p>
                   )}
+                  <Button variant="outline" className="cursor-pointer mt-4" onClick={codeSubmit}>Submit</Button>
                 </section>
               )}
             </>
