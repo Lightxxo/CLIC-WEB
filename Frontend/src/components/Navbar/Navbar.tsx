@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
+import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function Navbar() {
       <nav className="relative z-50 w-full border-b border-gray-200 bg-white px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <a href="/" className="text-2xl font-bold text-figma-blue">
-          CLIC
+          <img src={logo} width="50" />
         </a>
 
         {/* Desktop nav buttons */}

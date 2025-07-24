@@ -143,8 +143,7 @@ const EmailVerification = () => {
   return (
     <div className="mt-20 text-center">
       <p className="text-xl">
-        talk to people at online events <br /> the events pool the people we
-        know you will clic with
+        Talk to other members at online events. <br /> The events pool together the members we know you will Clic with.
       </p>
 
       {isLoading ? (
@@ -157,7 +156,7 @@ const EmailVerification = () => {
               {!enteredEmail ? (
                 <section>
                   <p className="my-5">
-                    Enter your email address to apply for membership
+                    <b className="text-lg">Enter your email address</b> <br /> <small className="text-gray-500">to apply for membership</small>
                   </p>
                   <Input
                     type="email"

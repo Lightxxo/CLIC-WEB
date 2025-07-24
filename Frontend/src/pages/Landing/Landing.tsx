@@ -43,7 +43,7 @@ export default function Landing() {
         className="flex flex-col items-center justify-center text-center py-24 px-4 bg-white"
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          Don't Swipe,
+          don't swipe,
           <span className="inline-block mx-2 text-figma-orange font-black animate-pulse">
             CLIC
           </span>
