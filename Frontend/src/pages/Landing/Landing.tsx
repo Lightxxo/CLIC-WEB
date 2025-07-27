@@ -2,7 +2,8 @@
 import { ChevronDown, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import videoSrc from "@/assets/videos/CC.London.mp4";
+import videoSrc from "@/assets/videos/CC.Highway.Bangkok.Website.mp4";
+import { CLIC } from "@/components/CLIC/CLIC";
 
 export default function Landing() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -42,12 +43,18 @@ export default function Landing() {
         ref={scrollRef}
         className="flex flex-col items-center justify-center text-center py-24 px-4 bg-white"
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          don't swipe,
-          <span className="inline-block mx-2 text-figma-orange font-black animate-pulse">
-            CLIC
-          </span>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 flex items-center justify-center gap-2">
+          <span className="inline-block">don’t swipe,</span>
+          <CLIC
+            size="md" // Adjusted to better match text height
+            color="#F05A23"
+            spinSpeed={3}
+            staticDuration={3}
+            fadeIn={true}
+            className="align-middle"
+          />
         </h1>
+
         <p className="text-lg md:text-xl text-gray-700 max-w-md">
           Let's start speaking to each other again.
         </p>
