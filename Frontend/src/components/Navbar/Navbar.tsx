@@ -31,7 +31,10 @@ export default function Navbar() {
             </Button>
           )}
           <Button variant="ghost" asChild>
-            <a href="/signup">Signup</a>
+            <a href="/">Pools</a>
+          </Button>
+          <Button variant="ghost" asChild>
+            <a href="/signup">Sign up</a>
           </Button>
         </div>
 
@@ -49,7 +52,11 @@ export default function Navbar() {
             stroke="currentColor"
             strokeWidth={2}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         </button>
       </nav>
@@ -76,13 +83,16 @@ export default function Navbar() {
               transition={{ type: "tween", duration: 0.3 }}
             >
               <Button variant="ghost" asChild>
-                <a href="/signup">Signup</a>
+                <a href="/signup">Sign up</a>
               </Button>
               {!isHome && (
                 <Button variant="ghost" asChild>
                   <a href="/">Home</a>
                 </Button>
               )}
+              <Button variant="ghost" asChild>
+                <a href="/">Pools</a>
+              </Button>
             </motion.div>
           </>
         )}
