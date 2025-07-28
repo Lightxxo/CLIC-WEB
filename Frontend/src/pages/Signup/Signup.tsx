@@ -1,5 +1,6 @@
 import EmailVerification from "@/components/EmailVerification/EmailVerification";
 import MultiPartForm from "@/components/MultiPartForm/MultiPartForm";
+import SignupSuccess from "@/components/SignupSuccess/SignupSuccess";
 import { useFormContext } from "@/contexts/FormContext";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -53,6 +54,17 @@ const Signup = () => {
         component: (
           <>
             <EmailVerification></EmailVerification>
+          </>
+        ),
+      };
+    }
+
+    if (data.signupSuccess) {
+      return {
+        key: "signup-success",
+        component: (
+          <>
+            <SignupSuccess></SignupSuccess>
           </>
         ),
       };
