@@ -59,7 +59,7 @@ export default function HowItWorks() {
 
         {/* Tagline */}
         <div className="text-center mb-18 mt-6">
-          <p className="text-2xl sm:text-3xl font-semibold text-gray-800 max-w-xl mx-auto leading-snug">
+          <p className="text-2xl sm:text-lg font-semibold text-gray-800 max-w-xl mx-auto leading-snug">
             Join the pool
           </p>
           <p className="text-base sm:text-lg text-gray-600 font-medium max-w-xl mx-auto mt-2 leading-relaxed">

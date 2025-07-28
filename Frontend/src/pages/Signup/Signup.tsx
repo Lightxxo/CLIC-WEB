@@ -20,27 +20,33 @@ const quiz = [
   {
     id: 1,
     question: "What is the capital of France?",
-    options: ["Berlin", "Madrid", "Paris", "Rome"],
+    options: ["Berlin", "Madrid", "Paris", "Rome", "London"],
   },
   {
     id: 2,
     question: "Which language runs in a web browser?",
-    options: ["Java", "C", "Python", "JavaScript"],
+    options: ["Java", "C", "Python", "JavaScript", "Ruby"],
   },
   {
     id: 3,
     question: "Who wrote 'To Kill a Mockingbird'?",
-    options: ["Harper Lee", "Mark Twain", "Jane Austen", "F. Scott Fitzgerald"],
+    options: [
+      "Harper Lee",
+      "Mark Twain",
+      "Jane Austen",
+      "F. Scott Fitzgerald",
+      "Ernest Hemingway",
+    ],
   },
   {
     id: 4,
     question: "What is the smallest prime number?",
-    options: ["0", "1", "2", "3"],
+    options: ["0", "1", "2", "3", "5"],
   },
   {
     id: 5,
     question: "Which planet is known as the Red Planet?",
-    options: ["Earth", "Mars", "Venus", "Jupiter"],
+    options: ["Earth", "Mars", "Venus", "Jupiter", "Saturn"],
   },
 ];
 
