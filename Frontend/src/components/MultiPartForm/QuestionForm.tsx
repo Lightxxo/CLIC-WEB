@@ -40,6 +40,10 @@ export default function QuestionForm({
 
   return (
     <div className="space-y-4">
+      <p className="text-lg font-medium">
+        {index + 1}. {question.question}
+      </p>
+
       <p className="text-lg font-medium">{question.question}</p>
       <div className="space-y-2">
         {question.options.map((opt, i) => (

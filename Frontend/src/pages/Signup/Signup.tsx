@@ -1,5 +1,6 @@
 import EmailVerification from "@/components/EmailVerification/EmailVerification";
 import MultiPartForm from "@/components/MultiPartForm/MultiPartForm";
+import SignupSuccess from "@/components/SignupSuccess/SignupSuccess";
 import { useFormContext } from "@/contexts/FormContext";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -58,14 +59,25 @@ const Signup = () => {
       };
     }
 
+    if (data.signupSuccess) {
+      return {
+        key: "signup-success",
+        component: (
+          <>
+            <SignupSuccess></SignupSuccess>
+          </>
+        ),
+      };
+    }
+
     if (data.newUser) {
       return {
         key: "multi-form",
         component: (
           <>
             {/* Multi-Step Quiz Form for New Users */}
-            <p className="text-center text-sm text-muted-foreground mt-8">
-              New User Onboarding
+            <p className="text-center text-xs text-muted-foreground mt-8">
+              New Member Onboarding
             </p>
             <MultiPartForm questions={quiz} />
           </>
