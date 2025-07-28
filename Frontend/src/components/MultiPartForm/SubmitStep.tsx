@@ -4,7 +4,7 @@ import { useFormContext } from "@/contexts/FormContext";
 import { useState } from "react";
 import config from "@/config";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react"; // For the spinner icon
+import { Loader2 } from "lucide-react";
 
 const { REMOTE, API_BASE_URL, API_PORT } = config;
 
@@ -19,17 +19,17 @@ export default function SubmitStep() {
       setError(false);
 
       const formData = new FormData();
+
       function generateRandomString(length = 8) {
         const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-        let result = "";
-        for (let i = 0; i < length; i++) {
-          result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return result;
+        return Array.from(
+          { length },
+          () => chars[Math.floor(Math.random() * chars.length)]
+        ).join("");
       }
 
       const email =
-        SubmitStepData.email && SubmitStepData.email.trim() !== ""
+        SubmitStepData.email?.trim() !== ""
           ? SubmitStepData.email
           : `${generateRandomString()}@${generateRandomString()}.com`;
 
@@ -64,10 +64,7 @@ export default function SubmitStep() {
       );
 
       if (response.ok) {
-        setData((prev) => ({
-          ...prev,
-          signupSuccess: true,
-        }));
+        setData((prev) => ({ ...prev, signupSuccess: true }));
       } else {
         setError(true);
       }
@@ -81,8 +78,7 @@ export default function SubmitStep() {
 
   return (
     <div className="text-center space-y-4">
-      <h2 className="text-xl font-semibold">All good to go!</h2>
-      <p className="text-muted-foreground">Ready to get started</p>
+      <h2 className="text-xl font-semibold">Done!</h2>
 
       {error && (
         <p className="text-red-500 text-sm">
@@ -101,7 +97,7 @@ export default function SubmitStep() {
             Submitting...
           </>
         ) : (
-          "Sign me up"
+          "Submit"
         )}
       </Button>
     </div>

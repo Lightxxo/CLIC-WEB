@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [isHome, setIsHome] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsHome(window.location.pathname === "/");
+    }
+  }, []);
 
   return (
     <>
@@ -18,15 +25,17 @@ export default function Navbar() {
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex">
-          <Button variant="ghost" asChild>
-            <a href="/pools">Pools</a>
-          </Button>
+          {!isHome && (
+            <Button variant="ghost" asChild>
+              <a href="/">Home</a>
+            </Button>
+          )}
           <Button variant="ghost" asChild>
             <a href="/signup">Signup</a>
           </Button>
         </div>
 
-        {/* Mobile menu toggle (hamburger only) */}
+        {/* Mobile menu toggle */}
         <button
           className="md:hidden focus:outline-none"
           onClick={() => setOpen(!open)}
@@ -40,11 +49,7 @@ export default function Navbar() {
             stroke="currentColor"
             strokeWidth={2}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </nav>
@@ -62,7 +67,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
             />
 
-            {/* Auto-width Sliding Drawer */}
+            {/* Sliding Drawer */}
             <motion.div
               className="fixed right-0 top-0 z-50 h-full bg-white px-6 py-4 shadow-lg flex flex-col space-y-4 md:hidden max-w-[80vw] w-auto"
               initial={{ x: "100%" }}
@@ -73,9 +78,11 @@ export default function Navbar() {
               <Button variant="ghost" asChild>
                 <a href="/signup">Signup</a>
               </Button>
-              <Button variant="ghost" asChild>
-                <a href="/pools">Pools</a>
-              </Button>
+              {!isHome && (
+                <Button variant="ghost" asChild>
+                  <a href="/">Home</a>
+                </Button>
+              )}
             </motion.div>
           </>
         )}

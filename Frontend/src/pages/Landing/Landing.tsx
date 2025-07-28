@@ -2,7 +2,6 @@
 import { ChevronDown, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import videoSrc from "@/assets/videos/CC.Highway.Bangkok.Website.mp4";
 import { CLIC } from "@/components/CLIC/CLIC";
 
 export default function Landing() {
@@ -18,7 +17,10 @@ export default function Landing() {
           playsInline
           className="absolute inset-0 h-full w-full object-cover z-0"
         >
-          <source src={videoSrc} type="video/mp4" />
+          <source
+            src="/videos/CC.Highway.Bangkok.Website.mp4"
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
 
@@ -49,7 +51,7 @@ export default function Landing() {
             size="md" // Adjusted to better match text height
             color="#F05A23"
             spinSpeed={3}
-            staticDuration={3}
+            staticDuration={1}
             fadeIn={true}
             className="align-middle"
           />

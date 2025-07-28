@@ -64,8 +64,8 @@ const Signup = () => {
         component: (
           <>
             {/* Multi-Step Quiz Form for New Users */}
-            <p className="text-center text-sm text-muted-foreground mt-8">
-              New User Onboarding
+            <p className="text-center text-xs text-muted-foreground mt-8">
+              New Member Onboarding
             </p>
             <MultiPartForm questions={quiz} />
           </>
