@@ -1,19 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [isHome, setIsHome] = useState(true);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsHome(window.location.pathname === "/");
-    }
-  }, []);
 
   return (
     <>

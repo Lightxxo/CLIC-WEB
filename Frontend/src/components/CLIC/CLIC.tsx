@@ -2,7 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+
 
 export interface CLICProps {
   className?: string;
