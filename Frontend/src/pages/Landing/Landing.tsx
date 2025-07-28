@@ -18,7 +18,7 @@ export default function Landing() {
           className="absolute inset-0 h-full w-full object-cover z-0"
         >
           <source
-            src="/videos/CC.Highway.Bangkok.Website.mp4"
+            src="/videos/CC.Highway.London.Website.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.

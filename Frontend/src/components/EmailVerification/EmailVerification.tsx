@@ -145,10 +145,8 @@ const EmailVerification = () => {
   return (
     <div className="mt-20 text-center">
       <p className="text-xl">
-        talk to other members at <span className="font-bold">live</span> online
-        events. <br />
-        <span className="font-bold">Our</span> events pool together the members
-        we know you will Clic with
+        talk to other members at live online events. <br />
+        Our events pool together the members we know you will Clic with
       </p>
 
       {isLoading ? (

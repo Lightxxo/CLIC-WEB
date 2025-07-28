@@ -34,6 +34,9 @@ export default function Navbar() {
             <a href="/">Pools</a>
           </Button>
           <Button variant="ghost" asChild>
+            <a href="/howitworks">How it works</a>
+          </Button>
+          <Button variant="ghost" asChild>
             <a href="/signup">Sign up</a>
           </Button>
         </div>
@@ -85,6 +88,7 @@ export default function Navbar() {
               <Button variant="ghost" asChild>
                 <a href="/signup">Sign up</a>
               </Button>
+
               {!isHome && (
                 <Button variant="ghost" asChild>
                   <a href="/">Home</a>
@@ -92,6 +96,9 @@ export default function Navbar() {
               )}
               <Button variant="ghost" asChild>
                 <a href="/">Pools</a>
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href="/howitworks">How it works</a>
               </Button>
             </motion.div>
           </>

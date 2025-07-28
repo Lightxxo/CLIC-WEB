@@ -16,6 +16,7 @@ import Landing from "./pages/Landing/Landing";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import MainLayout from "./layouts/MainLayout";
 import Signup from "./pages/Signup/Signup";
+import HowItWorks from "./pages/HowItWorks/HowItWorks";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
         {/* Public routes with navbar */}
         {/*
         <Route
