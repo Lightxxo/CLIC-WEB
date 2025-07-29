@@ -3,7 +3,7 @@ import React, { useState, createContext, useContext } from "react";
 import type { ReactNode } from "react";
 
 export type FormDataType = {
-  email: string;
+  email: string | null;
   firstName: string;
   lastName: string;
   username: string;
@@ -15,6 +15,7 @@ export type FormDataType = {
   password: string | null;
   confirmPassword: string | null;
   signupSuccess: boolean;
+  token: null | string;
 };
 
 const defaultFormData: FormDataType = {
@@ -30,6 +31,7 @@ const defaultFormData: FormDataType = {
   password: null,
   confirmPassword: null,
   signupSuccess: false,
+  token: null
 };
 
 type FormContextType = {
