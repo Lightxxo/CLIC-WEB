@@ -4,6 +4,7 @@ import config from "@/config";
 import { useFormContext } from "@/contexts/FormContext";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Link, useNavigate } from "react-router-dom";
 
 const EmailVerification = () => {
   const [error, setError] = useState("");
@@ -13,6 +14,7 @@ const EmailVerification = () => {
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { REMOTE, API_BASE_URL, API_PORT } = config;
+  const navigate = useNavigate();
 
   const { setData } = useFormContext();
 
@@ -24,7 +26,15 @@ const EmailVerification = () => {
         return;
       }
       setIsLoading(true);
-      fetch(
+      fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/checkUser?email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.message == "User Email exists") {
+            setIsLoading(false);
+            alert("You already have an account!");
+            navigate("/login");
+          } else {
+          fetch(
         `http${
           REMOTE ? "s" : ""
         }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
@@ -40,6 +50,8 @@ const EmailVerification = () => {
         else alert("an error occurred!");
         setIsLoading(false);
       });
+          }
+        });
     }
   }
   function emailSubmit() {
@@ -49,22 +61,32 @@ const EmailVerification = () => {
       return;
     }
     setIsLoading(true);
-    fetch(
-      `http${
-        REMOTE ? "s" : ""
-      }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      }
-    ).then((res) => {
-      if (res.status == 200) setEnteredEmail(true);
-      else alert("an error occurred!");
-      setIsLoading(false);
-    });
+    fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/checkUser?email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.message == "User Email exists") {
+            setIsLoading(false);
+            alert("You already have an account!");
+            navigate("/login");
+          } else {
+          fetch(
+        `http${
+          REMOTE ? "s" : ""
+        }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      ).then((res) => {
+        if (res.status == 200) setEnteredEmail(true);
+        else alert("an error occurred!");
+        setIsLoading(false);
+      });
+          }
+        });
   }
   function codeInput(e: any) {
     setCodeError("");
@@ -93,14 +115,16 @@ const EmailVerification = () => {
             email,
             newUser: true,
           }));
-        } else if (res.status == 200) {
-          setData((prev) => ({
-            ...prev,
-            verificationStatus: true,
-            email,
-            newUser: false,
-          }));
-        } else setCodeError("Code didn't match!");
+        } 
+        // else if (res.status == 200) {
+        //   setData((prev) => ({
+        //     ...prev,
+        //     verificationStatus: true,
+        //     email,
+        //     newUser: false,
+        //   }));
+        // } 
+        else setCodeError("Code didn't match!");
         setIsLoading(false);
       });
     }
@@ -149,7 +173,7 @@ const EmailVerification = () => {
           Join the pool
         </p>
         <p className="text-base text-gray-600 font-medium max-w-sm mx-auto mt-2 leading-relaxed px-2 ">
-          Talk to members we know you’ll Clic with at live online events
+          Talk to members we know you'll Clic with at live online events
         </p>
       </div>
 
@@ -185,6 +209,7 @@ const EmailVerification = () => {
               >
                 Submit
               </Button>
+              <p className="text-xs mt-5">Already have an account? <Link to="/login" className="text-blue-600">Login</Link></p>
             </section>
           ) : (
             <section>
