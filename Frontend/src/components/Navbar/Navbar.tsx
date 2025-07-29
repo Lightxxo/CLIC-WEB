@@ -1,19 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [isHome, setIsHome] = useState(true);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsHome(window.location.pathname === "/");
-    }
-  }, []);
 
   return (
     <>
@@ -25,11 +18,6 @@ export default function Navbar() {
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex">
-          {!isHome && (
-            <Button variant="ghost" asChild>
-              <a href="/">Home</a>
-            </Button>
-          )}
           <Button variant="ghost" asChild>
             <a href="/">Pools</a>
           </Button>
@@ -88,17 +76,11 @@ export default function Navbar() {
               <Button variant="ghost" asChild>
                 <a href="/signup">Sign up</a>
               </Button>
-
-              {!isHome && (
-                <Button variant="ghost" asChild>
-                  <a href="/">Home</a>
-                </Button>
-              )}
-              <Button variant="ghost" asChild>
-                <a href="/">Pools</a>
-              </Button>
               <Button variant="ghost" asChild>
                 <a href="/howitworks">How it works</a>
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href="/">Pools</a>
               </Button>
             </motion.div>
           </>

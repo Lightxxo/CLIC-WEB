@@ -144,10 +144,14 @@ const EmailVerification = () => {
   }
   return (
     <div className="mt-20 text-center">
-      <p className="text-xl">
-        talk to other members at live online events. <br />
-        Our events pool together the members we know you will Clic with
-      </p>
+      <div className="text-center my-10">
+        <p className=" font-semibold text-gray-800 max-w-sm mx-auto leading-snug px-2">
+          Join the pool
+        </p>
+        <p className="text-base text-gray-600 font-medium max-w-sm mx-auto mt-2 leading-relaxed px-2 ">
+          Talk to members we know you’ll Clic with at live online events
+        </p>
+      </div>
 
       {isLoading ? (
         <div className="w-1/2 m-auto mt-5">
@@ -164,7 +168,7 @@ const EmailVerification = () => {
               </p>
               <Input
                 type="email"
-                className="w-4/5 sm:w-1/2 md:w-1/3 m-auto p-5"
+                className="w-full max-w-[180px] m-auto p-5"
                 onKeyDown={emailInput}
                 onChange={(e) => setEmail(e.target.value.trim())}
                 placeholder="Email"
