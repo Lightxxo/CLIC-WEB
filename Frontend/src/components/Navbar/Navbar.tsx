@@ -19,7 +19,6 @@ export default function Navbar() {
     }));
   };
 
-  console.log(data.token);
   return (
     <>
       <nav className="relative z-50 w-full border-b border-gray-200 bg-white px-4 py-3 flex items-center justify-between">
@@ -30,7 +29,7 @@ export default function Navbar() {
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex">
-          {!data.token ? (
+          {data.token ? (
             <Button variant="ghost" asChild>
               <a href="/pools">Pools</a>
             </Button>
@@ -111,7 +110,7 @@ export default function Navbar() {
               <Button variant="ghost" asChild>
                 <a href="/howitworks">How it works</a>
               </Button>
-              {!data.token ? (
+              {data.token ? (
                 <Button variant="ghost" asChild>
                   <a href="/pools">Pools</a>
                 </Button>
