@@ -4,10 +4,20 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-
+  const {data, setData} = useFormContext();
+  const logOut = () => {
+    localStorage.clear();
+    setData((prev) => ({
+            ...prev,
+            verificationStatus: false,
+            email: "",
+            token: null
+          }));
+  };
   return (
     <>
       <nav className="relative z-50 w-full border-b border-gray-200 bg-white px-4 py-3 flex items-center justify-between">
@@ -24,9 +34,14 @@ export default function Navbar() {
           <Button variant="ghost" asChild>
             <a href="/howitworks">How it works</a>
           </Button>
+          {data.token ? 
+          <Button variant="ghost" className="cursor-pointer" onClick={logOut}>
+            Logout
+          </Button>
+          : 
           <Button variant="ghost" asChild>
             <a href="/signup">Sign up</a>
-          </Button>
+          </Button>}
         </div>
 
         {/* Mobile menu toggle */}
@@ -72,10 +87,14 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-            >
-              <Button variant="ghost" asChild>
+            >{data.token ? 
+              <Button variant="ghost" className="cursor-pointer" onClick={logOut}>
+            Logout
+          </Button>
+              :
+             <Button variant="ghost" asChild>
                 <a href="/signup">Sign up</a>
-              </Button>
+              </Button>}
               <Button variant="ghost" asChild>
                 <a href="/howitworks">How it works</a>
               </Button>

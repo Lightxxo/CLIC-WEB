@@ -39,16 +39,17 @@ const Login = () => {
                 setData((prev) => ({
           ...prev,
           verificationStatus: true,
+          newUser: false,
           email: email,
           token: data.token,
-        })); alert("login successful!"); navigate("/");
+        })); alert("login successful!"); navigate("/signup");
         } else if (data.message == "Incorrect password") {alert("Incorrect password");}
         else {alert("User does not exist");}
         })
     }
     return (
-        <div className="text-center">
-            <h3 className='font-bold text-xl'>Login</h3>
+        <div className="text-center w-4/5 md:w-1/3 mx-auto">
+            <h3 className='font-bold text-xl mb-8 mt-4'>Login</h3>
             <form onSubmit={handleSubmit}>
                 <Input type="email" placeholder="Email" name='email' required />
                 {emailError != "" && (
@@ -56,6 +57,7 @@ const Login = () => {
                   {emailError}
                 </p>
               )}
+              <br />
                 <Input type="password" placeholder="Password" name='pass' required />
                 {/* {passError != "" && (
                 <p className="text-left w-1/2 m-auto text-red-600 text-xs">

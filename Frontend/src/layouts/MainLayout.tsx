@@ -12,6 +12,7 @@ export default function MainLayout() {
           verificationStatus: true,
           email: localStorage.getItem("email"),
           token: localStorage.getItem("token"),
+          newUser: false
         }));
     }
   }, [])
