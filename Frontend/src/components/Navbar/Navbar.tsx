@@ -29,9 +29,13 @@ export default function Navbar() {
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex">
-          <Button variant="ghost" asChild>
-            <a href="/">Pools</a>
-          </Button>
+          {!data.token ? (
+            <Button variant="ghost" asChild>
+              <a href="/pools">Pools</a>
+            </Button>
+          ) : (
+            <></>
+          )}
           <Button variant="ghost" asChild>
             <a href="/howitworks">How it works</a>
           </Button>
@@ -106,9 +110,13 @@ export default function Navbar() {
               <Button variant="ghost" asChild>
                 <a href="/howitworks">How it works</a>
               </Button>
-              <Button variant="ghost" asChild>
-                <a href="/">Pools</a>
-              </Button>
+              {!data.token ? (
+                <Button variant="ghost" asChild>
+                  <a href="/pools">Pools</a>
+                </Button>
+              ) : (
+                <></>
+              )}
             </motion.div>
           </>
         )}
