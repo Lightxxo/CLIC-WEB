@@ -16,10 +16,10 @@ import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import MainLayout from "./layouts/MainLayout";
 import Signup from "./pages/Signup/Signup";
 import HowItWorks from "./pages/HowItWorks/HowItWorks";
-import Login from "./pages/Login/Login";
 import ApprovedLayout from "./layouts/ApprovedLayout";
 import Pools from "./pages/Pools/Pools";
 import PoolDetails from "./pages/PoolDetails/PoolDetails";
+import Login from "./pages/Login/Login";
 
 export default function App() {
   return (
@@ -30,6 +30,7 @@ export default function App() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
         <Route path="/pools" element={<Pools />} />
         <Route path="/pools/:id" element={<PoolDetails />} />

@@ -5,13 +5,16 @@ import App from "./App.tsx";
 import { FormProvider } from "./contexts/FormContext.tsx";
 
 import { BrowserRouter } from "react-router-dom";
+import { PoolProvider } from "./contexts/PoolContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <FormProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </FormProvider>
+    <PoolProvider>
+      <FormProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </FormProvider>
+    </PoolProvider>
   </StrictMode>
 );
