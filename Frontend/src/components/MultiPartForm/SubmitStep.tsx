@@ -66,6 +66,8 @@ export default function SubmitStep() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("email", email);
+        localStorage.setItem("userName", data.newUser.userName);
+        localStorage.setItem("imgURL", data.newUser.imgURL);
         localStorage.setItem("token", data.token);
         setData((prev) => ({
           ...prev,
