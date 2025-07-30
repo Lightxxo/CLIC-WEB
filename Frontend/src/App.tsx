@@ -2,7 +2,6 @@
 import { Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing/Landing";
-// import Login from "./routes/Login";
 
 // // Lazy public route (future use)
 // const About = lazy(() => import("./routes/About"));
@@ -13,25 +12,24 @@ import Landing from "./pages/Landing/Landing";
 // // Lazy private route (future use)
 // const Dashboard = lazy(() => import("./routes/Dashboard"));
 
-import ProtectedLayout from "./layouts/ProtectedLayout";
+import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import MainLayout from "./layouts/MainLayout";
 import Signup from "./pages/Signup/Signup";
 import HowItWorks from "./pages/HowItWorks/HowItWorks";
+import Login from "./pages/Login/Login";
+import ApprovedLayout from "./layouts/ApprovedLayout";
 
 export default function App() {
   return (
     <Routes>
       {/* Public routes WITHOUT navbar */}
 
-      {/*
-      <Route path="/login" element={<Login />} />
-      */}
-
       {/* Routes WITH navbar */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
-                <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
         {/* Public routes with navbar */}
         {/*
         <Route
@@ -44,8 +42,24 @@ export default function App() {
         />
         */}
 
-        {/* Protected routes WITH navbar */}
-        <Route element={<ProtectedLayout />}>
+        {/* Authenticated routes WITH navbar */}
+        <Route element={<AuthenticatedLayout />}>
+          {/*
+          <Route path="profile" element={<Profile />} />
+
+          <Route
+            path="dashboard"
+            element={
+              <Suspense fallback={<div>Loading Dashboard...</div>}>
+                <Dashboard />
+              </Suspense>
+            }
+          />
+          */}
+        </Route>
+
+        {/* Approved routes WITH navbar */}
+        <Route element={<ApprovedLayout />}>
           {/*
           <Route path="profile" element={<Profile />} />
 
@@ -60,6 +74,8 @@ export default function App() {
           */}
         </Route>
       </Route>
+
+        
 
       {/* 
       // Protected routes WITHOUT navbar (optional)
