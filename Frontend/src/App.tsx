@@ -16,7 +16,6 @@ import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import MainLayout from "./layouts/MainLayout";
 import Signup from "./pages/Signup/Signup";
 import HowItWorks from "./pages/HowItWorks/HowItWorks";
-import Login from "./pages/Login/Login";
 import ApprovedLayout from "./layouts/ApprovedLayout";
 import Pools from "./pages/Pools/Pools";
 import PoolDetails from "./pages/PoolDetails/PoolDetails";
