@@ -19,7 +19,6 @@ export default function Navbar() {
     }));
   };
 
-  console.log(data.token);
   return (
     <>
       <nav className="relative z-50 w-full border-b border-gray-200 bg-white px-4 py-3 flex items-center justify-between">

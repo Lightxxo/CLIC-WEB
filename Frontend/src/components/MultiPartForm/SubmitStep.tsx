@@ -64,7 +64,18 @@ export default function SubmitStep() {
       );
 
       if (response.ok) {
-        setData((prev) => ({ ...prev, signupSuccess: true }));
+        const data = await response.json();
+        localStorage.setItem("email", email);
+        localStorage.setItem("token", data.token);
+        setData((prev) => ({
+          ...prev,
+          verificationStatus: false,
+          newUser: false,
+          email: email,
+          token: data.token,
+          signupSuccess: true,
+        }));
+        
       } else {
         setError(true);
       }
