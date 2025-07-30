@@ -17,6 +17,10 @@ export default function MainLayout() {
         newUser: false,
       }));
     }
+    setData((prev) => ({
+        ...prev,
+        loading: false,
+      }));
   }, []);
   return (
     <>

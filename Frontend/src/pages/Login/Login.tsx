@@ -1,3 +1,4 @@
+"use client"
 import { Input } from "@/components/ui/input"
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import config from "@/config";
 import { useFormContext } from "@/contexts/FormContext";
 
 const Login = () => {
+
     const [emailError, setEmailError] = useState("");
     // const [passError, setPassError] = useState("");
     const { REMOTE, API_BASE_URL, API_PORT } = config;
