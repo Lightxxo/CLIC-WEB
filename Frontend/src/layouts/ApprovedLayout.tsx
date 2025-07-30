@@ -1,0 +1,32 @@
+import config from "@/config";
+import PendingPage from "@/pages/PendingPage/PendingPage";
+import { useEffect, useState } from "react";
+import { Link, Navigate, Outlet } from "react-router-dom";
+
+const ApprovedLayout = () => {
+      const [isAuthenticated, setIsAuthenticated] = useState(false);
+      const [isApproved, setIsApproved] = useState(false);
+      const { REMOTE, API_BASE_URL, API_PORT } = config;
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      if (localStorage.length && token && token.length > 0) {
+        setIsAuthenticated(true);
+        fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/user_approved`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.approved == "approved") {
+                setIsApproved(true);
+            }
+        })
+      }
+    }, []);
+    if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+    }
+    if (!isApproved) {
+    return <PendingPage />;
+    }
+    return <Outlet />;
+};
+
+export default ApprovedLayout;
