@@ -172,7 +172,7 @@ const EmailVerification = () => {
     <div className="mt-20 text-center">
       <div className="text-center my-10">
         <p className=" font-semibold text-gray-800 max-w-sm mx-auto leading-snug px-2">
-          Join the pool
+          Jump into pools of online live events.
         </p>
         <p className="text-base text-gray-600 font-medium max-w-sm mx-auto mt-2 leading-relaxed px-2 ">
           Talk to members we know you'll Clic with at live online events
