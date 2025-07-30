@@ -35,6 +35,8 @@ const Login = () => {
         .then(data => {
             if (data.message == "Login successful") {
                 localStorage.setItem("email", email);
+                localStorage.setItem("userName", data.isExists.userName);
+                localStorage.setItem("imgURL", data.isExists.imgURL);
                 localStorage.setItem("token", data.token);
                 setData((prev) => ({
           ...prev,
