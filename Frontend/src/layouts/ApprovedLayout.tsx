@@ -1,4 +1,5 @@
 import config from "@/config";
+import PendingPage from "@/pages/PendingPage/PendingPage";
 import { useEffect, useState } from "react";
 import { Link, Navigate, Outlet } from "react-router-dom";
 
@@ -23,10 +24,7 @@ const ApprovedLayout = () => {
     return <Navigate to="/login" replace />;
     }
     if (!isApproved) {
-    return (<div>
-        <p>Member isn't approved!</p>
-        <Link to="/">Return Home</Link>
-    </div>);
+    return <PendingPage />;
     }
     return <Outlet />;
 };
