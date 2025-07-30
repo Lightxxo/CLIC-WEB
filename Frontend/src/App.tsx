@@ -20,6 +20,8 @@ import ApprovedLayout from "./layouts/ApprovedLayout";
 import Pools from "./pages/Pools/Pools";
 import PoolDetails from "./pages/PoolDetails/PoolDetails";
 import Login from "./pages/Login/Login";
+import Authenticated from "./pages/Protected/Authenticated";
+import Approved from "./pages/Protected/Approved";
 
 export default function App() {
   return (
@@ -49,6 +51,7 @@ export default function App() {
 
         {/* Authenticated routes WITH navbar */}
         <Route element={<AuthenticatedLayout />}>
+          <Route path="authenticated" element={<Authenticated />} />
           {/*
           <Route path="profile" element={<Profile />} />
 
@@ -65,6 +68,7 @@ export default function App() {
 
         {/* Approved routes WITH navbar */}
         <Route element={<ApprovedLayout />}>
+          <Route path="approved" element={<Approved />} />
           {/*
           <Route path="profile" element={<Profile />} />
 
