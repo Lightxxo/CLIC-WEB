@@ -155,14 +155,16 @@ const EmailVerification = () => {
           email,
           newUser: true,
         }));
-      } else if (res.status == 200) {
-        setData((prev) => ({
-          ...prev,
-          verificationStatus: true,
-          email,
-          newUser: false,
-        }));
-      } else setCodeError("Code didn't match!");
+      }
+      //  else if (res.status == 200) {
+      //   setData((prev) => ({
+      //     ...prev,
+      //     verificationStatus: true,
+      //     email,
+      //     newUser: false,
+      //   }));
+      // }
+       else setCodeError("Code didn't match!");
       setIsLoading(false);
     });
   }
@@ -214,9 +216,9 @@ const EmailVerification = () => {
           ) : (
             <section>
               <p className="my-5">
-                We have sent you a verification code to your email (
+                We have sent a verification code to (
                 <b>{email}</b>). <br />
-                (Check your spam/junk folder)
+                (Check your spam/junk folder too. If you entered an incorrect email address, you won't receive a code.)
               </p>
               <Input
                 type="number"

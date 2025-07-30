@@ -94,13 +94,14 @@ const Signup = () => {
     return {
       key: "existing-user",
       component: (
-        <>
+        <div className="text-center">
           {/* Existing User Screen */}
-          <p className="text-center text-sm text-muted-foreground mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             Welcome Back
           </p>
+          <p>Explore Pools!</p>
           {/* <ExistingUserComponent /> */}
-        </>
+        </div>
       ),
     };
   };
