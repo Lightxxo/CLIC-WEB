@@ -6,16 +6,18 @@ import { useFormContext } from "@/contexts/FormContext";
 export default function MainLayout() {
   const { setData } = useFormContext();
   useEffect(() => {
-    if (localStorage.length > 0) {
-          setData((prev) => ({
-          ...prev,
-          verificationStatus: true,
-          email: localStorage.getItem("email"),
-          token: localStorage.getItem("token"),
-          newUser: false
-        }));
+    
+    const token = localStorage.getItem("token");
+    if (localStorage.length && token && token.length > 0) {
+      setData((prev) => ({
+        ...prev,
+        verificationStatus: true,
+        email: localStorage.getItem("email"),
+        token: token,
+        newUser: false,
+      }));
     }
-  }, [])
+  }, []);
   return (
     <>
       <Navbar />
