@@ -17,20 +17,21 @@ import ProtectedLayout from "./layouts/ProtectedLayout";
 import MainLayout from "./layouts/MainLayout";
 import Signup from "./pages/Signup/Signup";
 import HowItWorks from "./pages/HowItWorks/HowItWorks";
-import Login from "./pages/Login/Login";
 
 export default function App() {
   return (
     <Routes>
       {/* Public routes WITHOUT navbar */}
-     
+
+      {/*
+      <Route path="/login" element={<Login />} />
+      */}
 
       {/* Routes WITH navbar */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
-        <Route path="/login" element={<Login />} />
+                <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
         {/* Public routes with navbar */}
         {/*
         <Route
