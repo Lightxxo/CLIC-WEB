@@ -106,7 +106,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <footer className="mt-auto border-t border-gray-200 text-sm text-gray-600 bg-white">
+      {/* <footer className="mt-auto border-t border-gray-200 text-sm text-gray-600 bg-white">
         <div className="flex justify-center items-center divide-x divide-gray-300 py-4 flex-wrap">
           <a
             href="https://instagram.com"
@@ -131,7 +131,7 @@ export default function Landing() {
             for support or enquiries
           </span>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }
