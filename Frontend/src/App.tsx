@@ -33,10 +33,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
-        <Route path="/pools" element={<Pools />} />
-        <Route path="/pools/:id" element={<PoolDetails />} />
-        <Route path="/login" element={<Login />} />
+
         {/* Public routes with navbar */}
         {/*
         <Route
@@ -52,6 +49,7 @@ export default function App() {
         {/* Authenticated routes WITH navbar */}
         <Route element={<AuthenticatedLayout />}>
           <Route path="authenticated" element={<Authenticated />} />
+          <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
           {/*
           <Route path="profile" element={<Profile />} />
 
@@ -69,6 +67,8 @@ export default function App() {
         {/* Approved routes WITH navbar */}
         <Route element={<ApprovedLayout />}>
           <Route path="approved" element={<Approved />} />
+          <Route path="/pools" element={<Pools />} />
+          <Route path="/pools/:id" element={<PoolDetails />} />
           {/*
           <Route path="profile" element={<Profile />} />
 
@@ -83,8 +83,6 @@ export default function App() {
           */}
         </Route>
       </Route>
-
-        
 
       {/* 
       // Protected routes WITHOUT navbar (optional)

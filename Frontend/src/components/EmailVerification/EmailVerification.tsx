@@ -5,7 +5,7 @@ import { useFormContext } from "@/contexts/FormContext";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "sonner"
+import { toast } from "sonner";
 
 const EmailVerification = () => {
   const [error, setError] = useState("");
@@ -27,40 +27,46 @@ const EmailVerification = () => {
         return;
       }
       setIsLoading(true);
-      fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/checkUser?email=${email}`)
-        .then(res => res.json())
-        .then(data => {
+      fetch(
+        `http${
+          REMOTE ? "s" : ""
+        }://${API_BASE_URL}:${API_PORT}/checkUser?email=${email}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
           if (data.message == "User Email exists") {
             setIsLoading(false);
             toast("You already have an account!", {
-          action: {
-            label: "Close",
-            onClick: () => void(0),
-          },
-        });
+              action: {
+                label: "Close",
+                onClick: () => void 0,
+              },
+            });
             navigate("/login");
           } else {
-          fetch(
-        `http${
-          REMOTE ? "s" : ""
-        }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ email }),
-        }
-      ).then((res) => {
-        if (res.status == 200) setEnteredEmail(true);
-        else {toast("an error occurred!", {
-          action: {
-            label: "Close",
-            onClick: () => void(0),
-          },
-        });}
-        setIsLoading(false);
-      });
+            fetch(
+              `http${
+                REMOTE ? "s" : ""
+              }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
+              {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify({ email }),
+              }
+            ).then((res) => {
+              if (res.status == 200) setEnteredEmail(true);
+              else {
+                toast("an error occurred!", {
+                  action: {
+                    label: "Close",
+                    onClick: () => void 0,
+                  },
+                });
+              }
+              setIsLoading(false);
+            });
           }
         });
     }
@@ -72,42 +78,48 @@ const EmailVerification = () => {
       return;
     }
     setIsLoading(true);
-    fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/checkUser?email=${email}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.message == "User Email exists") {
-            setIsLoading(false);
-            toast("You already have an account!", {
-          action: {
-            label: "Close",
-            onClick: () => void(0),
-          },
-        });
-            navigate("/login");
-          } else {
+    fetch(
+      `http${
+        REMOTE ? "s" : ""
+      }://${API_BASE_URL}:${API_PORT}/checkUser?email=${email}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message == "User Email exists") {
+          setIsLoading(false);
+          toast("You already have an account!", {
+            action: {
+              label: "Close",
+              onClick: () => void 0,
+            },
+          });
+          navigate("/login");
+        } else {
           fetch(
-        `http${
-          REMOTE ? "s" : ""
-        }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ email }),
+            `http${
+              REMOTE ? "s" : ""
+            }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({ email }),
+            }
+          ).then((res) => {
+            if (res.status == 200) setEnteredEmail(true);
+            else {
+              toast("an error occurred!", {
+                action: {
+                  label: "Close",
+                  onClick: () => void 0,
+                },
+              });
+            }
+            setIsLoading(false);
+          });
         }
-      ).then((res) => {
-        if (res.status == 200) setEnteredEmail(true);
-        else {toast("an error occurred!", {
-          action: {
-            label: "Close",
-            onClick: () => void(0),
-          },
-        });}
-        setIsLoading(false);
       });
-          }
-        });
   }
   function codeInput(e: any) {
     setCodeError("");
@@ -136,7 +148,7 @@ const EmailVerification = () => {
             email,
             newUser: true,
           }));
-        } 
+        }
         // else if (res.status == 200) {
         //   setData((prev) => ({
         //     ...prev,
@@ -144,7 +156,7 @@ const EmailVerification = () => {
         //     email,
         //     newUser: false,
         //   }));
-        // } 
+        // }
         else setCodeError("Code didn't match!");
         setIsLoading(false);
       });
@@ -185,18 +197,19 @@ const EmailVerification = () => {
       //     newUser: false,
       //   }));
       // }
-       else setCodeError("Code didn't match!");
+      else setCodeError("Code didn't match!");
       setIsLoading(false);
     });
   }
   return (
     <div className="mt-20 text-center">
       <div className="text-center my-10">
-        <p className=" font-semibold text-gray-800 max-w-sm mx-auto leading-snug px-2">
-          Jump into pools of online live events.
+        <p className="text-base font-medium text-gray-800 max-w-sm mx-auto leading-relaxed px-2">
+          Jump into pools of online live events:
         </p>
-        <p className="text-base text-gray-600 font-medium max-w-sm mx-auto mt-2 leading-relaxed px-2 ">
-          Talk to members we know you'll Clic with at live online events
+        <p className="text-base font-medium text-gray-800 max-w-sm mx-auto mt-2 leading-relaxed px-2">
+          Talk to members we know you'll Clic with.<br></br> At live online
+          events.
         </p>
       </div>
 
@@ -232,14 +245,19 @@ const EmailVerification = () => {
               >
                 Submit
               </Button>
-              <p className="text-xs mt-5">Already have an account? <Link to="/login" className="text-blue-600">Login</Link></p>
+              <p className="text-xs mt-5">
+                Already have an account?{" "}
+                <Link to="/login" className="text-blue-600">
+                  Login
+                </Link>
+              </p>
             </section>
           ) : (
             <section>
               <p className="my-5">
-                We have sent a verification code to (
-                <b>{email}</b>). <br />
-                (Check your spam/junk folder too. If you entered an incorrect email address, you won't receive a code.)
+                We have sent a verification code to (<b>{email}</b>). <br />
+                (Check your spam/junk folder too. If you entered an incorrect
+                email address, you won't receive a code.)
               </p>
               <Input
                 type="number"
