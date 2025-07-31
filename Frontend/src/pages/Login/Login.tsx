@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import config from "@/config";
 import { useFormContext } from "@/contexts/FormContext";
+import { toast } from "sonner"
 
 const Login = () => {
 
@@ -46,9 +47,24 @@ const Login = () => {
           newUser: false,
           email: email,
           token: data.token,
-        })); alert("login successful!"); navigate("/signup");
-        } else if (data.message == "Incorrect password") {alert("Incorrect password");}
-        else {alert("User does not exist");}
+        })); toast("login successful!", {
+          action: {
+            label: "Close",
+            onClick: () => void(0),
+          },
+        }); navigate("/signup");
+        } else if (data.message == "Incorrect password") {toast("Incorrect password", {
+          action: {
+            label: "Close",
+            onClick: () => void(0),
+          },
+        });}
+        else {toast("User does not exist", {
+          action: {
+            label: "Close",
+            onClick: () => void(0),
+          },
+        });}
         })
     }
     return (

@@ -5,6 +5,7 @@ import { useFormContext } from "@/contexts/FormContext";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner"
 
 const EmailVerification = () => {
   const [error, setError] = useState("");
@@ -31,7 +32,12 @@ const EmailVerification = () => {
         .then(data => {
           if (data.message == "User Email exists") {
             setIsLoading(false);
-            alert("You already have an account!");
+            toast("You already have an account!", {
+          action: {
+            label: "Close",
+            onClick: () => void(0),
+          },
+        });
             navigate("/login");
           } else {
           fetch(
@@ -47,7 +53,12 @@ const EmailVerification = () => {
         }
       ).then((res) => {
         if (res.status == 200) setEnteredEmail(true);
-        else alert("an error occurred!");
+        else {toast("an error occurred!", {
+          action: {
+            label: "Close",
+            onClick: () => void(0),
+          },
+        });}
         setIsLoading(false);
       });
           }
@@ -66,7 +77,12 @@ const EmailVerification = () => {
         .then(data => {
           if (data.message == "User Email exists") {
             setIsLoading(false);
-            alert("You already have an account!");
+            toast("You already have an account!", {
+          action: {
+            label: "Close",
+            onClick: () => void(0),
+          },
+        });
             navigate("/login");
           } else {
           fetch(
@@ -82,7 +98,12 @@ const EmailVerification = () => {
         }
       ).then((res) => {
         if (res.status == 200) setEnteredEmail(true);
-        else alert("an error occurred!");
+        else {toast("an error occurred!", {
+          action: {
+            label: "Close",
+            onClick: () => void(0),
+          },
+        });}
         setIsLoading(false);
       });
           }

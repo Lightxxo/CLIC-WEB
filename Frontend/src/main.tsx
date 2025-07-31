@@ -6,13 +6,16 @@ import { FormProvider } from "./contexts/FormContext.tsx";
 
 import { BrowserRouter } from "react-router-dom";
 import { PoolProvider } from "./contexts/PoolContext.tsx";
+import ToasterLayout from "./layouts/ToasterLayout.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <PoolProvider>
       <FormProvider>
         <BrowserRouter>
-          <App />
+          <ToasterLayout>
+            <App />
+          </ToasterLayout>
         </BrowserRouter>
       </FormProvider>
     </PoolProvider>
