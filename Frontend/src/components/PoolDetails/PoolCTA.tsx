@@ -112,7 +112,7 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
 
   if (poolStatus === "apply") {
     return (
-      <Button onClick={() => handleAction("join")} className="w-full">
+      <Button onClick={() => handleAction("join")} className="w-full cursor-pointer">
         <Plus className="h-4 w-4 mr-2" /> Apply
       </Button>
     );
@@ -122,7 +122,7 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
     <Button
       onClick={() => handleAction("cancel")}
       variant="destructive"
-      className="w-full"
+      className="w-full cursor-pointer"
     >
       <X className="h-4 w-4 mr-2" /> Cancel
     </Button>

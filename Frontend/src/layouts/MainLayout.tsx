@@ -18,8 +18,7 @@ export default function MainLayout() {
         token: token,
         newUser: false,
       }));
-    }
-    fetch(
+          fetch(
       `http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/user_approved`,
       {
         headers: {
@@ -33,6 +32,7 @@ export default function MainLayout() {
           localStorage.setItem("isApproved", "true");
         }
       });
+    }
 
     setData((prev) => ({
       ...prev,
