@@ -43,7 +43,7 @@ export default function SubmitStep() {
       formData.append("ques_ans", JSON.stringify(SubmitStepData.answers));
       formData.append("interests", JSON.stringify([]));
 
-      const fallbackUri = "src/assets/default_user.jpg";
+      const fallbackUri = "default_user.jpg";
       const fileType = fallbackUri.split(".").pop();
 
       try {
