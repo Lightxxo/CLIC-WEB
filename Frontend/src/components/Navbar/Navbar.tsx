@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
 import { useFormContext } from "@/contexts/FormContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { data, setData } = useFormContext();
+  const navigate = useNavigate();
   const logOut = () => {
     localStorage.clear();
     setData((prev) => ({
@@ -17,6 +19,7 @@ export default function Navbar() {
       email: "",
       token: null,
     }));
+    navigate("/");
   };
 
   return (
