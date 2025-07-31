@@ -1,6 +1,6 @@
 // @ts-ignore: Using deprecated Instagram icon as no replacement exists yet
 import { ChevronDown, Instagram } from "lucide-react";
-import { Link } from "react-router-dom";
+
 import { useRef, useEffect, useState } from "react";
 import { CLIC } from "@/components/CLIC/CLIC";
 
