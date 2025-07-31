@@ -1,6 +1,6 @@
 // @ts-ignore: Using deprecated Instagram icon as no replacement exists yet
 import { ChevronDown, Instagram } from "lucide-react";
-import { Link } from "react-router-dom";
+
 import { useRef, useEffect, useState } from "react";
 import { CLIC } from "@/components/CLIC/CLIC";
 
@@ -86,27 +86,28 @@ export default function Landing() {
         </p>
       </section>
 
-      <section className="bg-gray-100 w-full py-20 px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-gray-900">
-          Get the Clic app
-        </h2>
-        <p className="text-gray-700 mb-8 text-base md:text-lg max-w-md mx-auto">
-          Use the links below to download the Clic app and start connecting with
-          others
-        </p>
+      <section className="bg-gray-300 w-full py-10 px-4">
+        <div className="flex flex-col items-center gap-2">
+          <p
+            className="text-gray-900 text-4xl md:text-4xl font-semibold text-left font-thin"
+            style={{ lineHeight: "1.1" }}
+          >
+            DOWNLOAD <br /> HERE:
+          </p>
 
-        <div className="flex justify-center gap-4 flex-wrap">
-          <button className="bg-black text-white px-6 py-3 rounded-xl text-sm md:text-base hover:bg-gray-800 transition">
-            Download on the App Store
-          </button>
-          <button className="bg-[#34A853] text-white px-6 py-3 rounded-xl text-sm md:text-base hover:bg-[#2c8e46] transition">
-            Get it on Google Play
-          </button>
+          <div className="flex flex-wrap justify-center gap-2">
+            <button className="border border-gray-800 text-gray-900 px-4 py-2 rounded-full text-base hover:bg-gray-200 transition w-fit">
+              Apple iOS
+            </button>
+            <button className="border border-gray-800 text-gray-900 px-2 py-2 rounded-full text-base hover:bg-gray-200 transition w-fit">
+              Android OS
+            </button>
+          </div>
         </div>
       </section>
 
-      <footer className="mt-auto border-t border-gray-200 text-sm text-gray-600 bg-white">
-        <div className="flex justify-center items-center divide-x divide-gray-300 py-4">
+      {/* <footer className="mt-auto border-t border-gray-200 text-sm text-gray-600 bg-white">
+        <div className="flex justify-center items-center divide-x divide-gray-300 py-4 flex-wrap">
           <a
             href="https://instagram.com"
             target="_blank"
@@ -122,8 +123,15 @@ export default function Landing() {
           <Link to="/" className="px-4 hover:text-[#F05A23] transition">
             Terms of Service
           </Link>
+          <span className="px-4 text-xs">
+            Email{" "}
+            <a href="mailto:hello@cliclub.cc" className="underline">
+              hello@cliclub.cc
+            </a>{" "}
+            for support or enquiries
+          </span>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }

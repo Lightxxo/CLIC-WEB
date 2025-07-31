@@ -34,17 +34,22 @@ export default function Navbar() {
         <div className="hidden space-x-4 md:flex">
           {data.token ? (
             <Button variant="ghost" asChild>
+              <a href="/howitworks">How it works</a>
+            </Button>
+          ) : (
+            <></>
+          )}
+          {data.token && localStorage.getItem("isApproved") ? (
+            <Button variant="ghost" asChild>
               <a href="/pools">Pools</a>
             </Button>
           ) : (
             <></>
           )}
-          <Button variant="ghost" asChild>
-            <a href="/howitworks">How it works</a>
-          </Button>
+
           {data.token ? (
             <Button variant="ghost" className="cursor-pointer" onClick={logOut}>
-              Logout
+              Log out
             </Button>
           ) : (
             <Button variant="ghost" asChild>
@@ -103,19 +108,23 @@ export default function Navbar() {
                   className="cursor-pointer"
                   onClick={logOut}
                 >
-                  Logout
+                  Log out
                 </Button>
               ) : (
                 <Button variant="ghost" asChild>
                   <a href="/signup">Sign up</a>
                 </Button>
               )}
-              <Button variant="ghost" asChild>
-                <a href="/howitworks">How it works</a>
-              </Button>
-              {data.token ? (
+              {data.token && localStorage.getItem("isApproved") ? (
                 <Button variant="ghost" asChild>
                   <a href="/pools">Pools</a>
+                </Button>
+              ) : (
+                <></>
+              )}
+              {data.token ? (
+                <Button variant="ghost" asChild>
+                  <a href="/howitworks">How it works</a>
                 </Button>
               ) : (
                 <></>

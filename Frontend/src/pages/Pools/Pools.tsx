@@ -39,12 +39,22 @@ export default function Pools() {
   const poolEntries = Object.entries(data);
 
   return (
-    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {loading
-        ? Array.from({ length: 3 }).map((_, i) => <SkeletonPoolCard key={i} />)
-        : poolEntries.map(([id, pool]) => (
-            <PoolCard key={id} pool={{ _id: id, ...pool }} />
-          ))}
+    <div className="p-4">
+      {/* Responsive mobile-first heading */}
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+        Explore pools
+      </h1>
+
+      {/* Pool grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {loading
+          ? Array.from({ length: 3 }).map((_, i) => (
+              <SkeletonPoolCard key={i} />
+            ))
+          : poolEntries.map(([id, pool]) => (
+              <PoolCard key={id} pool={{ _id: id, ...pool }} />
+            ))}
+      </div>
     </div>
   );
 }

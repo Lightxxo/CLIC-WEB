@@ -5,12 +5,13 @@ import config from "@/config";
 
 interface Props {
   eventId?: string;
+  poolStatus: string;
+  setPoolStatus: (status: string) => void;
 }
 
 type Status = "loading" | "apply" | "pending" | "cancel";
 
-export default function PoolCTA({ eventId }: Props) {
-  const [status, setStatus] = useState<Status>("loading");
+export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
   const [loading, setLoading] = useState(false);
 
   const { REMOTE, API_BASE_URL, API_PORT } = config;
@@ -29,8 +30,14 @@ export default function PoolCTA({ eventId }: Props) {
     }
   };
 
+  useEffect(() => {
+    console.log("########status:", poolStatus);
+  }, [poolStatus]);
+
   const fetchStatus = async () => {
     const token = localStorage.getItem("token");
+    console.log("token:", token);
+    console.log("eventId:", eventId);
     if (!token || !eventId) return;
 
     try {
@@ -40,16 +47,18 @@ export default function PoolCTA({ eventId }: Props) {
 
       if (!res.ok) throw new Error("Failed to fetch event status");
       const result = await res.json();
-      setStatus(mapStatus(result.status));
+      console.log("Fetched event status:", result);
+      setPoolStatus(mapStatus(result.status));
     } catch (e) {
       console.error("Status fetch failed", e);
-      setStatus("apply");
+      setPoolStatus("apply");
     }
   };
 
   useEffect(() => {
+    console.log("Fetching initial status for event:", eventId);
     fetchStatus();
-  }, [eventId]);
+  }, []);
 
   const handleAction = async (btnTxt: "join" | "cancel") => {
     const token = localStorage.getItem("token");
@@ -73,7 +82,7 @@ export default function PoolCTA({ eventId }: Props) {
       console.log("Action response status:", result.btnTxt);
 
       const newStatus = mapStatus(result.btnTxt);
-      setStatus(newStatus);
+      setPoolStatus(newStatus);
     } catch (e) {
       console.error("Action failed", e);
     } finally {
@@ -81,23 +90,27 @@ export default function PoolCTA({ eventId }: Props) {
     }
   };
 
-  if (status === "loading" || loading) {
+  if (poolStatus === "loading" || loading) {
     return (
-      <Button disabled className="w-full">
+      <Button disabled className="w-full bg-gray-400 text-back">
         <Loader2 className="h-4 w-4 animate-spin mr-2" /> Loading
       </Button>
     );
   }
 
-  if (status === "pending") {
+  if (poolStatus === "pending") {
     return (
-      <Button disabled variant="secondary" className="w-full">
-        <Clock className="h-4 w-4 mr-2" /> Pending
+      <Button
+        disabled
+        variant="secondary"
+        className="w-full bg-gray-400 text-back"
+      >
+        <Clock className="h-4 w-4 mr-2" /> RSVP Pending
       </Button>
     );
   }
 
-  if (status === "apply") {
+  if (poolStatus === "apply") {
     return (
       <Button onClick={() => handleAction("join")} className="w-full">
         <Plus className="h-4 w-4 mr-2" /> Apply

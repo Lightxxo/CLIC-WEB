@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from "react";
 const steps = [
   "Sign up\nComplete a short questionnaire to become a member of Clic Club. Clic Club gives you access to pools of like-minded people to connect with from the inside out, through conversation, and not the outside in based on photos.",
   "RSVP for a pool\n(Dating) Pools are live online events at which you speak to a series of members in short video dates. We pool together the most appropriate members for each event.",
+  "Download the app\nDownload here for Apple iOS and here for Android. You can download the app after you sign up for membership or after you’ve RSVP’d for a pool, but you’ll need the app to be in a live pool.",
+  "Jump into a pool!\nTurn on your video camera and show up at the pool you signed up for. Be punctual because the pools will start as scheduled. Once you’ve pressed the Join button on the Pool page, relax, be yourself, and the app will start presenting members for you to video-date.",
   "Did you Clic?\nThe events and video dates are scheduled for a fixed duration. If you Clic with a member, you’ll have the option to extend your date. If they also Clic’d with you, you can speak to each other for a bit longer. But remember that each extension could be reducing the time you might have speaking to the other members at the event. Is a bird in hand worth two in the bush?",
   "Feedback\nWe‘re just starting out. As we work on improving your experience, we would love to hear your thoughts. Please complete the short feedback form after each date.",
 ];
@@ -30,12 +32,10 @@ export default function HowItWorks() {
         const firstRect = firstCircleRef.current.getBoundingClientRect();
         const lastRect = lastCircleRef.current.getBoundingClientRect();
 
-        // Calculate vertical line position relative to container
         const top = firstRect.top + firstRect.height / 2 - containerRect.top;
         const bottom = lastRect.top + lastRect.height / 2 - containerRect.top;
         const height = bottom - top;
 
-        // Calculate horizontal line left aligned with circles center
         const left = firstRect.left + firstRect.width / 2 - containerRect.left;
 
         setLineTop(top);
@@ -44,9 +44,17 @@ export default function HowItWorks() {
       }
     }
 
-    updateLine();
+    // Delay calculation slightly to ensure layout is ready
+    const timeout = setTimeout(() => {
+      requestAnimationFrame(updateLine);
+    }, 10);
+
     window.addEventListener("resize", updateLine);
-    return () => window.removeEventListener("resize", updateLine);
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener("resize", updateLine);
+    };
   }, []);
 
   return (
@@ -58,12 +66,12 @@ export default function HowItWorks() {
         </div>
 
         {/* Tagline */}
-        <div className="text-center mb-18 mt-6">
-          <p className="text-2xl sm:text-lg font-semibold text-gray-800 max-w-xl mx-auto leading-snug">
-            Join the pool
+        <div className="text-center my-10">
+          <p className="text-base font-medium text-gray-800 max-w-sm mx-auto leading-relaxed px-2">
+            Jump into pools of online live events:
           </p>
-          <p className="text-base sm:text-lg text-gray-600 font-medium max-w-xl mx-auto mt-2 leading-relaxed">
-            Talk to members we know you’ll Clic with at live online events
+          <p className="text-base font-medium text-gray-800 max-w-sm mx-auto mt-2 leading-relaxed px-2">
+            Talk to members we know you'll Clic with.<br></br> At live online events.
           </p>
         </div>
 
