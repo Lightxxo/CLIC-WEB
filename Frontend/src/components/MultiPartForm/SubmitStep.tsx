@@ -102,7 +102,7 @@ export default function SubmitStep() {
       <Button
         onClick={() => onSubmit(data)}
         disabled={loading}
-        className="mt-2"
+        className="mt-2 cursor-pointer"
       >
         {loading ? (
           <>
