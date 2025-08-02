@@ -228,13 +228,13 @@ const EmailVerification = () => {
               </p>
               <Input
                 type="email"
-                className="w-full max-w-[180px] m-auto p-5"
+                className="w-4/5 md:w-1/4 mx-auto p-5"
                 onKeyDown={emailInput}
                 onChange={(e) => setEmail(e.target.value.trim())}
                 placeholder="Email"
               />
               {error != "" && (
-                <p className="text-left w-1/2 m-auto text-red-600 text-xs">
+                <p className="text-left w-4/5 md:w-1/4 mx-auto text-red-600 text-xs">
                   {error}
                 </p>
               )}
@@ -261,7 +261,7 @@ const EmailVerification = () => {
               </p>
               <Input
                 type="number"
-                className="w-4/5 sm:w-1/2 md:w-1/3 m-auto p-5"
+                className="w-4/5 md:w-1/4 mx-auto p-5"
                 min="100000"
                 max="999999"
                 onKeyDown={codeInput}
@@ -269,7 +269,7 @@ const EmailVerification = () => {
                 placeholder="enter your code"
               />
               {codeError != "" && (
-                <p className="text-left w-1/2 m-auto text-red-600 text-xs">
+                <p className="text-left w-4/5 md:w-1/4 mx-auto text-red-600 text-xs">
                   {codeError}
                 </p>
               )}
