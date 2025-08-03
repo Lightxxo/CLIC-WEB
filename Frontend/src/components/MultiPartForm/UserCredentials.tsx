@@ -27,7 +27,6 @@ export default function UserCredentials({
 }: UserCredentialsProps) {
   const { data, setData } = useFormContext();
 
-  // Local states
   const [dob, setDob] = useState<Date | null>(data.dateOfBirth);
   const [password, setPassword] = useState(data.password || "");
   const [confirmPassword, setConfirmPassword] = useState(
@@ -37,7 +36,6 @@ export default function UserCredentials({
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Sync dob to context, debounced effect to avoid rapid updates
   useEffect(() => {
     const handler = setTimeout(() => {
       setData((prev) => ({ ...prev, dateOfBirth: dob }));
@@ -45,7 +43,6 @@ export default function UserCredentials({
     return () => clearTimeout(handler);
   }, [dob, setData]);
 
-  // Sync password & confirmPassword with context
   useEffect(() => {
     setData((prev) => ({ ...prev, password }));
   }, [password, setData]);
@@ -54,15 +51,13 @@ export default function UserCredentials({
     setData((prev) => ({ ...prev, confirmPassword }));
   }, [confirmPassword, setData]);
 
-  // Update username when first/last name changes
   useEffect(() => {
     setData((prev) => ({
       ...prev,
-      username: `${prev.firstName || ""} ${prev.lastName || ""}`.trim(),
+      username: `${prev.firstName || ""}`.trim(),
     }));
   }, [data.firstName, data.lastName, setData]);
 
-  // Validate all fields + passwords match
   const isValid =
     !!data.firstName?.trim() &&
     !!data.lastName?.trim() &&
@@ -72,23 +67,27 @@ export default function UserCredentials({
     password === confirmPassword &&
     !!data.gender;
 
-  // Notify parent about validity
   useEffect(() => {
     onValidityChange(isValid);
   }, [isValid, onValidityChange]);
 
-  // Memoize the date select handler to avoid re-renders
   const onDateSelect = useCallback((date: Date | undefined) => {
     setDob(date || null);
   }, []);
 
-  // Memoize formatted DOB to avoid recalculating on every render
-  const formattedDob = useMemo(() => (dob ? format(dob, "PPP") : "Pick a date"), [
-    dob,
-  ]);
+  const formattedDob = useMemo(
+    () => (dob ? format(dob, "PPP") : "Pick a date"),
+    [dob]
+  );
 
   return (
     <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+      {/* Top message */}
+      <p className="text-sm text-gray-600">
+        Except for your last name and date of birth, the following answers will
+        appear on your profile.
+      </p>
+
       {/* First and Last Name side by side */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Input

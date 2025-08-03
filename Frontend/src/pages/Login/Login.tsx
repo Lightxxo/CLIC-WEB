@@ -111,7 +111,7 @@ const Login = () => {
           Submit
         </Button>
       </form>
-      <p className="text-xs mt-5">
+      <p className="text-md mt-5">
         Don't have an account?{" "}
         <Link to="/signup" className="text-blue-600">
           Sign up

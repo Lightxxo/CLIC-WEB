@@ -205,11 +205,10 @@ const EmailVerification = () => {
     <div className="mt-20 text-center">
       <div className="text-center my-10">
         <p className="text-base font-medium text-gray-800 max-w-sm mx-auto leading-relaxed px-2">
-          Jump into pools of online live events:
+          Jump into pools of live online events.
         </p>
         <p className="text-base font-medium text-gray-800 max-w-sm mx-auto mt-2 leading-relaxed px-2">
-          Talk to members we know you'll Clic with.<br></br> At live online
-          events.
+          Talk to members we know you’ll Clic with.
         </p>
       </div>
 
@@ -245,7 +244,7 @@ const EmailVerification = () => {
               >
                 Submit
               </Button>
-              <p className="text-xs mt-5">
+              <p className="text-md mt-5">
                 Already have an account?{" "}
                 <Link to="/login" className="text-blue-600">
                   Login
@@ -256,8 +255,8 @@ const EmailVerification = () => {
             <section>
               <p className="my-5">
                 We have sent a verification code to (<b>{email}</b>). <br />
-                (Check your spam/junk folder too. If you entered an incorrect
-                email address, you won't receive a code.)
+                Check your spam/junk folder too. If you entered an incorrect
+                email address, you won't receive a code.
               </p>
               <Input
                 type="number"
