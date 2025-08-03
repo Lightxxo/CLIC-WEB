@@ -16,7 +16,7 @@ export type FormDataType = {
   confirmPassword: string | null;
   signupSuccess: boolean;
   token: null | string;
-  loading: boolean
+  loading: boolean;
 };
 
 const defaultFormData: FormDataType = {
@@ -33,7 +33,7 @@ const defaultFormData: FormDataType = {
   confirmPassword: null,
   signupSuccess: false,
   token: null,
-  loading: true
+  loading: true,
 };
 
 type FormContextType = {

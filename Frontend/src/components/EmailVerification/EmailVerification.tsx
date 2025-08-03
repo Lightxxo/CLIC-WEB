@@ -255,8 +255,8 @@ const EmailVerification = () => {
             <section>
               <p className="my-5">
                 We have sent a verification code to (<b>{email}</b>). <br />
-                (Check your spam/junk folder too. If you entered an incorrect
-                email address, you won't receive a code.)
+                Check your spam/junk folder too. If you entered an incorrect
+                email address, you won't receive a code.
               </p>
               <Input
                 type="number"
