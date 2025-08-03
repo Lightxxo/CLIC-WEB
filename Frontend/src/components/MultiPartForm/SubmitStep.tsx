@@ -39,6 +39,14 @@ export default function SubmitStep() {
       formData.append("lastName", SubmitStepData.lastName);
       formData.append("password", SubmitStepData.password);
       formData.append("gender", SubmitStepData.gender || "");
+
+      // NEW FIELDS
+      formData.append("occupation", SubmitStepData.occupation || "");
+      formData.append("where_live", SubmitStepData.live || "");
+      formData.append("where_from", SubmitStepData.from || "");
+      formData.append("cities_frequent", SubmitStepData.cities || "");
+      formData.append("about", SubmitStepData.about || "");
+
       formData.append("city", "n/a");
       formData.append("ques_ans", JSON.stringify(SubmitStepData.answers));
       formData.append("interests", JSON.stringify([]));
@@ -77,7 +85,6 @@ export default function SubmitStep() {
           token: data.token,
           signupSuccess: true,
         }));
-        
       } else {
         setError(true);
       }

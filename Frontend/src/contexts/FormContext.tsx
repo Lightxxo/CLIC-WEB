@@ -1,4 +1,3 @@
-// FormContext.tsx
 import React, { useState, createContext, useContext } from "react";
 import type { ReactNode } from "react";
 
@@ -14,6 +13,11 @@ export type FormDataType = {
   dateOfBirth: Date | null;
   password: string | null;
   confirmPassword: string | null;
+  occupation?: string;
+  live?: string;
+  from?: string;
+  cities?: string;
+  about?: string;
   signupSuccess: boolean;
   token: null | string;
   loading: boolean;
@@ -31,6 +35,11 @@ const defaultFormData: FormDataType = {
   dateOfBirth: null,
   password: null,
   confirmPassword: null,
+  occupation: "",
+  live: "",
+  from: "",
+  cities: "",
+  about: "",
   signupSuccess: false,
   token: null,
   loading: true,
