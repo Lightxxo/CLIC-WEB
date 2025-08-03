@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-
 
 export interface CLICProps {
   className?: string;
@@ -11,14 +11,8 @@ export interface CLICProps {
   spinSpeed?: number; // Duration in seconds for one full rotation
   staticDuration?: number; // Duration in seconds to stay static before spinning starts
   fadeIn?: boolean; // Enable/disable fade in animation
+  letterSpacing?: number; // Gap between letters in pixels (default: 1)
 }
-
-const sizeClasses: Record<NonNullable<CLICProps["size"]>, string> = {
-  sm: "h-8",
-  md: "h-12",
-  lg: "h-16",
-  xl: "h-24",
-};
 
 /**
  * CLIC Logo Component with spinning C's
@@ -29,6 +23,7 @@ const sizeClasses: Record<NonNullable<CLICProps["size"]>, string> = {
  * @param spinSpeed - Spin duration in seconds per rotation (default: 2)
  * @param staticDuration - Duration in seconds to stay static before spinning starts (default: 0.8)
  * @param fadeIn - Enable/disable fade in animation (default: true)
+ * @param letterSpacing - Gap between letters in pixels (default: 1)
  */
 export function CLIC({
   className,
@@ -37,7 +32,19 @@ export function CLIC({
   spinSpeed = 2,
   staticDuration = 0.8,
   fadeIn = true,
+  letterSpacing = 4,
 }: CLICProps) {
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    // Start animation after component mounts
+    const timer = setTimeout(() => {
+      setIsAnimating(true);
+    }, staticDuration * 1000);
+
+    return () => clearTimeout(timer);
+  }, [staticDuration]);
+
   const containerVariants: Variants = {
     initial: { opacity: fadeIn ? 0 : 1 },
     animate: {
@@ -52,36 +59,67 @@ export function CLIC({
   const spinVariants: Variants = {
     initial: { rotate: 0 },
     animate: {
-      rotate: 360,
+      rotate: isAnimating ? 360 : 0,
       transition: {
         duration: spinSpeed,
         ease: "linear",
-        repeat: Infinity,
-        delay: staticDuration,
+        repeat: isAnimating ? Number.POSITIVE_INFINITY : 0,
       },
     },
   };
 
+  // Get the height value for consistent sizing
+  const getHeightValue = () => {
+    switch (size) {
+      case "sm":
+        return "32px";
+      case "md":
+        return "48px";
+      case "lg":
+        return "64px";
+      case "xl":
+        return "96px";
+      default:
+        return "48px";
+    }
+  };
+
+  const heightValue = getHeightValue();
+
   return (
-    <motion.div
-      className={cn("flex items-center gap-1", className)}
+    <motion.span
+      className={cn("inline-block", className)}
       variants={containerVariants}
       initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, margin: "-50px" }}
+      animate="animate"
+      style={{
+        whiteSpace: "nowrap", // Prevent line breaks
+        fontSize: 0, // Remove any text spacing
+        lineHeight: 0, // Remove line height spacing
+      }}
     >
       {/* First C - Spinning */}
-      <motion.div
+      <motion.span
         variants={spinVariants}
         initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-50px" }}
-        className={cn("flex-shrink-0", sizeClasses[size])}
-        style={{ transformOrigin: "center center" }}
+        animate="animate"
+        style={{
+          display: "inline-block",
+          transformOrigin: "50% 50%",
+          willChange: "transform",
+          height: heightValue,
+          width: heightValue, // Make it square for proper rotation
+          marginRight: `${letterSpacing}px`,
+          verticalAlign: "top",
+        }}
       >
         <svg
           viewBox="0 0 138 138"
-          className="w-full h-full"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+          }}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -90,13 +128,25 @@ export function CLIC({
             fill={color}
           />
         </svg>
-      </motion.div>
+      </motion.span>
 
       {/* L - Static */}
-      <div className={cn("flex-shrink-0", sizeClasses[size])}>
+      <span
+        style={{
+          display: "inline-block",
+          height: heightValue,
+          width: `${Number.parseFloat(heightValue) * 0.47}px`, // L is narrower, about 47% of height
+          marginRight: `${letterSpacing}px`,
+          verticalAlign: "top",
+        }}
+      >
         <svg
           viewBox="0 0 65 138"
-          className="w-full h-full"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+          }}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -105,13 +155,25 @@ export function CLIC({
             fill={color}
           />
         </svg>
-      </div>
+      </span>
 
       {/* I - Static */}
-      <div className={cn("flex-shrink-0", sizeClasses[size])}>
+      <span
+        style={{
+          display: "inline-block",
+          height: heightValue,
+          width: `${Number.parseFloat(heightValue) * 0.21}px`, // I is very narrow, about 21% of height
+          marginRight: `${letterSpacing}px`,
+          verticalAlign: "top",
+        }}
+      >
         <svg
           viewBox="0 0 29 142"
-          className="w-full h-full"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+          }}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -120,20 +182,30 @@ export function CLIC({
             fill={color}
           />
         </svg>
-      </div>
+      </span>
 
       {/* Second C - Spinning */}
-      <motion.div
+      <motion.span
         variants={spinVariants}
         initial="initial"
-        whileInView="animate"
-        viewport={{ once: true, margin: "-50px" }}
-        className={cn("flex-shrink-0", sizeClasses[size])}
-        style={{ transformOrigin: "center center" }}
+        animate="animate"
+        style={{
+          display: "inline-block",
+          transformOrigin: "50% 50%",
+          willChange: "transform",
+          height: heightValue,
+          width: heightValue, // Make it square for proper rotation
+          verticalAlign: "top",
+          // No margin on last element
+        }}
       >
         <svg
           viewBox="0 0 138 138"
-          className="w-full h-full"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+          }}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -142,9 +214,7 @@ export function CLIC({
             fill={color}
           />
         </svg>
-      </motion.div>
-    </motion.div>
+      </motion.span>
+    </motion.span>
   );
 }
-
-
