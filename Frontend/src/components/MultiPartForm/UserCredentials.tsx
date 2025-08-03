@@ -32,6 +32,11 @@ export default function UserCredentials({
   const [confirmPassword, setConfirmPassword] = useState(
     data.confirmPassword || ""
   );
+  const [occupation, setOccupation] = useState("");
+  const [live, setLive] = useState("");
+  const [from, setFrom] = useState("");
+  const [cities, setCities] = useState("");
+  const [about, setAbout] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -52,6 +57,10 @@ export default function UserCredentials({
   }, [confirmPassword, setData]);
 
   useEffect(() => {
+    setData((prev) => ({ ...prev, occupation, live, from, cities, about }));
+  }, [occupation, live, from, cities, about, setData]);
+
+  useEffect(() => {
     setData((prev) => ({
       ...prev,
       username: `${prev.firstName || ""}`.trim(),
@@ -65,7 +74,8 @@ export default function UserCredentials({
     !!password &&
     !!confirmPassword &&
     password === confirmPassword &&
-    !!data.gender;
+    !!data.gender &&
+    !!from;
 
   useEffect(() => {
     onValidityChange(isValid);
@@ -82,13 +92,11 @@ export default function UserCredentials({
 
   return (
     <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-      {/* Top message */}
       <p className="text-sm text-gray-600">
         Except for your last name and date of birth, the following answers will
         appear on your profile.
       </p>
 
-      {/* First and Last Name side by side */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Input
           placeholder="First Name"
@@ -104,7 +112,6 @@ export default function UserCredentials({
         />
       </div>
 
-      {/* Date of Birth */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm font-medium">Date of Birth</label>
         <Popover>
@@ -133,7 +140,12 @@ export default function UserCredentials({
         </Popover>
       </div>
 
-      {/* Password and Confirm Password with eye toggles */}
+      <Input placeholder="Occupation" value={occupation} onChange={(e) => setOccupation(e.target.value)} />
+      <Input placeholder="Where do you live?" value={live} onChange={(e) => setLive(e.target.value)} />
+      <Input placeholder="Where are you from? *" value={from} onChange={(e) => setFrom(e.target.value)} />
+      <Input placeholder="Cities you frequent" value={cities} onChange={(e) => setCities(e.target.value)} />
+      <Input placeholder="Add what you want other members to know about you" value={about} onChange={(e) => setAbout(e.target.value)} />
+
       <div className="space-y-3">
         <div className="relative">
           <Input
@@ -147,8 +159,7 @@ export default function UserCredentials({
             variant="ghost"
             size="sm"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full ml-1 bg-white-100 hover:bg-gray-200 focus:outline-none focus-visible:outline-none focus-visible:ring-0"
-            aria-label={showPassword ? "Hide password" : "Show password"}
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full ml-1 bg-white-100 hover:bg-gray-200"
             type="button"
           >
             {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
@@ -163,7 +174,7 @@ export default function UserCredentials({
             onChange={(e) => setConfirmPassword(e.target.value)}
             className={
               password !== confirmPassword && confirmPassword !== ""
-                ? "border-red-600 ring-0 focus-visible:border-red-400 focus-visible:ring-red-400 !border-red-600"
+                ? "border-red-600 ring-0 focus-visible:border-red-400"
                 : ""
             }
             autoComplete="new-password"
@@ -172,8 +183,7 @@ export default function UserCredentials({
             variant="ghost"
             size="sm"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full ml-1 bg-white-100 hover:bg-gray-200 focus:outline-none focus-visible:outline-none focus-visible:ring-0"
-            aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full ml-1 bg-white-100 hover:bg-gray-200"
             type="button"
           >
             {showConfirmPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
@@ -181,11 +191,10 @@ export default function UserCredentials({
         </div>
       </div>
 
-      {/* Gender select */}
       <select
         value={data.gender || ""}
         onChange={(e) => setData({ ...data, gender: e.target.value })}
-        className="w-full border rounded-md p-2 focus:outline-none focus:ring"
+        className="w-full border rounded-md p-2 focus:outline-none"
         autoComplete="sex"
       >
         <option value="">Select Gender</option>
