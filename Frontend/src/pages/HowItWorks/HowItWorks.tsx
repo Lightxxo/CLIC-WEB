@@ -68,10 +68,10 @@ export default function HowItWorks() {
         {/* Tagline */}
         <div className="text-center my-10">
           <p className="text-base font-medium text-gray-800 max-w-sm mx-auto leading-relaxed px-2">
-            Jump into pools of online live events:
+            Jump into pools of live online events.
           </p>
           <p className="text-base font-medium text-gray-800 max-w-sm mx-auto mt-2 leading-relaxed px-2">
-            Talk to members we know you'll Clic with.<br></br> At live online events.
+            Talk to members we know you’ll Clic with.
           </p>
         </div>
 
