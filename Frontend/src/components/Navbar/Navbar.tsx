@@ -52,9 +52,14 @@ export default function Navbar() {
               Log out
             </Button>
           ) : (
-            <Button variant="ghost" asChild>
-              <a href="/signup">Sign up</a>
-            </Button>
+            <>
+              <Button variant="ghost" asChild>
+                <a href="/signup">Sign up</a>
+              </Button>
+              <Button variant="ghost" asChild>
+                <a href="/login">Login</a>
+              </Button>
+            </>
           )}
         </div>
 
@@ -103,17 +108,11 @@ export default function Navbar() {
               transition={{ type: "tween", duration: 0.3 }}
             >
               {data.token ? (
-                <Button
-                  variant="ghost"
-                  className="cursor-pointer"
-                  onClick={logOut}
-                >
-                  Log out
+                <Button variant="ghost" asChild>
+                  <a href="/howitworks">How it works</a>
                 </Button>
               ) : (
-                <Button variant="ghost" asChild>
-                  <a href="/signup">Sign up</a>
-                </Button>
+                <></>
               )}
               {data.token && localStorage.getItem("isApproved") ? (
                 <Button variant="ghost" asChild>
@@ -123,11 +122,22 @@ export default function Navbar() {
                 <></>
               )}
               {data.token ? (
-                <Button variant="ghost" asChild>
-                  <a href="/howitworks">How it works</a>
+                <Button
+                  variant="ghost"
+                  className="cursor-pointer"
+                  onClick={logOut}
+                >
+                  Log out
                 </Button>
               ) : (
-                <></>
+                <>
+                  <Button variant="ghost" asChild>
+                    <a href="/signup">Sign up</a>
+                  </Button>
+                  <Button variant="ghost" asChild>
+                    <a href="/login">Login</a>
+                  </Button>
+                </>
               )}
             </motion.div>
           </>
