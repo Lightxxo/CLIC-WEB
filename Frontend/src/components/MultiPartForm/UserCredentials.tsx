@@ -140,11 +140,31 @@ export default function UserCredentials({
         </Popover>
       </div>
 
-      <Input placeholder="Occupation" value={occupation} onChange={(e) => setOccupation(e.target.value)} />
-      <Input placeholder="Where do you live?" value={live} onChange={(e) => setLive(e.target.value)} />
-      <Input placeholder="Where are you from? *" value={from} onChange={(e) => setFrom(e.target.value)} />
-      <Input placeholder="Cities you frequent" value={cities} onChange={(e) => setCities(e.target.value)} />
-      <Input placeholder="Add what you want other members to know about you" value={about} onChange={(e) => setAbout(e.target.value)} />
+      <Input
+        placeholder="Occupation"
+        value={occupation}
+        onChange={(e) => setOccupation(e.target.value)}
+      />
+      <Input
+        placeholder="Where do you live?"
+        value={live}
+        onChange={(e) => setLive(e.target.value)}
+      />
+      <Input
+        placeholder="Where are you from? *"
+        value={from}
+        onChange={(e) => setFrom(e.target.value)}
+      />
+      <Input
+        placeholder="Cities you frequent"
+        value={cities}
+        onChange={(e) => setCities(e.target.value)}
+      />
+      <Input
+        placeholder="Add what you want other members to know about you"
+        value={about}
+        onChange={(e) => setAbout(e.target.value)}
+      />
 
       <div className="space-y-3">
         <div className="relative">
