@@ -22,6 +22,7 @@ import PoolDetails from "./pages/PoolDetails/PoolDetails";
 import Login from "./pages/Login/Login";
 import Authenticated from "./pages/Protected/Authenticated";
 import Approved from "./pages/Protected/Approved";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 
 export default function App() {
   return (
@@ -33,7 +34,10 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-
+        <Route
+          path="/privacypolicy"
+          element={<PrivacyPolicy></PrivacyPolicy>}
+        />
         {/* Public routes with navbar */}
         {/*
         <Route
@@ -50,6 +54,7 @@ export default function App() {
         <Route element={<AuthenticatedLayout />}>
           <Route path="authenticated" element={<Authenticated />} />
           <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
+
           {/*
           <Route path="profile" element={<Profile />} />
 
