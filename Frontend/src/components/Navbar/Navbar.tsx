@@ -24,24 +24,24 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="relative z-50 w-full border-b border-gray-200 bg-white px-4 py-3 flex items-center justify-between">
+      <nav className="relative z-50 w-full nav-bg-color px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <a href="/" className="text-2xl font-bold text-figma-blue">
-          <img src={logo} width="50" />
+          <img src={logo} width="65" />
         </a>
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex">
           {data.token ? (
             <Button variant="ghost" asChild>
-              <a href="/howitworks">How it works</a>
+              <a href="/howitworks" className="txt-color">How it works</a>
             </Button>
           ) : (
             <></>
           )}
           {data.token && localStorage.getItem("isApproved") ? (
             <Button variant="ghost" asChild>
-              <a href="/pools">Pools</a>
+              <a href="/pools" className="txt-color">Pools</a>
             </Button>
           ) : (
             <></>
@@ -54,10 +54,10 @@ export default function Navbar() {
           ) : (
             <>
               <Button variant="ghost" asChild>
-                <a href="/signup">Sign up</a>
+                <a href="/signup" className="txt-color nav-links">Sign up</a>
               </Button>
               <Button variant="ghost" asChild>
-                <a href="/login">Login</a>
+                <a href="/login" className="txt-color nav-links">Login</a>
               </Button>
             </>
           )}
@@ -109,14 +109,14 @@ export default function Navbar() {
             >
               {data.token ? (
                 <Button variant="ghost" asChild>
-                  <a href="/howitworks">How it works</a>
+                  <a href="/howitworks" className="txt-color">How it works</a>
                 </Button>
               ) : (
                 <></>
               )}
               {data.token && localStorage.getItem("isApproved") ? (
                 <Button variant="ghost" asChild>
-                  <a href="/pools">Pools</a>
+                  <a href="/pools" className="txt-color">Pools</a>
                 </Button>
               ) : (
                 <></>
@@ -132,10 +132,10 @@ export default function Navbar() {
               ) : (
                 <>
                   <Button variant="ghost" asChild>
-                    <a href="/signup">Sign up</a>
+                    <a href="/signup" className="txt-color">Sign up</a>
                   </Button>
                   <Button variant="ghost" asChild>
-                    <a href="/login">Login</a>
+                    <a href="/login" className="txt-color">Login</a>
                   </Button>
                 </>
               )}
