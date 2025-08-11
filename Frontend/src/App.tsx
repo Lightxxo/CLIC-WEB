@@ -1,6 +1,6 @@
 // import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-
+import "./App.css";
 import Landing from "./pages/Landing/Landing";
 
 // // Lazy public route (future use)
