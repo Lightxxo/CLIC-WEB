@@ -20,8 +20,8 @@ export default function Footer() {
         >
           Privacy Policy
         </Link>
-        <Link to="/" className="px-4 hover:text-[#F05A23] transition">
-          Terms of Service
+        <Link to="/termsofuse" className="px-4 hover:text-[#F05A23] transition">
+          Terms of Use
         </Link>
         <span className="px-4 text-xs">
           Email{" "}
