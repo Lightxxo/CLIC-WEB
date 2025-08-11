@@ -23,6 +23,7 @@ import Login from "./pages/Login/Login";
 import Authenticated from "./pages/Protected/Authenticated";
 import Approved from "./pages/Protected/Approved";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse/TermsOfUse";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
           path="/privacypolicy"
           element={<PrivacyPolicy></PrivacyPolicy>}
         />
+        <Route path="/termsofuse" element={<TermsOfUse></TermsOfUse>} />
         {/* Public routes with navbar */}
         {/*
         <Route
