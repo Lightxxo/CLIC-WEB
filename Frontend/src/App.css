@@ -44,16 +44,16 @@
 /* styles to match figma */
 @font-face {
   font-family: 'Gill Sans';
-  src: url('GillSans/Monotype-GillSansNovaBook.woff2') format('woff2'),
-       url('GillSans/Monotype-GillSansNovaBook.woff') format('woff');
+  src: url('./assets/GillSans/Monotype-GillSansNovaBook.woff2') format('woff2'), /* GillSans/Monotype-GillSansNovaBook.woff2 */
+       url('./assets/GillSans/Monotype-GillSansNovaBook.woff') format('woff'); /* GillSans/Monotype-GillSansNovaBook.woff */
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gill Sans bold';
-  src: url('GillSans/Monotype  - Gill Sans Nova Bold.woff2') format('woff2'),
-       url('GillSans/Monotype  - Gill Sans Nova Bold.woff') format('woff');
+  src: url('./assets/GillSans/Monotype-GillSansNovaBold.woff2') format('woff2'), /* GillSans/Monotype  - Gill Sans Nova Bold.woff2 */
+       url('./assets/GillSans/Monotype-GillSansNovaBold.woff') format('woff'); /* GillSans/Monotype  - Gill Sans Nova Bold.woff */
   font-weight: normal;
   font-style: normal;
 }
