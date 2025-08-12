@@ -1,9 +1,7 @@
-import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import config from "@/config";
 import { useFormContext } from "@/contexts/FormContext";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -225,9 +223,9 @@ const EmailVerification = () => {
                 <b className="text-lg">Enter your email address</b> <br />{" "}
                 <small className="text-gray-500">to apply for membership</small>
               </p>
-              <Input
+              <input
                 type="email"
-                className="w-4/5 md:w-1/4 mx-auto p-5"
+                className="w-4/5 md:w-1/4 mx-auto bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c]"
                 onKeyDown={emailInput}
                 onChange={(e) => setEmail(e.target.value.trim())}
                 placeholder="Email"
@@ -237,13 +235,13 @@ const EmailVerification = () => {
                   {error}
                 </p>
               )}
-              <Button
-                variant="outline"
-                className="cursor-pointer mt-4"
+              <br />
+              <button
+                className="cursor-pointer mt-4 w-4/5 md:w-1/4 mx-auto text-left bg-[#B46E28] p-1 px-2"
                 onClick={emailSubmit}
               >
                 Submit
-              </Button>
+              </button>
               <p className="text-md mt-5">
                 Already have an account?{" "}
                 <Link to="/login" className="text-blue-600">
@@ -258,9 +256,9 @@ const EmailVerification = () => {
                 Check your spam/junk folder too. If you entered an incorrect
                 email address, you won't receive a code.
               </p>
-              <Input
+              <input
                 type="number"
-                className="w-4/5 md:w-1/4 mx-auto p-5"
+                className="w-4/5 md:w-1/4 mx-auto bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c]"
                 min="100000"
                 max="999999"
                 onKeyDown={codeInput}
@@ -271,14 +269,13 @@ const EmailVerification = () => {
                 <p className="text-left w-4/5 md:w-1/4 mx-auto text-red-600 text-xs">
                   {codeError}
                 </p>
-              )}
-              <Button
-                variant="outline"
-                className="cursor-pointer mt-4"
+              )}<br />
+              <button
+                className="cursor-pointer mt-4 w-4/5 md:w-1/4 mx-auto text-left bg-[#B46E28] p-1 px-2"
                 onClick={codeSubmit}
               >
                 Submit
-              </Button>
+              </button>
             </section>
           )}
         </>
