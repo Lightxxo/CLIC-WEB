@@ -12,14 +12,6 @@ export default function SubmitStep() {
   const { data, setData } = useFormContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
-  const onSubmit = async (SubmitStepData: any) => {
-    try {
-      setLoading(true);
-      setError(false);
-
-      const formData = new FormData();
-
       function generateRandomString(length = 8) {
         const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
         return Array.from(
@@ -27,6 +19,12 @@ export default function SubmitStep() {
           () => chars[Math.floor(Math.random() * chars.length)]
         ).join("");
       }
+  const onSubmit = async (SubmitStepData: any) => {
+    try {
+      setLoading(true);
+      setError(false);
+
+      const formData = new FormData();
 
       const email =
         SubmitStepData.email?.trim() !== ""
@@ -38,6 +36,7 @@ export default function SubmitStep() {
       formData.append("firstName", SubmitStepData.firstName);
       formData.append("lastName", SubmitStepData.lastName);
       formData.append("password", SubmitStepData.password);
+      formData.append("dateOfBirth", SubmitStepData.dateOfBirth);
       formData.append("gender", SubmitStepData.gender || "");
 
       // NEW FIELDS
@@ -95,7 +94,8 @@ export default function SubmitStep() {
       setLoading(false);
     }
   };
-
+  // console.log(`${generateRandomString()}@${generateRandomString()}.com`);
+  // console.log(data);
   return (
     <div className="text-center space-y-4">
       <h2 className="text-xl font-semibold">Done!</h2>
