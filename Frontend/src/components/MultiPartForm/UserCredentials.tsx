@@ -27,7 +27,7 @@ export default function UserCredentials({
 }: UserCredentialsProps) {
   const { data, setData } = useFormContext();
 
-  const [dob, setDob] = useState<Date | null>(data.dateOfBirth);
+  const [dob, setDob] = useState(data.dateOfBirth);
   const [password, setPassword] = useState(data.password || "");
   const [confirmPassword, setConfirmPassword] = useState(
     data.confirmPassword || ""
@@ -82,7 +82,7 @@ export default function UserCredentials({
   }, [isValid, onValidityChange]);
 
   const onDateSelect = useCallback((date: Date | undefined) => {
-    setDob(date || null);
+     if (date) setDob(date!.toString());
   }, []);
 
   const formattedDob = useMemo(
@@ -130,7 +130,7 @@ export default function UserCredentials({
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
               mode="single"
-              selected={dob || undefined}
+              selected={dob == "" ? new Date() : new Date(dob)}
               onSelect={onDateSelect}
               disabled={(date) => date > new Date()}
               autoFocus

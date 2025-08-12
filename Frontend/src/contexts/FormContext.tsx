@@ -10,7 +10,7 @@ export type FormDataType = {
   answers: { question: string; selectedAns: string }[];
   verificationStatus: boolean;
   newUser: boolean;
-  dateOfBirth: Date | null;
+  dateOfBirth: string;
   password: string | null;
   confirmPassword: string | null;
   occupation?: string;
@@ -32,7 +32,7 @@ const defaultFormData: FormDataType = {
   answers: [],
   verificationStatus: false,
   newUser: true,
-  dateOfBirth: null,
+  dateOfBirth: "",
   password: null,
   confirmPassword: null,
   occupation: "",
