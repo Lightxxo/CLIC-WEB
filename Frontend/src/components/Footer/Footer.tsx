@@ -72,6 +72,21 @@ export default function Footer() {
 
         {/* Mobile Layout */}
         <div className="flex flex-col items-center gap-3 md:hidden text-center">
+          {/* Buttons */}
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              className="rounded-full px-5 text-base bg-[#005A2D] text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+            >
+              Download on Android
+            </Button>
+            <Button
+              variant="outline"
+              className="rounded-full px-5 text-base bg-[#005A2D] text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+            >
+              Download on iOS
+            </Button>
+          </div>
           {/* Middle content */}
           <div className="flex flex-wrap justify-center items-center divide-x divide-[#00C3FF]">
             <a
@@ -89,10 +104,7 @@ export default function Footer() {
             >
               Privacy Policy
             </Link>
-            <Link
-              to="/termsofuse"
-              className="px-4 hover:text-white transition"
-            >
+            <Link to="/termsofuse" className="px-4 hover:text-white transition">
               Terms of Use
             </Link>
             <span className="px-4 text-xs whitespace-normal">
@@ -105,22 +117,6 @@ export default function Footer() {
               </a>{" "}
               for support or enquiries
             </span>
-          </div>
-
-          {/* Buttons */}
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              className="rounded-full px-5 text-base bg-[#005A2D] text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
-            >
-              Download on Android
-            </Button>
-            <Button
-              variant="outline"
-              className="rounded-full px-5 text-base bg-[#005A2D] text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
-            >
-              Download on iOS
-            </Button>
           </div>
         </div>
       </div>
