@@ -21,8 +21,6 @@ type Props = {
 export default function MultiPartForm({ questions }: Props) {
   const [step, setStep] = useState(0);
 
-  
-
   // Track validity of each step, step 0 is UserCredentials, 1..N questions, last submit step no need validation here
   const [validityMap, setValidityMap] = useState<Record<number, boolean>>({
     0: false,
@@ -69,7 +67,11 @@ export default function MultiPartForm({ questions }: Props) {
               Back
             </Button>
             {step < totalSteps - 1 ? (
-              <Button onClick={next} disabled={isNextDisabled}>
+              <Button
+                className="bg-[#B46E28] hover:bg-[#945A21] text-white"
+                onClick={next}
+                disabled={isNextDisabled}
+              >
                 Next
               </Button>
             ) : (
