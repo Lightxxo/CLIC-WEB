@@ -40,6 +40,7 @@ export default function App() {
           element={<PrivacyPolicy></PrivacyPolicy>}
         />
         <Route path="/termsofuse" element={<TermsOfUse></TermsOfUse>} />
+        <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
         {/* Public routes with navbar */}
         {/*
         <Route
@@ -55,7 +56,6 @@ export default function App() {
         {/* Authenticated routes WITH navbar */}
         <Route element={<AuthenticatedLayout />}>
           <Route path="authenticated" element={<Authenticated />} />
-          <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
 
           {/*
           <Route path="profile" element={<Profile />} />

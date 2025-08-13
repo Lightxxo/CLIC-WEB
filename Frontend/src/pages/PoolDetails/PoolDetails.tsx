@@ -1,17 +1,15 @@
 "use client";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { usePoolContext } from "@/contexts/PoolContext";
 import { useEffect, useState } from "react";
-import { Loader2, ArrowLeft } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import config from "@/config";
-import PoolImage from "@/components/PoolDetails/PoolImage";
 import PoolHeader from "@/components/PoolDetails/PoolHeader";
 import PoolFooter from "@/components/PoolDetails/PoolFooter";
 export default function PoolDetails() {
   const { id } = useParams<{ id: string }>();
   const { data, setData } = usePoolContext();
-  const navigate = useNavigate();
   const [pool, setPool] = useState(id ? data[id] : null);
   const [loading, setLoading] = useState(!pool);
   const [poolStatus, setPoolStatus] = useState("loading");
@@ -57,16 +55,8 @@ export default function PoolDetails() {
 
   return (
     <div className="px-4 py-6 max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center gap-2 sm:hidden">
-        <button
-          onClick={() => navigate("/pools")}
-          className="flex items-center text-sm text-blue-600 hover:underline"
-        >
-          <ArrowLeft className="h-4 w-4 mr-1" /> Back to all pools
-        </button>
-      </div>
-
-      <PoolImage imgURL={pool.imgURL} />
+      <p className="flex justify-center m-0 p-6 bg-[#D9D9D9]"><img src={apiUrl + "/" + pool.imgURL} alt="Event banner" className="" /></p>
+      
       <PoolHeader
         title={pool.title}
         location={pool.location}

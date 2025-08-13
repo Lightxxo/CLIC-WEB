@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
 import { useFormContext } from "@/contexts/FormContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -26,38 +26,36 @@ export default function Navbar() {
     <>
       <nav className="relative z-50 w-full nav-bg-color px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="text-2xl font-bold text-figma-blue">
+        <Link to="/" className="text-2xl font-bold text-figma-blue">
           <img src={logo} width="65" />
-        </a>
+        </Link>
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex">
-          {data.token ? (
+      
             <Button variant="ghost">
-              <a href="/howitworks" className="txt-color text-lg gill-sans-bold pb-1">How it works</a>
+              <Link to="/howitworks" className="text-lg gill-sans-bold pb-1">How it works</Link>
             </Button>
-          ) : (
-            <></>
-          )}
+
           {data.token && localStorage.getItem("isApproved") ? (
             <Button variant="ghost">
-              <a href="/pools" className="txt-color text-lg gill-sans-bold pb-1">Pools</a>
+              <Link to="/pools" className="text-lg gill-sans-bold pb-1">Pools</Link>
             </Button>
           ) : (
             <></>
           )}
 
           {data.token ? (
-            <Button variant="ghost" className="cursor-pointer txt-color text-lg gill-sans-bold pt-1" onClick={logOut}>
+            <Button variant="ghost" className="cursor-pointer text-lg gill-sans-bold pt-1" onClick={logOut}>
               Log out
             </Button>
           ) : (
             <>
               <Button variant="ghost">
-                <a href="/signup" className="txt-color text-lg gill-sans-bold pb-1">Sign up</a>
+                <Link to="/signup" className="text-lg gill-sans-bold pb-1">Sign up</Link>
               </Button>
               <Button variant="ghost">
-                <a href="/login" className="txt-color text-lg gill-sans-bold pb-1">Login</a>
+                <Link to="/login" className="text-lg gill-sans-bold pb-1">Login</Link>
               </Button>
             </>
           )}
@@ -107,16 +105,14 @@ export default function Navbar() {
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
             >
-              {data.token ? (
+            
                 <Button variant="ghost">
-                  <a href="/howitworks" className="txt-color text-2xl txt-color text-lg gill-sans-bold pb-1">How it works</a>
+                  <Link to="/howitworks" className="text-lg gill-sans-bold pb-1">How it works</Link>
                 </Button>
-              ) : (
-                <></>
-              )}
+
               {data.token && localStorage.getItem("isApproved") ? (
                 <Button variant="ghost">
-                  <a href="/pools" className="txt-color text-2xl txt-color text-lg gill-sans-bold pb-1">Pools</a>
+                  <Link to="/pools" className="text-lg gill-sans-bold pb-1">Pools</Link>
                 </Button>
               ) : (
                 <></>
@@ -124,7 +120,7 @@ export default function Navbar() {
               {data.token ? (
                 <Button
                   variant="ghost"
-                  className="cursor-pointer"
+                  className="cursor-pointer text-lg gill-sans-bold"
                   onClick={logOut}
                 >
                   Log out
@@ -132,10 +128,10 @@ export default function Navbar() {
               ) : (
                 <>
                   <Button variant="ghost">
-                    <a href="/signup" className="txt-color text-2xl txt-color text-lg gill-sans-bold pb-1">Sign up</a>
+                    <Link to="/signup" className="text-lg gill-sans-bold pb-1">Sign up</Link>
                   </Button>
                   <Button variant="ghost">
-                    <a href="/login" className="txt-color text-2xl txt-color text-lg gill-sans-bold pb-1">Login</a>
+                    <Link to="/login" className="text-lg gill-sans-bold pb-1">Login</Link>
                   </Button>
                 </>
               )}

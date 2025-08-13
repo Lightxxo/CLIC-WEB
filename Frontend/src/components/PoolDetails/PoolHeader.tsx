@@ -29,9 +29,9 @@ export default function PoolHeader({
   });
 
   return (
-    <div className="space-y-3">
-      {/* Title + Confirmed badge */}
-      <div className="flex items-center gap-3">
+    <div className="p-6 bg-[#D9D9D9] mb-4 shadow-[0_3px_#8c8c8c]">
+ 
+      <div className="flex items-center gap-3 mb-10">
         <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
         {poolStatus === "cancel" && (
           <span className="px-2 py-0.5 text-xs font-medium border border-green-500 text-green-600 rounded-full">

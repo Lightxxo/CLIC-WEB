@@ -62,12 +62,11 @@
   border-style: solid;
   background-color: #B46E28;
 }
-.txt-color {
-  color: #031E59;
-}
+
 body {
   font-family: "Gill Sans";
   background-color: #CDA0C3;
+  color: #031E59;
 }
 
 .gill-sans-bold {

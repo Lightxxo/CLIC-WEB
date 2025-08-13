@@ -3,44 +3,44 @@ import { toast } from "sonner";
 
 export default function PoolFooter() {
   return (
-    <div className="w-full max-w-md mx-auto p-6 border-2 border-gray-300 rounded-2xl bg-white shadow-sm">
+    <div className="bg-[#D9D9D9] p-6 shadow-[0_3px_#8c8c8c]">
       {/* Main heading */}
-      <h1 className="text-xl md:text-2xl font-bold mb-6 text-gray-800 text-left">
+      <h1 className="text-xl md:text-2xl mb-6 gill-sans-bold text-left">
         Jump into the Pool:
       </h1>
 
       {/* Instructions list */}
-      <div className="space-y-4 mb-8">
+      <div className="space-y-4 mb-8 text-xl">
         <div className="flex items-start gap-3">
-          <span className="flex-shrink-0 w-6 h-6 bg-[#F05A23] text-white rounded-full flex items-center justify-center text-sm font-semibold">
+          <span className="">
             1
           </span>
-          <p className="text-gray-700 text-sm md:text-base">
+          <p className="">
             Download the app if you haven't already
           </p>
         </div>
 
         <div className="flex items-start gap-3">
-          <span className="flex-shrink-0 w-6 h-6 bg-[#F05A23] text-white rounded-full flex items-center justify-center text-sm font-semibold">
+          <span className="">
             2
           </span>
-          <p className="text-gray-700 text-sm md:text-base">Login to the app</p>
+          <p className="">Login to the app</p>
         </div>
 
         <div className="flex items-start gap-3">
-          <span className="flex-shrink-0 w-6 h-6 bg-[#F05A23] text-white rounded-full flex items-center justify-center text-sm font-semibold">
+          <span className="">
             3
           </span>
-          <p className="text-gray-700 text-sm md:text-base">
+          <p className="">
             Click on the Pools icon (the waves in the middle of the bottom of
             your screen)
           </p>
         </div>
         <div className="flex items-start gap-3">
-          <span className="flex-shrink-0 w-6 h-6 bg-[#F05A23] text-white rounded-full flex items-center justify-center text-sm font-semibold">
+          <span className="">
             4
           </span>
-          <p className="text-gray-700 text-sm md:text-base">
+          <p className="">
             Under Confirmed Pools, click on your pool & press the big “Go live”
             button — or press link below
           </p>
@@ -52,7 +52,7 @@ export default function PoolFooter() {
         {/* TODO: replace "#" with purple in-app Go Live URL */}
         <a
           href="#"
-          className="text-[#F05A23] underline hover:text-[#d94f1f]"
+          className="underline"
           onClick={(e) => {
             e.preventDefault();
             toast.error("Something went wrong. Please open the pool on app.");
@@ -63,7 +63,7 @@ export default function PoolFooter() {
       </div>
 
       {/* Bottom quote */}
-      <p className="text-left text-gray-600 text-sm md:text-base italic">
+      <p className="text-left text-gray-600  italic">
         We hope you Click with some! Be curious, be natural, be yourself
       </p>
     </div>
