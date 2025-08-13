@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import type React from "react";
+
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "@/contexts/FormContext";
 import { format } from "date-fns";
@@ -8,6 +10,8 @@ import {
   CalendarIcon,
   EyeOpenIcon,
   EyeClosedIcon,
+  UploadIcon,
+  ImageIcon,
 } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 import {
@@ -26,6 +30,7 @@ export default function UserCredentials({
   onValidityChange,
 }: UserCredentialsProps) {
   const { data, setData } = useFormContext();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [dob, setDob] = useState(data.dateOfBirth);
   const [password, setPassword] = useState(data.password || "");
@@ -37,6 +42,9 @@ export default function UserCredentials({
   const [from, setFrom] = useState("");
   const [cities, setCities] = useState("");
   const [about, setAbout] = useState("");
+
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -61,11 +69,40 @@ export default function UserCredentials({
   }, [occupation, live, from, cities, about, setData]);
 
   useEffect(() => {
+    setData((prev) => ({ ...prev, profileImage: selectedImage }));
+  }, [selectedImage, setData]);
+
+  useEffect(() => {
     setData((prev) => ({
       ...prev,
       username: `${prev.firstName || ""}`.trim(),
     }));
   }, [data.firstName, data.lastName, setData]);
+
+  const handleImageSelect = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (file && file.type.startsWith("image/")) {
+        setSelectedImage(file);
+
+        // Create preview URL
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setImagePreview(e.target?.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    []
+  );
+
+  const handleReuploadClick = useCallback(() => {
+    fileInputRef.current?.click();
+  }, []);
+
+  const handleImageAreaClick = useCallback(() => {
+    fileInputRef.current?.click();
+  }, []);
 
   const isValid =
     !!data.firstName?.trim() &&
@@ -75,7 +112,8 @@ export default function UserCredentials({
     !!confirmPassword &&
     password === confirmPassword &&
     !!data.gender &&
-    !!from;
+    !!from &&
+    !!selectedImage;
 
   useEffect(() => {
     onValidityChange(isValid);
@@ -96,6 +134,57 @@ export default function UserCredentials({
         Except for your last name and date of birth, the following answers will
         appear on your profile.
       </p>
+
+      <div className="flex flex-col space-y-2">
+        <label className="text-sm font-medium">Profile Picture *</label>
+        <div className="flex flex-col items-start gap-3">
+          <div
+            onClick={handleImageAreaClick}
+            className="w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-gray-400 transition-colors bg-gray-50"
+          >
+            {imagePreview ? (
+              <img
+                src={imagePreview || "/placeholder.svg"}
+                alt="Profile preview"
+                className="w-full h-full object-cover rounded-lg"
+              />
+            ) : (
+              <>
+                <ImageIcon className="w-8 h-8 text-gray-400 mb-2" />
+                <span className="text-sm text-gray-500 text-center">
+                  Select Image
+                </span>
+              </>
+            )}
+          </div>
+
+          {selectedImage && (
+            <div className="flex flex-col gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleReuploadClick}
+                className="w-auto bg-transparent"
+              >
+                <UploadIcon className="w-4 h-4 mr-2" />
+                Reupload Image
+              </Button>
+              <p className="text-xs text-gray-500">
+                {selectedImage.name} (
+                {(selectedImage.size / 1024 / 1024).toFixed(2)} MB)
+              </p>
+            </div>
+          )}
+        </div>
+
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleImageSelect}
+          className="hidden"
+        />
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Input
