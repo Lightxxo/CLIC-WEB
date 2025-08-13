@@ -1,5 +1,4 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
 interface TermsOfUseProps {}
@@ -10,11 +9,9 @@ const TermsOfUse: React.FC<TermsOfUseProps> = () => {
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45 }}
-      className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen bg-[#ABABAB] py-12 px-4 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-4xl">
-        <Card className="shadow-lg">
-          <CardContent className="p-10">
             <header className="mb-6">
               <h1 className="text-2xl sm:text-3xl font-extrabold leading-tight">
                 Terms of Use
@@ -22,7 +19,7 @@ const TermsOfUse: React.FC<TermsOfUseProps> = () => {
 
               <ul className="list-disc pl-5 mt-3">
                 <li>
-                  <p className="mt-3 text-sm text-black">
+                  <p className="mt-3 text-sm">
                     These terms and conditions apply to the Clic Club platform,
                     including its website(s), the app for mobile devices (the
                     "App") and any live events, collectively referred to as the
@@ -412,8 +409,6 @@ const TermsOfUse: React.FC<TermsOfUseProps> = () => {
                 </li>
               </ol>
             </section>
-          </CardContent>
-        </Card>
       </div>
     </motion.div>
   );
