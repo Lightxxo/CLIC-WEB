@@ -21,7 +21,7 @@ export default function ProgressDots({ step, total }: ProgressDotsProps) {
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
           className={cn(
             "w-3 h-3 rounded-full",
-            step === i ? "bg-primary" : "bg-gray-300"
+            step === i ? "bg-figma-blue" : "bg-gray-300"
           )}
         />
       ))}

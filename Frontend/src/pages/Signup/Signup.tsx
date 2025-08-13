@@ -54,7 +54,6 @@ const Signup = () => {
   const { data } = useFormContext();
 
   const getCurrentComponent = () => {
-
     if (data.signupSuccess) {
       return {
         key: "signup-success",
@@ -77,16 +76,13 @@ const Signup = () => {
       };
     }
 
-
     if (data.newUser) {
       return {
         key: "multi-form",
         component: (
           <>
             {/* Multi-Step Quiz Form for New Users */}
-            <p className="text-center text-xs text-muted-foreground mt-8">
-              New Member Onboarding
-            </p>
+            <p className="text-center text-xs  mt-8">New Member Onboarding</p>
             <MultiPartForm questions={quiz} />
           </>
         ),

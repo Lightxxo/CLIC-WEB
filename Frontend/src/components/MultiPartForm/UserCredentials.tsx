@@ -82,7 +82,7 @@ export default function UserCredentials({
   }, [isValid, onValidityChange]);
 
   const onDateSelect = useCallback((date: Date | undefined) => {
-     if (date) setDob(date!.toString());
+    if (date) setDob(date!.toString());
   }, []);
 
   const formattedDob = useMemo(
@@ -99,13 +99,13 @@ export default function UserCredentials({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Input
-          placeholder="First Name"
+          placeholder="First Name *"
           value={data.firstName || ""}
           onChange={(e) => setData({ ...data, firstName: e.target.value })}
           autoComplete="given-name"
         />
         <Input
-          placeholder="Last Name"
+          placeholder="Last Name *"
           value={data.lastName || ""}
           onChange={(e) => setData({ ...data, lastName: e.target.value })}
           autoComplete="family-name"
@@ -113,7 +113,7 @@ export default function UserCredentials({
       </div>
 
       <div className="flex flex-col space-y-2">
-        <label className="text-sm font-medium">Date of Birth</label>
+        <label className="text-sm font-medium">Date of Birth *</label>
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -170,7 +170,7 @@ export default function UserCredentials({
         <div className="relative">
           <Input
             type={showPassword ? "text" : "password"}
-            placeholder="Password"
+            placeholder="Password *"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="new-password"
@@ -189,7 +189,7 @@ export default function UserCredentials({
         <div className="relative">
           <Input
             type={showConfirmPassword ? "text" : "password"}
-            placeholder="Confirm Password"
+            placeholder="Confirm Password *"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             className={
@@ -217,7 +217,7 @@ export default function UserCredentials({
         className="w-full border rounded-md p-2 focus:outline-none"
         autoComplete="sex"
       >
-        <option value="">Select Gender</option>
+        <option value="">Select Gender *</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
