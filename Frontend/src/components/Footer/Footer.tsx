@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-gray-200 text-sm bg-[#005A2D] text-[#00C3FF]">
+    <footer className="border-t border-gray-200 text-sm bg-[#005A2D] text-[#00C3FF]">
       <div className="max-w-7xl mx-auto px-4 py-4">
         {/* Desktop / Tablet Layout */}
         <div className="hidden md:flex justify-between items-center gap-4 flex-nowrap">

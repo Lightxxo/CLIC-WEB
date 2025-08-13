@@ -31,59 +31,53 @@ export default function HowItWorks() {
         <article className="">
           <h4 className="gill-sans-bold text-2xl">1. Sign up</h4>
           <p className="text-2xl">
-            Complete a short questionnaire to become a member of Clic Club. 
-            Clic Club gives you access to pools of like-minded people to connect with from the inside out, 
-            through conversation, and not the outside in based on photos.
+            Complete a questionnaire to become a Clic Club member. 
+            Membership gives you access to live online events at which you  
+            speak to a series on members we pooled together especially for that event.
           </p>
           <br />
           <hr className="border-black" />
           <br />
-          <h4 className="gill-sans-bold text-2xl">2. RSVP for a pool</h4>
+          <h4 className="gill-sans-bold text-2xl">2. Register for a pool </h4>
           <p className="text-2xl">
-            (Dating) Pools are live online events at which you speak to a series of members in short video dates. 
-            We pool together the most appropriate members for each event.
+            The pools are live, online and require you to turn on your video camera. 
+            In a series of short video dates, you’ll speak to a series of members we select for that pool.
+            Connect from the inside out, through conversation, and not the outside in, based on photos.
           </p>
           <br />
           <hr className="border-black" />
           <br />
           <h4 className="gill-sans-bold text-2xl">3. Download the app</h4>
           <p className="text-2xl">
-            Download here for Apple iOS and here for Android. 
-            You can download the app after you sign up for membership or after you've RSVP'd for a pool, 
-            but you'll need the app to join a live pool. Once your membership is approved, 
-            you can navigate to “Pools” on the top right hand on your screen to explore upcoming events.
+            You can download the app after you sign up for membership or register for an event.
           </p>
           <br />
           <hr className="border-black" />
           <br />
-          <h4 className="gill-sans-bold text-2xl">4. Jump into a pool!</h4>
+          <h4 className="gill-sans-bold text-2xl">4. Join the pool </h4>
           <p className="text-2xl">
-            Make sure your video camera is on. Join the live pool through the app.
-            <br />• Click on the Pools icon (the waves in the middle of the bottom of your screen)
-            <br />• Under Confirmed Pools, click on your Pool
-            <br />• Press the big “Go live” button.<br />
-            Be punctual because Pools go live as scheduled. Once you've joined, 
-            the app will start presenting members for you to video-date one at a time. 
-            There will be time for you to catch your breath between video dates.
+            Turn on your video camera and show up on time. 
+            Go to the pool page in the App and press Join. Relax and be yourself. 
+            The app will start presenting members for you to video-date.
           </p>
           <br />
           <hr className="border-black" />
           <br />
           <h4 className="gill-sans-bold text-2xl">5. Did you Clic?</h4>
           <p className="text-2xl">
-            The events and video dates are scheduled for a fixed duration. 
-            If you Clic with a member, you'll have the option to extend your date. 
-            If they also Clic'd with you, you can speak to each other for a bit longer. 
-            But remember that each extension could reduce the remaining time available 
-            to speak to other members at the event. Is a bird in hand worth two in the bush?
+            Each video date and pool has a fixed duration. 
+            If you Clic with your date, you’ll have the option to extend it. 
+            If they also Clic’d with you, the date will be extended. 
+            But remember that each extension could reduce the time available to speak to others in the pool.
           </p>
           <br />
           <hr className="border-black" />
           <br />
           <h4 className="gill-sans-bold text-2xl">6. Feedback</h4>
           <p className="text-2xl">
-            We're just starting out. As we work on improving your experience, 
-            we would love to hear your thoughts. Please complete the short feedback form after each date.
+            As we work on improving your experience, 
+            we would love to hear your thoughts. 
+            Please complete the short feedback form after each date.
           </p>
           <br />
           <hr className="border-black" />

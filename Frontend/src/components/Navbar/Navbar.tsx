@@ -18,6 +18,7 @@ export default function Navbar() {
       verificationStatus: false,
       email: "",
       token: null,
+      signupSuccess: false,
     }));
     navigate("/");
   };
