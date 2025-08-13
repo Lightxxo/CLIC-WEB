@@ -200,18 +200,19 @@ const EmailVerification = () => {
     });
   }
   return (
-    <div className="mt-20 text-center">
-      <div className="text-center my-10">
-        <p className="text-base font-medium text-gray-800 max-w-sm mx-auto leading-relaxed px-2">
+    <div className="mt-20 mx-auto mb-10 w-9/10 sm:w-1/3">
+      <div className="my-10">
+        <h3 className="text-left font-bold text-xl mt-20">Sign Up</h3>
+        <p className="text-left text-base font-medium text-gray-800">
           Jump into pools of live online events.
         </p>
-        <p className="text-base font-medium text-gray-800 max-w-sm mx-auto mt-2 leading-relaxed px-2">
+        <p className="text-left text-base font-medium text-gray-800">
           Talk to members we know you’ll Clic with.
         </p>
       </div>
 
       {isLoading ? (
-        <div className="w-1/2 m-auto mt-5">
+        <div className="mt-5">
           <Skeleton className="h-[125px] rounded-xl" />
           <Skeleton className="h-4 mt-3" />
         </div>
@@ -225,19 +226,19 @@ const EmailVerification = () => {
               </p>
               <input
                 type="email"
-                className="w-4/5 md:w-1/4 mx-auto bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c]"
+                className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
                 onKeyDown={emailInput}
                 onChange={(e) => setEmail(e.target.value.trim())}
                 placeholder="Email"
               />
               {error != "" && (
-                <p className="text-left w-4/5 md:w-1/4 mx-auto text-red-600 text-xs">
+                <p className="text-left text-red-600 text-xs m-0">
                   {error}
                 </p>
               )}
               <br />
               <button
-                className="cursor-pointer mt-4 w-4/5 md:w-1/4 mx-auto text-left bg-[#B46E28] p-1 px-2"
+                className="cursor-pointer mt-4 text-left bg-[#B46E28] p-1 px-2  w-full"
                 onClick={emailSubmit}
               >
                 Submit
@@ -258,7 +259,7 @@ const EmailVerification = () => {
               </p>
               <input
                 type="number"
-                className="w-4/5 md:w-1/4 mx-auto bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c]"
+                className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
                 min="100000"
                 max="999999"
                 onKeyDown={codeInput}
@@ -266,12 +267,12 @@ const EmailVerification = () => {
                 placeholder="enter your code"
               />
               {codeError != "" && (
-                <p className="text-left w-4/5 md:w-1/4 mx-auto text-red-600 text-xs">
+                <p className="text-left text-red-600 text-xs m-0">
                   {codeError}
                 </p>
               )}<br />
               <button
-                className="cursor-pointer mt-4 w-4/5 md:w-1/4 mx-auto text-left bg-[#B46E28] p-1 px-2"
+                className="cursor-pointer mt-4 text-left bg-[#B46E28] p-1 px-2 w-full"
                 onClick={codeSubmit}
               >
                 Submit
