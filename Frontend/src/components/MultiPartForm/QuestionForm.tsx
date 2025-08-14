@@ -44,7 +44,6 @@ export default function QuestionForm({
         {index + 1}. {question.question}
       </p>
 
-      <p className="text-lg font-medium">{question.question}</p>
       <div className="space-y-2">
         {question.options.map((opt, i) => (
           <button
@@ -52,7 +51,9 @@ export default function QuestionForm({
             onClick={() => setAnswer(opt)}
             className={cn(
               "w-full p-2 border rounded-md text-left",
-              selected === opt ? "bg-primary text-white" : "bg-white"
+              selected === opt
+                ? "bg-[#B46E28] hover:bg-[#945A21] text-white"
+                : "bg-white"
             )}
           >
             {opt}

@@ -1,5 +1,4 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
 interface PrivacyPolicyProps {}
@@ -10,11 +9,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45 }}
-      className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen py-12 bg-[#ABABAB] px-4 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-4xl">
-        <Card className="shadow-lg">
-          <CardContent className="p-10">
+
             <header className="mb-6">
               <h1 className="text-2xl sm:text-3xl font-extrabold leading-tight">
                 Privacy Policy
@@ -22,7 +20,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
 
               <ul className="list-disc pl-5 mt-3">
                 <li>
-                  <p className="mt-3 text-sm text-black">
+                  <p className="mt-3 text-sm">
                     This privacy policy or notice (referred to as the “notice")
                     applies to the Clic Club platform, including its website,
                     the app for mobile devices (the "App") and any live events,
@@ -640,8 +638,6 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
                 </ul>
               </ol>
             </section>
-          </CardContent>
-        </Card>
       </div>
     </motion.div>
   );

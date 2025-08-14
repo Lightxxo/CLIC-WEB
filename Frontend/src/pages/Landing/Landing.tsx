@@ -87,7 +87,7 @@ export default function Landing() {
         </p>
       </section>
 
-      <section className="bg-gray-300 w-full py-10 px-4">
+      {/* <section className="bg-gray-300 w-full py-10 px-4">
         <div className="flex flex-col items-center gap-2">
           <p
             className="text-gray-900 text-4xl md:text-4xl font-semibold text-left font-thin"
@@ -104,7 +104,7 @@ export default function Landing() {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

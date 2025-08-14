@@ -1,6 +1,4 @@
 "use client";
-
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
 import config from "@/config";
@@ -34,27 +32,14 @@ export function PoolCard({ pool }: { pool: Pool }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       onClick={() => navigate(`/pools/${pool._id}`)}
-      className="cursor-pointer"
+      className="cursor-pointer bg-[#D9D9D9] p-5 shadow-[0_3px_#8c8c8c]"
     >
-      <Card className="w-full overflow-hidden rounded-2xl">
-        <div
-          className="h-48 bg-cover bg-center relative"
-          style={{ backgroundImage: `url('${fullImageUrl}')` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end">
-            <div className="p-4 w-full">
-              <h2 className="text-white text-xl font-bold truncate">
+          <img src={fullImageUrl} />
+              <h2 className="text-2xl font-bold truncate mb-4">
                 {pool.title}
               </h2>
-            </div>
-          </div>
-        </div>
-
-        <CardContent className="p-4">
-          <p className="text-sm text-gray-600 truncate">📍 {pool.location}</p>
-          <p className="text-sm text-gray-600">🕒 {formattedTime}</p>
-        </CardContent>
-      </Card>
+          <p className="text-sm truncate">📍 {pool.location}</p>
+          <p className="text-sm">🕒 {formattedTime}</p>
     </motion.div>
   );
 }

@@ -1,6 +1,6 @@
 // import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-
+import "./App.css";
 import Landing from "./pages/Landing/Landing";
 
 // // Lazy public route (future use)
@@ -23,6 +23,7 @@ import Login from "./pages/Login/Login";
 import Authenticated from "./pages/Protected/Authenticated";
 import Approved from "./pages/Protected/Approved";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse/TermsOfUse";
 
 export default function App() {
   return (
@@ -38,6 +39,8 @@ export default function App() {
           path="/privacypolicy"
           element={<PrivacyPolicy></PrivacyPolicy>}
         />
+        <Route path="/termsofuse" element={<TermsOfUse></TermsOfUse>} />
+        <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
         {/* Public routes with navbar */}
         {/*
         <Route
@@ -53,7 +56,6 @@ export default function App() {
         {/* Authenticated routes WITH navbar */}
         <Route element={<AuthenticatedLayout />}>
           <Route path="authenticated" element={<Authenticated />} />
-          <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
 
           {/*
           <Route path="profile" element={<Profile />} />

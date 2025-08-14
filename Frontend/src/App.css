@@ -1,9 +1,9 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+} */
 
 .logo {
   height: 6em;
@@ -39,4 +39,36 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* styles to match figma */
+@font-face {
+  font-family: 'Gill Sans';
+  src: url('./assets/GillSans/Monotype-GillSansNovaBook.woff2') format('woff2'), /* GillSans/Monotype-GillSansNovaBook.woff2 */
+       url('./assets/GillSans/Monotype-GillSansNovaBook.woff') format('woff'); /* GillSans/Monotype-GillSansNovaBook.woff */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gill Sans bold';
+  src: url('./assets/GillSans/Monotype-GillSansNovaBold.woff2') format('woff2'), /* GillSans/Monotype  - Gill Sans Nova Bold.woff2 */
+       url('./assets/GillSans/Monotype-GillSansNovaBold.woff') format('woff'); /* GillSans/Monotype  - Gill Sans Nova Bold.woff */
+  font-weight: normal;
+  font-style: normal;
+}
+
+.nav-bg-color {
+  border-style: solid;
+  background-color: #B46E28;
+}
+
+body {
+  font-family: "Gill Sans";
+  background-color: #CDA0C3;
+  color: #031E59;
+}
+
+.gill-sans-bold {
+  font-family: "Gill Sans bold";
 }

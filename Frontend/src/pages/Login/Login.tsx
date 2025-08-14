@@ -1,7 +1,7 @@
 "use client";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import config from "@/config";
 import { useFormContext } from "@/contexts/FormContext";
@@ -91,27 +91,28 @@ const Login = () => {
       });
   }
   return (
-    <div className="text-center w-4/5 md:w-1/3 mx-auto">
-      <h3 className="font-bold text-xl mb-8 mt-4">Login</h3>
+    <div className="w-4/5 md:w-1/3 mx-auto">
+      <h3 className="font-bold text-xl mt-20">Login</h3>
+      <p className="text-lg mb-3">Welcome back if you’re already a member of the Club. Please login here.</p>
       <form onSubmit={handleSubmit}>
-        <Input type="email" placeholder="Email" name="email" required />
+        <input type="email" placeholder="Email" name="email" className="w-full bg-[#D9D9D9] mb-3 p-1 shadow-[0_3px_#8c8c8c]" required />
         {emailError != "" && (
           <p className="text-left w-1/2 m-auto text-red-600 text-xs">
             {emailError}
           </p>
         )}
         <br />
-        <Input type="password" placeholder="Password" name="pass" required />
+        <input type="password" placeholder="Password" name="pass" className="w-full bg-[#D9D9D9] mb-3 p-1 shadow-[0_3px_#8c8c8c]" required />
         {/* {passError != "" && (
                 <p className="text-left w-1/2 m-auto text-red-600 text-xs">
                   {passError}
                 </p>
               )} */}
-        <Button type="submit" variant="outline" className="cursor-pointer mt-4">
-          Submit
-        </Button>
+        <button type="submit" className="cursor-pointer w-full text-left bg-[#B46E28] p-1 px-2">
+          Login
+        </button>
       </form>
-      <p className="text-md mt-5">
+      <p className="text-md my-5">
         Don't have an account?{" "}
         <Link to="/signup" className="text-blue-600">
           Sign up
