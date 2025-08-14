@@ -12,6 +12,7 @@ export default function SubmitStep() {
   const { data, setData } = useFormContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [agreed, setAgreed] = useState(false);
 
   function generateRandomString(length = 8) {
     const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -33,7 +34,6 @@ export default function SubmitStep() {
           ? SubmitStepData.email
           : `${generateRandomString()}@${generateRandomString()}.com`;
 
-      // Basic info
       formData.append("userName", SubmitStepData.username);
       formData.append("email", email);
       formData.append("firstName", SubmitStepData.firstName);
@@ -42,7 +42,6 @@ export default function SubmitStep() {
       formData.append("dateOfBirth", SubmitStepData.dateOfBirth);
       formData.append("gender", SubmitStepData.gender || "");
 
-      // Additional fields
       formData.append("occupation", SubmitStepData.occupation || "");
       formData.append("where_live", SubmitStepData.live || "");
       formData.append("where_from", SubmitStepData.from || "");
@@ -52,16 +51,13 @@ export default function SubmitStep() {
       formData.append("ques_ans", JSON.stringify(SubmitStepData.answers || {}));
       formData.append("interests", JSON.stringify([]));
 
-      // Profile picture handling
       if (SubmitStepData.profileImage) {
-        // Use uploaded image
         formData.append(
           "profilePicture",
           SubmitStepData.profileImage,
           SubmitStepData.profileImage.name
         );
       } else {
-        // Use fallback image
         const fallbackUri = "default_user.jpg";
         const fileType = fallbackUri.split(".").pop();
 
@@ -70,7 +66,7 @@ export default function SubmitStep() {
           if (!response.ok) throw new Error("Failed to load fallback image");
           const blob = await response.blob();
           formData.append("profilePicture", blob, `profilePic.${fileType}`);
-        } catch (err) {
+        } catch {
           console.warn(
             "Fallback image fetch failed. Skipping profile picture."
           );
@@ -120,10 +116,31 @@ export default function SubmitStep() {
         </p>
       )}
 
+      <div className="flex items-start justify-center gap-2 text-left max-w-md mx-auto">
+        <input
+          id="agree"
+          type="checkbox"
+          checked={agreed}
+          onChange={(e) => setAgreed(e.target.checked)}
+          className="mt-1 w-4 h-4 cursor-pointer flex-shrink-0"
+        />
+        <label htmlFor="agree" className="text-sm leading-snug">
+          By signing up, I confirm that I have read and agree to the{" "}
+          <a
+            href="/termsofuse"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            Terms of Use
+          </a>
+        </label>
+      </div>
+
       <Button
         onClick={() => onSubmit(data)}
-        disabled={loading}
-        className="mt-2 cursor-pointer bg-[#B46E28] hover:bg-[#945A21] text-white"
+        disabled={loading || !agreed}
+        className="mt-2 cursor-pointer bg-[#B46E28] hover:bg-[#945A21] text-white disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? (
           <>
