@@ -104,16 +104,16 @@ export default function UserCredentials({
     fileInputRef.current?.click();
   }, []);
 
-  const isValid =
-    !!data.firstName?.trim() &&
-    !!data.lastName?.trim() &&
-    !!dob &&
-    !!password &&
-    !!confirmPassword &&
-    password === confirmPassword &&
-    !!data.gender &&
-    !!from &&
-    !!selectedImage;
+  const isValid = true
+    // !!data.firstName?.trim() &&
+    // !!data.lastName?.trim() &&
+    // !!dob &&
+    // !!password &&
+    // !!confirmPassword &&
+    // password === confirmPassword &&
+    // !!data.gender &&
+    // !!from &&
+    // !!selectedImage;
 
   useEffect(() => {
     onValidityChange(isValid);
