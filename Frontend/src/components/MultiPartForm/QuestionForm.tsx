@@ -40,6 +40,14 @@ export default function QuestionForm({
 
   return (
     <div className="space-y-4">
+      {index == 0 && <p className="text-center mb-4">
+          <b>
+            Answer the next 10 questions so we can find the best pools for you. 
+        We won't publish your answers. 
+        Pick the answer (only one) most relevant to you.
+          </b>
+        </p>}
+      
       <p className="text-lg font-medium">
         {index + 1}. {question.question}
       </p>
