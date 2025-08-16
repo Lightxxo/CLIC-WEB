@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
 import { useFormContext } from "@/contexts/FormContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -19,6 +18,7 @@ export default function Navbar() {
       email: "",
       token: null,
       signupSuccess: false,
+      newUser: true,
     }));
     navigate("/");
   };
@@ -34,30 +34,31 @@ export default function Navbar() {
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex">
       
-            <Button variant="ghost">
-              <Link to="/howitworks" className="text-lg gill-sans-bold pb-1">How it works</Link>
-            </Button>
+              <NavLink to="/howitworks" 
+              className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>
+              How it works
+              </NavLink>
 
           {data.token && localStorage.getItem("isApproved") ? (
-            <Button variant="ghost">
-              <Link to="/pools" className="text-lg gill-sans-bold pb-1">Pools</Link>
-            </Button>
+            
+              <NavLink to="/pools" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Pools</NavLink>
+            
           ) : (
             <></>
           )}
 
           {data.token ? (
-            <Button variant="ghost" className="cursor-pointer text-lg gill-sans-bold pt-1" onClick={logOut}>
+            <button className="cursor-pointer text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1" onClick={logOut}>
               Log out
-            </Button>
+            </button>
           ) : (
             <>
-              <Button variant="ghost">
-                <Link to="/signup" className="text-lg gill-sans-bold pb-1">Sign up</Link>
-              </Button>
-              <Button variant="ghost">
-                <Link to="/login" className="text-lg gill-sans-bold pb-1">Login</Link>
-              </Button>
+              
+                <NavLink to="/signup" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Sign up</NavLink>
+              
+              
+                <NavLink to="/login" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Login</NavLink>
+              
             </>
           )}
         </div>
@@ -107,33 +108,32 @@ export default function Navbar() {
               transition={{ type: "tween", duration: 0.3 }}
             >
             
-                <Button variant="ghost">
-                  <Link to="/howitworks" className="text-lg gill-sans-bold pb-1">How it works</Link>
-                </Button>
+                {/* <Button variant="ghost"> */}
+                  <NavLink to="/howitworks" className={({isActive}) => isActive ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md" : "text-lg gill-sans-bold pb-1 px-3"}>How it works</NavLink>
+                {/* </Button> */}
 
               {data.token && localStorage.getItem("isApproved") ? (
-                <Button variant="ghost">
-                  <Link to="/pools" className="text-lg gill-sans-bold pb-1">Pools</Link>
-                </Button>
+             
+                  <NavLink to="/pools" className={({isActive}) => isActive ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md" : "text-lg gill-sans-bold pb-1 px-3"}>Pools</NavLink>
+             
               ) : (
                 <></>
               )}
               {data.token ? (
-                <Button
-                  variant="ghost"
-                  className="cursor-pointer text-lg gill-sans-bold"
+                <button
+                  className="cursor-pointer text-lg gill-sans-bold pb-1 px-3 text-left"
                   onClick={logOut}
                 >
                   Log out
-                </Button>
+                </button>
               ) : (
                 <>
-                  <Button variant="ghost">
-                    <Link to="/signup" className="text-lg gill-sans-bold pb-1">Sign up</Link>
-                  </Button>
-                  <Button variant="ghost">
-                    <Link to="/login" className="text-lg gill-sans-bold pb-1">Login</Link>
-                  </Button>
+                 
+                    <NavLink to="/signup" className={({isActive}) => isActive ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md" : "text-lg gill-sans-bold pb-1 px-3"}>Sign up</NavLink>
+                
+                 
+                    <NavLink to="/login" className={({isActive}) => isActive ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md" : "text-lg gill-sans-bold pb-1 px-3"}>Login</NavLink>
+                
                 </>
               )}
             </motion.div>
