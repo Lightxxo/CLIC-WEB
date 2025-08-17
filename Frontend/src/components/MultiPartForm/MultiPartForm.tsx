@@ -21,16 +21,13 @@ type Props = {
 export default function MultiPartForm({ questions }: Props) {
   const [step, setStep] = useState(0);
 
-  // Track validity of each step, step 0 is UserCredentials, 1..N questions, last submit step no need validation here
-  const [validityMap, setValidityMap] = useState<Record<number, boolean>>({
-    0: false,
-  });
+  const [validityMap, setValidityMap] = useState<Record<number, boolean>>({ 0: false });
 
   const totalSteps = 1 + questions.length + 1;
 
   const setStepValidity = useCallback((stepIndex: number, isValid: boolean) => {
     setValidityMap((prev) => {
-      if (prev[stepIndex] === isValid) return prev; // no change
+      if (prev[stepIndex] === isValid) return prev;
       return { ...prev, [stepIndex]: isValid };
     });
   }, []);
@@ -40,9 +37,7 @@ export default function MultiPartForm({ questions }: Props) {
 
   const currentComponent = () => {
     if (step === 0)
-      return (
-        <UserCredentials onValidityChange={(v) => setStepValidity(0, v)} />
-      );
+      return <UserCredentials onValidityChange={(v) => setStepValidity(0, v)} />;
     if (step > 0 && step <= questions.length)
       return (
         <QuestionForm
@@ -66,7 +61,7 @@ export default function MultiPartForm({ questions }: Props) {
             <Button onClick={prev} disabled={step === 0} variant="outline">
               Back
             </Button>
-            {step < totalSteps - 1 ? (
+            {step < totalSteps - 1 && (
               <Button
                 className="bg-[#B46E28] hover:bg-[#945A21] text-white"
                 onClick={next}
@@ -74,8 +69,6 @@ export default function MultiPartForm({ questions }: Props) {
               >
                 Next
               </Button>
-            ) : (
-              <></>
             )}
           </div>
         </CardContent>

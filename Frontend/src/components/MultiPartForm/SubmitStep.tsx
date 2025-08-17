@@ -41,7 +41,6 @@ export default function SubmitStep() {
       formData.append("password", SubmitStepData.password);
       formData.append("dateOfBirth", SubmitStepData.dateOfBirth);
       formData.append("gender", SubmitStepData.gender || "");
-
       formData.append("occupation", SubmitStepData.occupation || "");
       formData.append("where_live", SubmitStepData.live || "");
       formData.append("where_from", SubmitStepData.from || "");
@@ -60,7 +59,6 @@ export default function SubmitStep() {
       } else {
         const fallbackUri = "default_user.jpg";
         const fileType = fallbackUri.split(".").pop();
-
         try {
           const response = await fetch(fallbackUri);
           if (!response.ok) throw new Error("Failed to load fallback image");
@@ -82,18 +80,53 @@ export default function SubmitStep() {
       );
 
       if (response.ok) {
-        const data = await response.json();
+        const resData = await response.json();
+
+        // Save essential info
         localStorage.setItem("email", email);
-        localStorage.setItem("userName", data.newUser.userName);
-        localStorage.setItem("imgURL", data.newUser.imgURL);
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("userName", resData.newUser.userName);
+        localStorage.setItem("imgURL", resData.newUser.imgURL);
+        localStorage.setItem("token", resData.token);
+
+        // Clear only answers and user input fields
+        const keysToClear = [
+          "firstName",
+          "lastName",
+          "gender",
+          "dateOfBirth",
+          "password",
+          "confirmPassword",
+          "occupation",
+          "live",
+          "from",
+          "cities",
+          "about",
+          "profileImage",
+          "answers",
+        ];
+        keysToClear.forEach((k) => localStorage.removeItem(k));
+
+        // Update context
         setData((prev) => ({
           ...prev,
           verificationStatus: false,
           newUser: false,
           email: email,
-          token: data.token,
+          token: resData.token,
           signupSuccess: true,
+          answers: [],
+          firstName: "",
+          lastName: "",
+          gender: "",
+          dateOfBirth: "",
+          password: null,
+          confirmPassword: null,
+          occupation: "",
+          live: "",
+          from: "",
+          cities: "",
+          about: "",
+          profileImage: null,
         }));
       } else {
         setError(true);
@@ -112,7 +145,8 @@ export default function SubmitStep() {
 
       {error && (
         <p className="text-red-500 text-sm">
-          Something went wrong. Please try again.
+          Something went wrong. Your answers have been saved for applying again.
+          Please try again later.
         </p>
       )}
 

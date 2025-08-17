@@ -202,11 +202,11 @@ const EmailVerification = () => {
   return (
     <div className="mt-20 mx-auto mb-10 w-9/10 sm:w-1/3">
       <div className="my-10">
-        <h3 className="text-left font-bold text-xl mt-20">Sign Up</h3>
-        <p className="text-left text-base font-medium text-gray-800">
+        <h3 className="text-left font-bold text-xl mt-20  ">Sign Up</h3>
+        <p className="text-left text-base font-medium text-[#005a2d]">
           Jump into pools of live online events.
         </p>
-        <p className="text-left text-base font-medium text-gray-800">
+        <p className="text-left text-base font-medium text-[#005a2d]">
           Talk to members we know you’ll Clic with.
         </p>
       </div>
@@ -232,9 +232,7 @@ const EmailVerification = () => {
                 placeholder="Email"
               />
               {error != "" && (
-                <p className="text-left text-red-600 text-xs m-0">
-                  {error}
-                </p>
+                <p className="text-left text-red-600 text-xs m-0">{error}</p>
               )}
               <br />
               <button
@@ -270,7 +268,8 @@ const EmailVerification = () => {
                 <p className="text-left text-red-600 text-xs m-0">
                   {codeError}
                 </p>
-              )}<br />
+              )}
+              <br />
               <button
                 className="cursor-pointer mt-4 text-left bg-[#B46E28] p-1 px-2 w-full"
                 onClick={codeSubmit}
