@@ -24,6 +24,7 @@ import Authenticated from "./pages/Protected/Authenticated";
 import Approved from "./pages/Protected/Approved";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse/TermsOfUse";
+import ForgotPass from "./pages/ForgotPass/ForgotPass";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgotpass" element={<ForgotPass />} />
         <Route
           path="/privacypolicy"
           element={<PrivacyPolicy></PrivacyPolicy>}
