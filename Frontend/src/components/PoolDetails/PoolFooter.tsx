@@ -52,20 +52,20 @@ export default function PoolFooter() {
         {/* TODO: replace "#" with purple in-app Go Live URL */}
         <a
           href="#"
-          className="underline"
+          className="border border-[#031E59] px-3 pb-1 rounded-xl"
           onClick={(e) => {
             e.preventDefault();
             toast.error("Something went wrong. Please open the pool on app.");
           }}
         >
-          Take me to the Pool page on app
+          Go to App
         </a>
       </div>
 
       {/* Bottom quote */}
-      <p className="text-left text-gray-600  italic">
+      {/* <p className="text-left text-gray-600  italic">
         We hope you Click with some! Be curious, be natural, be yourself
-      </p>
+      </p> */}
     </div>
   );
 }

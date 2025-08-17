@@ -56,13 +56,13 @@ export default function Footer() {
             <div className="flex gap-2">
               <Button
                 variant="outline"
-                className="rounded-full px-5 text-base bg-[#005A2D] text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+                className="cursor-pointer rounded-full px-5 text-base bg-[#005A2D] hover:text-white text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
               >
                 Download on Android
               </Button>
               <Button
                 variant="outline"
-                className="rounded-full px-5 text-base bg-[#005A2D] text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+                className="cursor-pointer rounded-full px-5 text-base bg-[#005A2D] hover:text-white text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
               >
                 Download on iOS
               </Button>
@@ -76,13 +76,13 @@ export default function Footer() {
           <div className="flex gap-2">
             <Button
               variant="outline"
-              className="rounded-full px-5 text-base bg-[#005A2D] text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+              className="cursor-pointer rounded-full px-5 text-base bg-[#005A2D] hover:text-white text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
             >
               Download on Android
             </Button>
             <Button
               variant="outline"
-              className="rounded-full px-5 text-base bg-[#005A2D] text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+              className="cursor-pointer rounded-full px-5 text-base bg-[#005A2D] hover:text-white text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
             >
               Download on iOS
             </Button>
