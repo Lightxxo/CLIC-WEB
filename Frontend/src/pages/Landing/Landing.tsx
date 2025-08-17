@@ -12,8 +12,8 @@ export default function Landing() {
 
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-    const mobileSrc = "/videos/CC.Highway.London.02.mp4";
-    const desktopSrc = "/videos/CC.Highway.London.Website.mp4";
+    const mobileSrc = "/videos/portrait.mp4";
+    const desktopSrc = "/videos/landscape.mp4";
 
     if (videoRef.current) {
       // ✅ Important for Safari autoplay
