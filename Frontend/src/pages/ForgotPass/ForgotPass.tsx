@@ -1,15 +1,15 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import config from "@/config";
-// import { useFormContext } from "@/contexts/FormContext";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const ForgotPass = () => {
   const [error, setError] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState(true);
-  const [codeMatched, setCodeMatched] = useState(true);
+  const [enteredEmail, setEnteredEmail] = useState(false);
+  const [codeMatched, setCodeMatched] = useState(false);
   const [codeError, setCodeError] = useState("");
+  const [passError, setPassError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [conformPass, setConformPass] = useState("");
@@ -18,7 +18,6 @@ const ForgotPass = () => {
   const { REMOTE, API_BASE_URL, API_PORT } = config;
   const navigate = useNavigate();
 
-//   const { setData } = useFormContext();
 
   function emailInput(e: any) {
     setError("");
@@ -141,14 +140,8 @@ const ForgotPass = () => {
         }
       ).then((res) => {
         if (res.status == 201) {
-        //   setData((prev) => ({
-        //     ...prev,
-        //     verificationStatus: true,
-        //     email,
-        //     newUser: true,
-        //   }));
+            setCodeMatched(true);
         }
-
         else setCodeError("Code didn't match!");
         setIsLoading(false);
       });
@@ -174,16 +167,36 @@ const ForgotPass = () => {
       }
     ).then((res) => {
       if (res.status == 201) {
-        // setData((prev) => ({
-        //   ...prev,
-        //   verificationStatus: true,
-        //   email,
-        //   newUser: true,
-        // }));
+        setCodeMatched(true);
       }
       else setCodeError("Code didn't match!");
       setIsLoading(false);
     });
+  }
+  function handleSubmit () {
+    setPassError("");
+    if (password == conformPass) {
+        fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/reset_pass?email=${email}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ password }),
+        }).then(res => {
+            if (res.status == 200) {
+                toast("Password reset successful!", {
+              action: {
+                label: "Close",
+                onClick: () => void 0,
+              },
+            });
+            navigate("/login");
+            }
+        });
+    }
+    else {
+        setPassError("Password didn't match");
+    }
   }
   return (
     <div className="mt-20 mx-auto mb-10 w-9/10 sm:w-1/3">
@@ -227,12 +240,18 @@ const ForgotPass = () => {
                 className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
                 onChange={(e) => setPassword(e.target.value.trim())}
               />
-                <p className="mb-2"><b>Confirm Password</b></p>
+                <p className="my-2"><b>Confirm Password</b></p>
             <input
                 type="password"
                 className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
                 onChange={(e) => setConformPass(e.target.value.trim())}
               />
+              {passError != "" && (
+                <p className="text-left text-red-600 text-xs m-0">
+                  {passError}
+                </p>
+              )}
+              <button type="submit" className="cursor-pointer mt-4 text-left bg-[#B46E28] p-1 px-2 w-full" onClick={handleSubmit}>Submit</button>
             </section> : 
              <section>
               <p className="my-5">
