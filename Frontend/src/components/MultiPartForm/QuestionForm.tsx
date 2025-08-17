@@ -40,20 +40,23 @@ export default function QuestionForm({
 
   return (
     <div className="space-y-4">
-      {index == 0 && <p className="text-center mb-4">
+      {index == 0 && (
+        <p className="text-center mb-4">
           <b>
-            Answer the next 10 questions so we can find the best pools for you. 
-        We won't publish your answers. 
-        Pick the answer (only one) most relevant to you.
+            Answer the next 10 questions so we can find the best pools for you.
+            We won't publish your answers. Pick the answer (only one) most
+            relevant to you.
           </b>
-        </p>}
-      
+        </p>
+      )}
+
       <p className="text-lg font-medium">
         {index + 1}. {question.question}
       </p>
 
-      <div className="space-y-2">
-        {question.options.map((opt, i) => (
+      {question.options.map((opt, i) => {
+        const letter = String.fromCharCode(97 + i); // 97 = 'a'
+        return (
           <button
             key={i}
             onClick={() => setAnswer(opt)}
@@ -64,10 +67,10 @@ export default function QuestionForm({
                 : "bg-white"
             )}
           >
-            {opt}
+            {`(${letter}) ${opt}`}
           </button>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 }
