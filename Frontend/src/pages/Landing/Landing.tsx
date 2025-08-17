@@ -2,13 +2,13 @@
 
 // @ts-ignore: Using deprecated Instagram icon as no replacement exists yet
 import { ChevronDown } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
-import { CLIC } from "@/components/CLIC/CLIC";
+import { useRef, useEffect } from "react";
+// import { CLIC } from "@/components/CLIC/CLIC";
 
 export default function Landing() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [clicSize, setClicSize] = useState<"sm" | "md">(getCLICSize());
+  // const [clicSize, setClicSize] = useState<"sm" | "md">(getCLICSize());
 
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
@@ -31,17 +31,17 @@ export default function Landing() {
     }
   }, []);
 
-  useEffect(() => {
-    function handleResize() {
-      setClicSize(getCLICSize());
-    }
-    window.addEventListener("resize", handleResize);
-    handleResize(); // call once on mount
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // useEffect(() => {
+  //   function handleResize() {
+  //     setClicSize(getCLICSize());
+  //   }
+  //   window.addEventListener("resize", handleResize);
+  //   handleResize(); // call once on mount
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-gray-900">
+    <div className="flex flex-col min-h-screen bg-white text-gray-900 overflow-hidden">
       <section className="relative h-screen w-full overflow-hidden">
         <video
           ref={videoRef}
@@ -67,11 +67,11 @@ export default function Landing() {
         </button>
       </section>
 
-      <section
+      {/* <section
         ref={scrollRef}
         className="flex flex-col items-center justify-center text-center py-24 px-4 bg-white"
       >
-        {/* Fixed the flex container issue here */}
+       
         <div className="inline-flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
           <span className="mr-2">don't swipe,</span>
           <CLIC
@@ -85,7 +85,7 @@ export default function Landing() {
         <p className="text-lg md:text-xl text-gray-700 max-w-md">
           Let's start speaking to each other again
         </p>
-      </section>
+      </section> */}
 
       {/* <section className="bg-gray-300 w-full py-10 px-4">
         <div className="flex flex-col items-center gap-2">
@@ -109,7 +109,7 @@ export default function Landing() {
   );
 }
 
-function getCLICSize(): "sm" | "md" {
-  if (typeof window === "undefined") return "md";
-  return window.innerWidth < 768 ? "sm" : "md";
-}
+// function getCLICSize(): "sm" | "md" {
+//   if (typeof window === "undefined") return "md";
+//   return window.innerWidth < 768 ? "sm" : "md";
+// }

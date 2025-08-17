@@ -18,20 +18,20 @@ export default function MainLayout() {
         token: token,
         newUser: false,
       }));
-          fetch(
-      `http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/user_approved`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.approved == "approved") {
-          localStorage.setItem("isApproved", "true");
+      fetch(
+        `http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/user_approved`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.approved == "approved") {
+            localStorage.setItem("isApproved", "true");
+          }
+        });
     }
 
     setData((prev) => ({
@@ -42,7 +42,7 @@ export default function MainLayout() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 bg-transparent">
         <Outlet />
       </main>
       <Footer />
