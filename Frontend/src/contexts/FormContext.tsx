@@ -1,4 +1,6 @@
-import React, { useState, createContext, useContext } from "react";
+"use client";
+
+import React, { useState, createContext, useContext, useEffect } from "react";
 import type { ReactNode } from "react";
 
 export type FormDataType = {
@@ -57,12 +59,24 @@ const FormContext = createContext<FormContextType>({
 
 export const useFormContext = () => useContext(FormContext);
 
-type FormProviderProps = {
-  children: ReactNode;
-};
+type FormProviderProps = { children: ReactNode };
 
 export const FormProvider = ({ children }: FormProviderProps) => {
-  const [data, setData] = useState<FormDataType>(defaultFormData);
+  // Initialize from localStorage if available
+  const [data, setData] = useState<FormDataType>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("formData");
+      if (saved) return JSON.parse(saved);
+    }
+    return defaultFormData;
+  });
+
+  // Persist to localStorage whenever data changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("formData", JSON.stringify(data));
+    }
+  }, [data]);
 
   return (
     <FormContext.Provider value={{ data, setData }}>

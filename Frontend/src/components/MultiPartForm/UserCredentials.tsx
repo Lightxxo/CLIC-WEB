@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "@/contexts/FormContext";
@@ -32,64 +31,80 @@ export default function UserCredentials({
   const { data, setData } = useFormContext();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [dob, setDob] = useState(data.dateOfBirth);
-  const [password, setPassword] = useState(data.password || "");
-  const [confirmPassword, setConfirmPassword] = useState(
-    data.confirmPassword || ""
+  // --- Local states ---
+  const [dob, setDob] = useState<string>(
+    localStorage.getItem("dateOfBirth") || data.dateOfBirth
   );
-  const [occupation, setOccupation] = useState("");
-  const [live, setLive] = useState("");
-  const [from, setFrom] = useState("");
-  const [cities, setCities] = useState("");
-  const [about, setAbout] = useState("");
+  const [password, setPassword] = useState<string>(
+    localStorage.getItem("password") || data.password || ""
+  );
+  const [confirmPassword, setConfirmPassword] = useState<string>(
+    localStorage.getItem("confirmPassword") || data.confirmPassword || ""
+  );
+  const [occupation, setOccupation] = useState<string>(
+    localStorage.getItem("occupation") || data.occupation || ""
+  );
+  const [live, setLive] = useState<string>(
+    localStorage.getItem("live") || data.live || ""
+  );
+  const [from, setFrom] = useState<string>(
+    localStorage.getItem("from") || data.from || ""
+  );
+  const [cities, setCities] = useState<string>(
+    localStorage.getItem("cities") || data.cities || ""
+  );
+  const [about, setAbout] = useState<string>(
+    localStorage.getItem("about") || data.about || ""
+  );
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null); // removed localStorage
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  // --- Sync local state with global context + localStorage ---
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setData((prev) => ({ ...prev, dateOfBirth: dob }));
-    }, 100);
-    return () => clearTimeout(handler);
+    setData((prev) => ({ ...prev, dateOfBirth: dob }));
+    localStorage.setItem("dateOfBirth", dob || "");
   }, [dob, setData]);
 
   useEffect(() => {
     setData((prev) => ({ ...prev, password }));
+    localStorage.setItem("password", password);
   }, [password, setData]);
 
   useEffect(() => {
     setData((prev) => ({ ...prev, confirmPassword }));
+    localStorage.setItem("confirmPassword", confirmPassword);
   }, [confirmPassword, setData]);
 
   useEffect(() => {
     setData((prev) => ({ ...prev, occupation, live, from, cities, about }));
+    localStorage.setItem("occupation", occupation);
+    localStorage.setItem("live", live);
+    localStorage.setItem("from", from);
+    localStorage.setItem("cities", cities);
+    localStorage.setItem("about", about);
   }, [occupation, live, from, cities, about, setData]);
-
-  useEffect(() => {
-    setData((prev) => ({ ...prev, profileImage: selectedImage }));
-  }, [selectedImage, setData]);
 
   useEffect(() => {
     setData((prev) => ({
       ...prev,
-      username: `${prev.firstName || ""}`.trim(),
+      username: `${prev.firstName || ""} ${prev.lastName || ""}`.trim(),
     }));
   }, [data.firstName, data.lastName, setData]);
 
+  // --- Image handlers ---
   const handleImageSelect = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
       if (file && file.type.startsWith("image/")) {
         setSelectedImage(file);
-
-        // Create preview URL
+        setData((prev) => ({ ...prev, profileImage: file }));
+        // generate preview for immediate display only, not stored
         const reader = new FileReader();
-        reader.onload = (e) => {
-          setImagePreview(e.target?.result as string);
-        };
+        reader.onload = () => setImagePreview(reader.result as string);
         reader.readAsDataURL(file);
       }
     },
@@ -99,11 +114,11 @@ export default function UserCredentials({
   const handleReuploadClick = useCallback(() => {
     fileInputRef.current?.click();
   }, []);
-
   const handleImageAreaClick = useCallback(() => {
     fileInputRef.current?.click();
   }, []);
 
+  // --- Validity check ---
   const isValid =
     !!data.firstName?.trim() &&
     !!data.lastName?.trim() &&
@@ -113,28 +128,30 @@ export default function UserCredentials({
     password === confirmPassword &&
     !!data.gender &&
     !!from &&
-    !!selectedImage;
+    (!!selectedImage || !!imagePreview);
 
   useEffect(() => {
     onValidityChange(isValid);
   }, [isValid, onValidityChange]);
 
+  // --- Date picker ---
   const onDateSelect = useCallback((date: Date | undefined) => {
-    if (date) setDob(date!.toString());
+    if (date) setDob(date.toString());
   }, []);
 
   const formattedDob = useMemo(
-    () => (dob ? format(dob, "PPP") : "Pick a date"),
+    () => (dob ? format(new Date(dob), "PPP") : "Pick a date"),
     [dob]
   );
 
   return (
     <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
       <p className="text-sm text-gray-600">
-        Except for your last name and date of birth, the following answers will
+        Except for your last name and date of birth, the following data will
         appear on your profile.
       </p>
 
+      {/* Profile Picture */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm font-medium">Profile Picture *</label>
         <div className="flex flex-col items-start gap-3">
@@ -144,7 +161,7 @@ export default function UserCredentials({
           >
             {imagePreview ? (
               <img
-                src={imagePreview || "/placeholder.svg"}
+                src={imagePreview}
                 alt="Profile preview"
                 className="w-full h-full object-cover rounded-lg"
               />
@@ -176,7 +193,6 @@ export default function UserCredentials({
             </div>
           )}
         </div>
-
         <input
           ref={fileInputRef}
           type="file"
@@ -186,21 +202,29 @@ export default function UserCredentials({
         />
       </div>
 
+      {/* Name */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Input
           placeholder="First Name *"
           value={data.firstName || ""}
-          onChange={(e) => setData({ ...data, firstName: e.target.value })}
+          onChange={(e) => {
+            setData({ ...data, firstName: e.target.value });
+            localStorage.setItem("firstName", e.target.value);
+          }}
           autoComplete="given-name"
         />
         <Input
           placeholder="Last Name *"
           value={data.lastName || ""}
-          onChange={(e) => setData({ ...data, lastName: e.target.value })}
+          onChange={(e) => {
+            setData({ ...data, lastName: e.target.value });
+            localStorage.setItem("lastName", e.target.value);
+          }}
           autoComplete="family-name"
         />
       </div>
 
+      {/* Date of Birth */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm font-medium">Date of Birth *</label>
         <Popover>
@@ -229,6 +253,7 @@ export default function UserCredentials({
         </Popover>
       </div>
 
+      {/* Other inputs */}
       <Input
         placeholder="Occupation"
         value={occupation}
@@ -255,6 +280,7 @@ export default function UserCredentials({
         onChange={(e) => setAbout(e.target.value)}
       />
 
+      {/* Passwords */}
       <div className="space-y-3">
         <div className="relative">
           <Input
@@ -300,9 +326,13 @@ export default function UserCredentials({
         </div>
       </div>
 
+      {/* Gender */}
       <select
-        value={data.gender || ""}
-        onChange={(e) => setData({ ...data, gender: e.target.value })}
+        value={data.gender || localStorage.getItem("gender") || ""}
+        onChange={(e) => {
+          setData({ ...data, gender: e.target.value });
+          localStorage.setItem("gender", e.target.value);
+        }}
         className="w-full border rounded-md p-2 focus:outline-none"
         autoComplete="sex"
       >

@@ -38,21 +38,15 @@ export default function Footer() {
                 Terms of Use
               </Link>
               <span className="px-4 text-xs whitespace-normal">
-                Email{" "}
-                <a
-                  href="mailto:hello@cliclub.cc"
-                  className="underline hover:text-white"
-                >
-                  hello@cliclub.cc
-                </a>{" "}
-                for support or enquiries
+                <a href="mailto:hello@cliclub.cc" className="hover:text-white">
+                  Email us for support or enquiries
+                </a>
               </span>
             </div>
           </div>
 
           {/* Right */}
           <div className="flex items-center gap-3 whitespace-nowrap">
-            <span className="hidden lg:inline-block">Download the App</span>
             <div className="flex gap-2">
               <Button
                 variant="outline"
@@ -90,7 +84,7 @@ export default function Footer() {
           {/* Middle content */}
           <div className="flex flex-wrap justify-center items-center divide-x divide-[#00C3FF]">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/Clicclubcommunity/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 flex items-center gap-1 hover:text-white transition"
@@ -108,14 +102,9 @@ export default function Footer() {
               Terms of Use
             </Link>
             <span className="px-4 text-xs whitespace-normal">
-              Email{" "}
-              <a
-                href="mailto:hello@cliclub.cc"
-                className="underline hover:text-white"
-              >
-                hello@cliclub.cc
-              </a>{" "}
-              for support or enquiries
+              <a href="mailto:hello@cliclub.cc" className="hover:text-white">
+                Email us for support or enquiries
+              </a>
             </span>
           </div>
         </div>

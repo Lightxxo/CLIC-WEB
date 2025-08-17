@@ -19,8 +19,7 @@ const fadeVariant = {
 const quiz = [
   {
     id: 1,
-    question:
-      "How do you spend most of your time with other people?",
+    question: "How do you spend most of your time with other people?",
     options: [
       "I prioritize my family first and foremost, all else is secondary",
       "I socialize in a close tight-knit group, some of us have known each other since childhood",
@@ -53,8 +52,7 @@ const quiz = [
   },
   {
     id: 4,
-    question:
-      "Drugs: Have you taken recreational drugs?",
+    question: "Drugs: Have you taken recreational drugs?",
     options: [
       "No way. I hate what it does to people / the opportunity has never arisen.",
       "Yes, there have been occasions.",
