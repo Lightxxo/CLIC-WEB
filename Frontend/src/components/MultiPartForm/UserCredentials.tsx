@@ -35,11 +35,9 @@ export default function UserCredentials({
   const [dob, setDob] = useState<string>(
     localStorage.getItem("dateOfBirth") || data.dateOfBirth
   );
-  const [password, setPassword] = useState<string>(
-    localStorage.getItem("password") || data.password || ""
-  );
+  const [password, setPassword] = useState<string>(data.password || "");
   const [confirmPassword, setConfirmPassword] = useState<string>(
-    localStorage.getItem("confirmPassword") || data.confirmPassword || ""
+    data.confirmPassword || ""
   );
   const [occupation, setOccupation] = useState<string>(
     localStorage.getItem("occupation") || data.occupation || ""
@@ -71,12 +69,10 @@ export default function UserCredentials({
 
   useEffect(() => {
     setData((prev) => ({ ...prev, password }));
-    localStorage.setItem("password", password);
   }, [password, setData]);
 
   useEffect(() => {
     setData((prev) => ({ ...prev, confirmPassword }));
-    localStorage.setItem("confirmPassword", confirmPassword);
   }, [confirmPassword, setData]);
 
   useEffect(() => {
