@@ -35,34 +35,75 @@ export default function Navbar() {
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex">
-      
-              <NavLink to="/howitworks" 
-              className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>
-              How it works
-              </NavLink>
+          <NavLink
+            to="/howitworks"
+            className={({ isActive }) =>
+              isActive
+                ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1"
+                : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
+            }
+          >
+            How it works
+          </NavLink>
 
           {data.token && localStorage.getItem("isApproved") ? (
             <>
-            <NavLink to="/pools" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Pools</NavLink>
+              <NavLink
+                to="/pools"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1"
+                    : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
+                }
+              >
+                Pools
+              </NavLink>
 
-              <NavLink to="/jhj" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Invites</NavLink>
+              <NavLink
+                to="/myinvites"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1"
+                    : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
+                }
+              >
+                My Invites
+              </NavLink>
             </>
           ) : (
             <></>
           )}
 
           {data.token ? (
-            <button className="cursor-pointer text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1" onClick={logOut}>
+            <button
+              className="cursor-pointer text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
+              onClick={logOut}
+            >
               Log out
             </button>
           ) : (
             <>
-              
-                <NavLink to="/signup" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Sign up</NavLink>
-              
-              
-                <NavLink to="/login" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Login</NavLink>
-              
+              <NavLink
+                to="/signup"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1"
+                    : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
+                }
+              >
+                Sign up
+              </NavLink>
+
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1"
+                    : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
+                }
+              >
+                Login
+              </NavLink>
             </>
           )}
         </div>
@@ -111,15 +152,42 @@ export default function Navbar() {
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
             >
-            
-                {/* <Button variant="ghost"> */}
-                  <NavLink to="/howitworks" className={({isActive}) => isActive ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md" : "text-lg gill-sans-bold pb-1 px-3"}>How it works</NavLink>
-                {/* </Button> */}
+              {/* <Button variant="ghost"> */}
+              <NavLink
+                to="/howitworks"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md"
+                    : "text-lg gill-sans-bold pb-1 px-3"
+                }
+              >
+                How it works
+              </NavLink>
+              {/* </Button> */}
 
               {data.token && localStorage.getItem("isApproved") ? (
-             
-                  <NavLink to="/pools" className={({isActive}) => isActive ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md" : "text-lg gill-sans-bold pb-1 px-3"}>Pools</NavLink>
-             
+                <>
+                  <NavLink
+                    to="/pools"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md"
+                        : "text-lg gill-sans-bold pb-1 px-3"
+                    }
+                  >
+                    Pools
+                  </NavLink>
+                  <NavLink
+                    to="/myinvites"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1"
+                        : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
+                    }
+                  >
+                    My Invites
+                  </NavLink>
+                </>
               ) : (
                 <></>
               )}
@@ -132,12 +200,27 @@ export default function Navbar() {
                 </button>
               ) : (
                 <>
-                 
-                    <NavLink to="/signup" className={({isActive}) => isActive ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md" : "text-lg gill-sans-bold pb-1 px-3"}>Sign up</NavLink>
-                
-                 
-                    <NavLink to="/login" className={({isActive}) => isActive ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md" : "text-lg gill-sans-bold pb-1 px-3"}>Login</NavLink>
-                
+                  <NavLink
+                    to="/signup"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md"
+                        : "text-lg gill-sans-bold pb-1 px-3"
+                    }
+                  >
+                    Sign up
+                  </NavLink>
+
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-lg gill-sans-bold pb-1 bg-black text-white px-3 rounded-md"
+                        : "text-lg gill-sans-bold pb-1 px-3"
+                    }
+                  >
+                    Login
+                  </NavLink>
                 </>
               )}
             </motion.div>

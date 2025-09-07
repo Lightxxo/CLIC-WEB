@@ -25,6 +25,7 @@ import Approved from "./pages/Protected/Approved";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse/TermsOfUse";
 import ForgotPass from "./pages/ForgotPass/ForgotPass";
+import Invites from "./pages/Invites/Invites";
 
 export default function App() {
   return (
@@ -76,6 +77,7 @@ export default function App() {
         {/* Approved routes WITH navbar */}
         <Route element={<ApprovedLayout />}>
           <Route path="approved" element={<Approved />} />
+          <Route path="/myinvites" element={<Invites />} />
           <Route path="/pools" element={<Pools />} />
           <Route path="/pools/:id" element={<PoolDetails />} />
           {/*
