@@ -113,7 +113,7 @@ export default function SubmitStep() {
           newUser: false,
           email: email,
           imgURL: resData.newUser.imgURL,
-          userName: resData.newUser.userName,
+          username: resData.newUser.userName,
           token: resData.token,
           signupSuccess: true,
           answers: [],
