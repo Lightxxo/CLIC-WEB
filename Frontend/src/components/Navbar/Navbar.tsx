@@ -16,6 +16,8 @@ export default function Navbar() {
       ...prev,
       verificationStatus: false,
       email: "",
+      imgURL: "",
+      userName: "",
       token: null,
       signupSuccess: false,
       newUser: true,
@@ -40,9 +42,11 @@ export default function Navbar() {
               </NavLink>
 
           {data.token && localStorage.getItem("isApproved") ? (
-            
-              <NavLink to="/pools" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Pools</NavLink>
-            
+            <>
+            <NavLink to="/pools" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Pools</NavLink>
+
+              <NavLink to="/jhj" className={({isActive}) => isActive ? "text-lg gill-sans-bold bg-white px-3 rounded-lg pb-1" : "text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"}>Invites</NavLink>
+            </>
           ) : (
             <></>
           )}
