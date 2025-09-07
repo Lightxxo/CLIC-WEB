@@ -45,6 +45,8 @@ const Login = () => {
             verificationStatus: true,
             newUser: false,
             email: email,
+            imgURL: data.isExists.imgURL,
+            userName: data.isExists.userName,
             token: data.token,
           }));
           fetch(

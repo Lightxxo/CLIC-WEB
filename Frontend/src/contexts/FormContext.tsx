@@ -8,6 +8,7 @@ export type FormDataType = {
   firstName: string;
   lastName: string;
   username: string;
+  imgURL: string;
   gender: string;
   answers: { question: string; selectedAns: string }[];
   verificationStatus: boolean;
@@ -30,6 +31,7 @@ const defaultFormData: FormDataType = {
   firstName: "",
   lastName: "",
   username: "",
+  imgURL: "",
   gender: "",
   answers: [],
   verificationStatus: false,
