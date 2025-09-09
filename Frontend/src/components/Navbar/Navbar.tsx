@@ -79,6 +79,7 @@ export default function Navbar() {
           )}
 
           {data.token ? (
+            <>
             <button
               className="cursor-pointer text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
               onClick={logOut}

@@ -44,8 +44,10 @@ export default function SubmitStep() {
       formData.append("occupation", SubmitStepData.occupation || "");
       formData.append("where_live", SubmitStepData.live || "");
       formData.append("where_from", SubmitStepData.from || "");
+      formData.append("referredBy", SubmitStepData.referredBy || "");
       formData.append("cities_frequent", SubmitStepData.cities || "");
       formData.append("about", SubmitStepData.about || "");
+      formData.append("hearingPlatform", SubmitStepData.hearingPlatform || "");
       formData.append("city", "n/a");
       formData.append("ques_ans", JSON.stringify(SubmitStepData.answers || {}));
       formData.append("interests", JSON.stringify([]));
@@ -96,6 +98,8 @@ export default function SubmitStep() {
           "dateOfBirth",
           "password",
           "confirmPassword",
+          "hearingPlatform",
+          "referredBy",
           "occupation",
           "live",
           "from",
@@ -126,6 +130,8 @@ export default function SubmitStep() {
           occupation: "",
           live: "",
           from: "",
+          hearingPlatform: "",
+          referredBy: "",
           cities: "",
           about: "",
           profileImage: null,
