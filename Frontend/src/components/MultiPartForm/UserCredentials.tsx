@@ -48,6 +48,9 @@ export default function UserCredentials({
   const [from, setFrom] = useState<string>(
     localStorage.getItem("from") || data.from || ""
   );
+    const [referredBy, setReferredBy] = useState<string>(
+    localStorage.getItem("referredBy") || data.referredBy || ""
+  );
   const [cities, setCities] = useState<string>(
     localStorage.getItem("cities") || data.cities || ""
   );
@@ -76,13 +79,14 @@ export default function UserCredentials({
   }, [confirmPassword, setData]);
 
   useEffect(() => {
-    setData((prev) => ({ ...prev, occupation, live, from, cities, about }));
+    setData((prev) => ({ ...prev, occupation, live, from, cities, about, referredBy }));
     localStorage.setItem("occupation", occupation);
     localStorage.setItem("live", live);
     localStorage.setItem("from", from);
     localStorage.setItem("cities", cities);
     localStorage.setItem("about", about);
-  }, [occupation, live, from, cities, about, setData]);
+    localStorage.setItem("referredBy", referredBy);
+  }, [occupation, live, from, cities, about, referredBy, setData]);
 
   useEffect(() => {
     setData((prev) => ({
@@ -123,7 +127,9 @@ export default function UserCredentials({
     !!confirmPassword &&
     password === confirmPassword &&
     !!data.gender &&
-    !!from &&
+    !!data.hearingPlatform &&
+    !!from && 
+    !!referredBy&& 
     (!!selectedImage || !!imagePreview);
 
   useEffect(() => {
@@ -274,6 +280,28 @@ export default function UserCredentials({
         placeholder="Add what you want other members to know about you"
         value={about}
         onChange={(e) => setAbout(e.target.value)}
+      />
+
+      <select
+        value={data.hearingPlatform || localStorage.getItem("hearingPlatform") || ""}
+        onChange={(e) => {
+          setData({ ...data, hearingPlatform: e.target.value });
+          localStorage.setItem("hearingPlatform", e.target.value);
+        }}
+        className="w-full border rounded-md p-2 focus:outline-none">
+        <option value="">How did you hear about us? *</option>
+        <option value="Social Media">Social Media</option>
+        <option value="Google Search">Google Search</option>
+        <option value="Friends or Family">Friends or Family</option>
+        <option value="Event or Networking">Event or Networking</option>
+        <option value="Online Advertisement">Online Advertisement</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <Input
+        placeholder="Enter the name of the person who referred you *"
+        value={referredBy}
+        onChange={(e) => setReferredBy(e.target.value)}
       />
 
       {/* Passwords */}

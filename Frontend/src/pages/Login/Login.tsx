@@ -35,6 +35,7 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.message == "Login successful") {
           localStorage.setItem("email", email);
           localStorage.setItem("userName", data.isExists.userName);
@@ -46,7 +47,7 @@ const Login = () => {
             newUser: false,
             email: email,
             imgURL: data.isExists.imgURL,
-            userName: data.isExists.userName,
+            username: data.isExists.userName,
             token: data.token,
           }));
           fetch(

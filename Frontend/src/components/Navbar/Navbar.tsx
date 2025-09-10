@@ -1,5 +1,5 @@
 "use client";
-
+import config from "@/config";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
@@ -9,6 +9,10 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { data, setData } = useFormContext();
+    const { REMOTE, API_BASE_URL, API_PORT } = config;
+    const apiUrl = `http${REMOTE ? "s" : ""}://${API_BASE_URL}${
+      API_PORT ? `:${API_PORT}` : ""
+    }`;
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.clear();
@@ -17,14 +21,14 @@ export default function Navbar() {
       verificationStatus: false,
       email: "",
       imgURL: "",
-      userName: "",
+      username: "",
       token: null,
       signupSuccess: false,
       newUser: true,
     }));
     navigate("/");
   };
-
+  
   return (
     <>
       <nav className="relative z-50 w-full nav-bg-color px-6 py-4 flex items-center justify-between">
@@ -34,7 +38,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav buttons */}
-        <div className="hidden space-x-4 md:flex">
+        <div className="hidden space-x-4 md:flex items-center">
           <NavLink
             to="/howitworks"
             className={({ isActive }) =>
@@ -75,12 +79,15 @@ export default function Navbar() {
           )}
 
           {data.token ? (
+            <>
             <button
               className="cursor-pointer text-lg gill-sans-bold hover:bg-white px-3 rounded-lg pb-1"
               onClick={logOut}
             >
               Log out
             </button>
+            <NavLink to="/profile"><img className="w-10 h-10 rounded-full" src={`${apiUrl}/${data.imgURL}`} /></NavLink>
+            </>
           ) : (
             <>
               <NavLink
@@ -192,12 +199,15 @@ export default function Navbar() {
                 <></>
               )}
               {data.token ? (
-                <button
-                  className="cursor-pointer text-lg gill-sans-bold pb-1 px-3 text-left"
-                  onClick={logOut}
-                >
-                  Log out
-                </button>
+                <>
+                  <button
+                    className="cursor-pointer text-lg gill-sans-bold pb-1 px-3 text-left"
+                    onClick={logOut}
+                  >
+                    Log out
+                  </button>
+                  <NavLink to="/profile"><img className="w-15 h-15 rounded-full" src={`${apiUrl}/${data.imgURL}`} /></NavLink>
+                </>
               ) : (
                 <>
                   <NavLink

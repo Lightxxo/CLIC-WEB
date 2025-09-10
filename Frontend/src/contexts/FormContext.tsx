@@ -19,8 +19,10 @@ export type FormDataType = {
   occupation?: string;
   live?: string;
   from?: string;
+  referredBy: string;
   cities?: string;
   about?: string;
+  hearingPlatform: string;
   signupSuccess: boolean;
   token: null | string;
   loading: boolean;
@@ -42,8 +44,10 @@ const defaultFormData: FormDataType = {
   occupation: "",
   live: "",
   from: "",
+  referredBy: "",
   cities: "",
   about: "",
+  hearingPlatform: "",
   signupSuccess: false,
   token: null,
   loading: true,

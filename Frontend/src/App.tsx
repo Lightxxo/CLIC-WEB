@@ -26,6 +26,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse/TermsOfUse";
 import ForgotPass from "./pages/ForgotPass/ForgotPass";
 import Invites from "./pages/Invites/Invites";
+import Profile from "./pages/Profile/Profile";
 
 export default function App() {
   return (
@@ -59,10 +60,8 @@ export default function App() {
         {/* Authenticated routes WITH navbar */}
         <Route element={<AuthenticatedLayout />}>
           <Route path="authenticated" element={<Authenticated />} />
-
-          {/*
           <Route path="profile" element={<Profile />} />
-
+          {/*
           <Route
             path="dashboard"
             element={
