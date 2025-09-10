@@ -20,6 +20,8 @@ export type FormDataType = {
   live?: string;
   from?: string;
   referredBy: string;
+  socialMediaObj: string;
+  socialMediaHandle: string;
   cities?: string;
   about?: string;
   hearingPlatform: string;
@@ -45,6 +47,8 @@ const defaultFormData: FormDataType = {
   live: "",
   from: "",
   referredBy: "",
+  socialMediaObj: "",
+  socialMediaHandle: "",
   cities: "",
   about: "",
   hearingPlatform: "",

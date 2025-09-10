@@ -1,7 +1,7 @@
 "use client";
-
+import { Input } from "@/components/ui/input";
 import { useFormContext } from "@/contexts/FormContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import config from "@/config";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
@@ -13,6 +13,12 @@ export default function SubmitStep() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (loading || !agreed || !data.hearingPlatform || !data.referredBy) setDisabled(true);
+    else setDisabled(false);
+  }, [agreed, loading, data.hearingPlatform, data.referredBy])
 
   function generateRandomString(length = 8) {
     const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -45,6 +51,8 @@ export default function SubmitStep() {
       formData.append("where_live", SubmitStepData.live || "");
       formData.append("where_from", SubmitStepData.from || "");
       formData.append("referredBy", SubmitStepData.referredBy || "");
+      formData.append("socialMediaObj", SubmitStepData.socialMediaObj || "");
+      formData.append("socialMediaHandle", SubmitStepData.socialMediaHandle || "");
       formData.append("cities_frequent", SubmitStepData.cities || "");
       formData.append("about", SubmitStepData.about || "");
       formData.append("hearingPlatform", SubmitStepData.hearingPlatform || "");
@@ -100,6 +108,8 @@ export default function SubmitStep() {
           "confirmPassword",
           "hearingPlatform",
           "referredBy",
+          "socialMediaObj",
+          "socialMediaHandle",
           "occupation",
           "live",
           "from",
@@ -132,6 +142,8 @@ export default function SubmitStep() {
           from: "",
           hearingPlatform: "",
           referredBy: "",
+          socialMediaObj: "",
+          socialMediaHandle: "",
           cities: "",
           about: "",
           profileImage: null,
@@ -149,7 +161,7 @@ export default function SubmitStep() {
 
   return (
     <div className="text-center space-y-4">
-      <h2 className="text-xl font-semibold">Done!</h2>
+      <h2 className="text-xl font-semibold">Almost there!</h2>
 
       {error && (
         <p className="text-red-500 text-sm">
@@ -157,6 +169,31 @@ export default function SubmitStep() {
           Please try again later.
         </p>
       )}
+
+      <select
+        value={data.hearingPlatform || localStorage.getItem("hearingPlatform") || ""}
+        onChange={(e) => {
+          setData({ ...data, hearingPlatform: e.target.value });
+          localStorage.setItem("hearingPlatform", e.target.value);
+        }}
+        className="w-full border rounded-md p-2 focus:outline-none">
+        <option value="">How did you hear about us? *</option>
+        <option value="Social Media">Social Media</option>
+        <option value="Google Search">Google Search</option>
+        <option value="Friends or Family">Friends or Family</option>
+        <option value="Event or Networking">Event or Networking</option>
+        <option value="Online Advertisement">Online Advertisement</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <Input
+        placeholder="Enter the name of the person who referred you *"
+        value={data.referredBy || localStorage.getItem("referredBy") || ""}
+        onChange={(e) => {
+          setData({ ...data, referredBy: e.target.value });
+          localStorage.setItem("referredBy", e.target.value);
+        }}
+      />
 
       <div className="flex items-start justify-center gap-2 text-left max-w-md mx-auto">
         <input
@@ -181,7 +218,7 @@ export default function SubmitStep() {
 
       <Button
         onClick={() => onSubmit(data)}
-        disabled={loading || !agreed}
+        disabled={disabled}
         className="mt-2 cursor-pointer bg-[#B46E28] hover:bg-[#945A21] text-white disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? (

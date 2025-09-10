@@ -125,6 +125,7 @@ const Profile = () => {
                     <div className="flex-1 space-y-4">
                         <div>
                             <h2 className="text-2xl font-bold text-foreground leading-tight">{data.username}</h2>
+                            <p className='my-1'>{data.email}</p>
                             <p className="text-sm text-muted-foreground">Click the avatar to update your profile picture</p>
                         </div>
 
