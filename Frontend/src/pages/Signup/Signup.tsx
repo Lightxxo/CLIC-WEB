@@ -39,8 +39,19 @@ const quiz = [
       "Adventurous",
     ],
   },
-  {
+    {
     id: 3,
+    question: "Which singular trait most fittingly describes you?",
+    options: [
+      "Driven",
+      "Grounded / stable / steadfast",
+      "Creative",
+      "Silly / can laugh at themselves",
+      "Adventurous",
+    ],
+  },
+  {
+    id: 4,
     question: "Success: what does success mean to you?",
     options: [
       "Professional success",
@@ -51,7 +62,7 @@ const quiz = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     question: "Drugs: Have you taken recreational drugs?",
     options: [
       "No way. I hate what it does to people / the opportunity has never arisen.",
@@ -62,9 +73,8 @@ const quiz = [
     ],
   },
   {
-    id: 5,
-    question:
-      "Lifestyle: I would prioritize having one of the following holidays in any given year",
+    id: 6,
+    question: "Lifestyle: I would prioritize having one of the following holidays in any given year",
     options: [
       "Travel to a city for a cultural event or fair where I can eat well, dress up",
       "Attend Burning Man or other dance music festival / or go to a party town (Mykonos, St Anton, Verbier, Ibiza, etc.)",
@@ -73,17 +83,7 @@ const quiz = [
       "Campervan / other adventurous or exploratory trip which may or may not include psychedelics",
     ],
   },
-  {
-    id: 6,
-    question: "Setbacks: How do you handle failure?",
-    options: [
-      "I'm very goal orientated. Failure is not an option.",
-      "If you work hard, you create opportunities and your own luck.",
-      "If I'm knocked back I find a way to restore the status quo (e.g., after losing work, finding similar work in the same industry)",
-      "With every door that closes another one opens to create new opportunity to reinvent myself (e.g., after losing work, finding a different line of work)",
-      "I roll with the punches. What goes up must come down. And vice versa.",
-    ],
-  },
+
   {
     id: 7,
     question: "Spirituality:",
@@ -95,31 +95,9 @@ const quiz = [
       "I interact with the spiritual world",
     ],
   },
+
   {
     id: 8,
-    question:
-      "How could you describe your level of engagement in Sports / physical activity?",
-    options: [
-      "Not active at all",
-      "I like country walks / strolls in the park / walk my dog / or similar",
-      "I am reasonably fit / do some sort of exercise or yoga 2-4 times a week / enjoy vigorous skiing / or similar",
-      "I am very fit / ski off-piste / run marathons / or similar",
-      "I Run ultra marathons / triathlons / or similar",
-    ],
-  },
-  {
-    id: 9,
-    question: "Love of nature: I am",
-    options: [
-      "An urban fox",
-      "Live in the city but like weekends in the country/mountains or beach",
-      "Happy to live a bohemian life in various cities, country/mountains and the beach",
-      "Happy to live 50/50 city and beach",
-      "Happy to live 50/50 city and country/mountains",
-    ],
-  },
-  {
-    id: 10,
     question: "How would you describe your taste in music?",
     options: [
       "Contemporary Classic, e.g. Coldplay, U2, Beyoncé",
@@ -187,7 +165,7 @@ const Signup = () => {
   const { key, component } = getCurrentComponent();
 
   return (
-    <div className="relative min-h-screen w-full flex  justify-center">
+    <div className="relative w-full flex justify-center">
       <AnimatePresence mode="wait">
         <motion.div
           key={key}

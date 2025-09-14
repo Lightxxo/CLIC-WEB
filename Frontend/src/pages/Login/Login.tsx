@@ -116,7 +116,7 @@ const Login = () => {
         </button>
       </form>
       <Link to="/forgotpass" className="text-blue-600">Forgot Password</Link>
-      <p className="text-md my-5">
+      <p className="text-md mt-5 mb-10">
         Don't have an account?{" "}
         <Link to="/signup" className="text-blue-600">
           Sign up

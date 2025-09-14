@@ -6,7 +6,7 @@ import { useRef, useEffect } from "react";
 // import { CLIC } from "@/components/CLIC/CLIC";
 
 export default function Landing() {
-  const scrollRef = useRef<HTMLDivElement | null>(null);
+  // const scrollRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   // const [clicSize, setClicSize] = useState<"sm" | "md">(getCLICSize());
 
@@ -51,8 +51,8 @@ export default function Landing() {
           playsInline
           className="absolute inset-0 h-full w-full object-cover z-0"
         />
-        <div className="absolute bottom-0 left-0 w-full h-[20%] bg-gradient-to-t from-black/60 to-transparent z-10" />
-        <button
+        <div className="absolute bottom-0 left-0 w-full h-[20%]" />  {/*bg-gradient-to-t from-black/60 to-transparent z-10*/}
+        {/* <button
           onClick={() =>
             scrollRef.current?.scrollIntoView({ behavior: "smooth" })
           }
@@ -64,7 +64,7 @@ export default function Landing() {
             className="text-white opacity-80 animate-bounce"
             size={32}
           />
-        </button>
+        </button> */}
       </section>
 
       {/* <section

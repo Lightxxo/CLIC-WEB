@@ -200,7 +200,7 @@ const EmailVerification = () => {
     });
   }
   return (
-    <div className="mt-20 mx-auto mb-10 w-9/10 sm:w-1/3">
+    <div className="mt-15 mx-auto mb-15 w-9/10 sm:w-1/3">
       <div className="my-10">
         <h3 className="text-left font-bold text-xl mt-20  ">Sign Up</h3>
         <p className="text-left text-base font-medium text-[#005a2d]">
