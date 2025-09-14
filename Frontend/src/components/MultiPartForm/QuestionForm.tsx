@@ -43,7 +43,7 @@ export default function QuestionForm({
       {index == 0 && (
         <p className="text-center mb-4">
           <b>
-            Answer the next 10 questions so we can find the best pools for you.
+            Answer the next 8 questions so we can find the best pools for you.
             We won't publish your answers. Pick the answer (only one) most
             relevant to you.
           </b>
