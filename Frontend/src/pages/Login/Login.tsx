@@ -95,8 +95,7 @@ const Login = () => {
   }
   return (
     <div className="w-4/5 md:w-1/3 mx-auto">
-      <h3 className="font-bold text-xl mt-20">Login</h3>
-      <p className="text-lg mb-3">Welcome back if you’re already a member of the Club. Please login here.</p>
+      <p className="text-lg mb-3 mt-15">Welcome back! Login here if you're a member.</p>
       <form onSubmit={handleSubmit}>
         <input type="email" placeholder="Email" name="email" className="w-full bg-[#D9D9D9] mb-3 p-1 shadow-[0_3px_#8c8c8c]" required />
         {emailError != "" && (
