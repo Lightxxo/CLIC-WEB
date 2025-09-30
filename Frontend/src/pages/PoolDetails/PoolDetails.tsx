@@ -64,6 +64,7 @@ export default function PoolDetails() {
         description={pool.description}
         poolStatus={poolStatus}
         setPoolStatus={setPoolStatus}
+        poolClosed={pool.event_status}
         eventId={id}
       />
 

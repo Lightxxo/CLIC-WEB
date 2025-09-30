@@ -9,6 +9,7 @@ type Pool = {
   description: string;
   date_time: string;
   location: string;
+  event_status: boolean;
 };
 
 type PoolMap = Record<string, Pool>;

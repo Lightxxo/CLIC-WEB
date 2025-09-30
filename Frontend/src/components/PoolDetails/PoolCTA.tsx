@@ -6,12 +6,13 @@ import config from "@/config";
 interface Props {
   eventId?: string;
   poolStatus: string;
+  poolClosed: boolean;
   setPoolStatus: (status: string) => void;
 }
+ 
+type Status = "loading" | "apply" | "pending" | "cancel" | "waiting";
 
-type Status = "loading" | "apply" | "pending" | "cancel";
-
-export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
+export default function PoolCTA({ eventId, poolStatus, poolClosed, setPoolStatus }: Props) {
   const [loading, setLoading] = useState(false);
 
   const { REMOTE, API_BASE_URL, API_PORT } = config;
@@ -25,6 +26,8 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
         return "cancel";
       case "cancel":
         return "apply";
+      case "waiting":
+        return "waiting";
       default:
         return "apply";
     }
@@ -60,7 +63,7 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
     fetchStatus();
   }, []);
 
-  const handleAction = async (btnTxt: "join" | "cancel") => {
+  const handleAction = async (btnTxt: "join" | "cancel" | "waiting") => {
     const token = localStorage.getItem("token");
     if (!token || !eventId) return;
 
@@ -98,7 +101,19 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
     );
   }
 
-  if (poolStatus === "pending") {
+  if (poolStatus === "waiting") {
+    return (
+      <Button
+        disabled
+        variant="secondary"
+        className="w-full bg-gray-400 text-back"
+      >
+        <Clock className="h-4 w-4 mr-2" /> RSVP Waiting
+      </Button>
+    );
+  }
+
+    if (poolStatus === "pending") {
     return (
       <Button
         disabled
@@ -113,10 +128,10 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
   if (poolStatus === "apply") {
     return (
       <Button
-        onClick={() => handleAction("join")}
+        onClick={() => handleAction(poolClosed ? "waiting" : "join")}
         className="w-full cursor-pointer bg-[#005A2D] hover:bg-[#005A2D]/90 text-white"
       >
-        <Plus className="h-4 w-4 mr-2" /> Apply
+        <Plus className="h-4 w-4 mr-2" /> {poolClosed ? "Join Waiting List" : "Apply"}
       </Button>
     );
   }

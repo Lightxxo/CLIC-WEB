@@ -6,6 +6,7 @@ interface Props {
   date_time: string;
   description: string;
   poolStatus: string;
+  poolClosed: boolean;
   setPoolStatus: (status: string) => void;
   eventId?: string;
 }
@@ -15,7 +16,7 @@ export default function PoolHeader({
   location,
   date_time,
   description,
-  poolStatus,
+  poolStatus, poolClosed,
   setPoolStatus,
   eventId,
 }: Props) {
@@ -46,7 +47,7 @@ export default function PoolHeader({
         <div className="w-auto">
           <PoolCTA
             eventId={eventId}
-            poolStatus={poolStatus}
+            poolStatus={poolStatus} poolClosed={poolClosed}
             setPoolStatus={setPoolStatus}
           />
         </div>
