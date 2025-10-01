@@ -10,7 +10,7 @@ interface Props {
   setPoolStatus: (status: string) => void;
 }
  
-type Status = "loading" | "apply" | "pending" | "cancel" | "waiting";
+type Status = "loading" | "apply" | "pending" | "cancel" | "waiting" | "join waitlist";
 
 export default function PoolCTA({ eventId, poolStatus, poolClosed, setPoolStatus }: Props) {
   const [loading, setLoading] = useState(false);
@@ -24,10 +24,10 @@ export default function PoolCTA({ eventId, poolStatus, poolClosed, setPoolStatus
         return "pending";
       case "approved":
         return "cancel";
-      case "cancel":
-        return "apply";
       case "waiting":
         return "waiting";
+      case "join waitlist":
+        return "join waitlist";
       default:
         return "apply";
     }
@@ -92,7 +92,7 @@ export default function PoolCTA({ eventId, poolStatus, poolClosed, setPoolStatus
       setLoading(false);
     }
   };
-
+  console.log(poolClosed);
   if (poolStatus === "loading" || loading) {
     return (
       <Button disabled className="w-full bg-gray-400 text-back">
@@ -131,7 +131,18 @@ export default function PoolCTA({ eventId, poolStatus, poolClosed, setPoolStatus
         onClick={() => handleAction(poolClosed ? "waiting" : "join")}
         className="w-full cursor-pointer bg-[#005A2D] hover:bg-[#005A2D]/90 text-white"
       >
-        <Plus className="h-4 w-4 mr-2" /> {poolClosed ? "Join Waiting List" : "Apply"}
+        <Plus className="h-4 w-4 mr-2" /> Apply
+      </Button>
+    );
+  }
+
+    if (poolStatus === "join waitlist") {
+    return (
+      <Button
+        onClick={() => handleAction(poolClosed ? "waiting" : "join")}
+        className="w-full cursor-pointer bg-[#005A2D] hover:bg-[#005A2D]/90 text-white"
+      >
+        <Plus className="h-4 w-4 mr-2" /> Join Waiting List
       </Button>
     );
   }
