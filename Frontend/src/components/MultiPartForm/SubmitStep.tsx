@@ -169,7 +169,7 @@ export default function SubmitStep() {
           Please try again later.
         </p>
       )}
-
+      <p className="text-left ml-1 mb-1">How did you hear about us? *</p>
       <select
         value={data.hearingPlatform || localStorage.getItem("hearingPlatform") || ""}
         onChange={(e) => {
@@ -177,7 +177,7 @@ export default function SubmitStep() {
           localStorage.setItem("hearingPlatform", e.target.value);
         }}
         className="w-full border rounded-md p-2 focus:outline-none">
-        <option value="">How did you hear about us? *</option>
+        <option value="">Choose one *</option>
         <option value="Social Media">Social Media</option>
         <option value="Google Search">Google Search</option>
         <option value="Friends or Family">Friends or Family</option>
