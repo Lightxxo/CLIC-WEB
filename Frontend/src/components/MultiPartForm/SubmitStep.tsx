@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import config from "@/config";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const { REMOTE, API_BASE_URL, API_PORT } = config;
 
 export default function SubmitStep() {
   const { data, setData } = useFormContext();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [disabled, setDisabled] = useState(true);
 
@@ -31,7 +31,6 @@ export default function SubmitStep() {
   const onSubmit = async (SubmitStepData: any) => {
     try {
       setLoading(true);
-      setError(false);
 
       const formData = new FormData();
 
@@ -149,11 +148,22 @@ export default function SubmitStep() {
           profileImage: null,
         }));
       } else {
-        setError(true);
+
+        toast.error("Something went wrong. Try again later!", {
+          action: {
+            label: "Close",
+            onClick: () => void 0,
+          },
+        });
       }
     } catch (err) {
       console.error("🚨 Error during submission:", err);
-      setError(true);
+      toast.error("Something went wrong. Try again later!", {
+        action: {
+          label: "Close",
+          onClick: () => void 0,
+        },
+      });
     } finally {
       setLoading(false);
     }
@@ -163,12 +173,6 @@ export default function SubmitStep() {
     <div className="text-center space-y-4">
       <h2 className="text-xl font-semibold">Almost there!</h2>
 
-      {error && (
-        <p className="text-red-500 text-sm">
-          Something went wrong. Your answers have been saved for applying again.
-          Please try again later.
-        </p>
-      )}
       <p className="text-left ml-1 mb-1">How did you hear about us? *</p>
       <select
         value={data.hearingPlatform || localStorage.getItem("hearingPlatform") || ""}
