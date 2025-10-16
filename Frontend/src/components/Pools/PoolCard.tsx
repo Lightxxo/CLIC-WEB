@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
-import { format } from "date-fns";
 import config from "@/config";
 import { useNavigate } from "react-router-dom";
+import { options, toLocalString } from "@/lib/dateParser";
 
 type Pool = {
   _id: string;
@@ -15,8 +15,6 @@ type Pool = {
 
 export function PoolCard({ pool }: { pool: Pool }) {
   const navigate = useNavigate();
-  const localDate = new Date(pool.date_time);
-  const formattedTime = format(localDate, "EEEE, MMMM d, yyyy p");
   const { REMOTE, API_BASE_URL, API_PORT } = config;
   const apiUrl = `http${REMOTE ? "s" : ""}://${API_BASE_URL}${
     API_PORT ? `:${API_PORT}` : ""
@@ -39,7 +37,7 @@ export function PoolCard({ pool }: { pool: Pool }) {
                 {pool.title}
               </h2>
           <p className="text-sm truncate">📍 {pool.location}</p>
-          <p className="text-sm">🕒 {formattedTime}</p>
+          <p className="text-sm">🕒 {new Date(toLocalString(pool.date_time)).toLocaleString('en-GB', options)}</p>
     </motion.div>
   );
 }

@@ -160,7 +160,7 @@ export default function UserCredentials({
   return (
     <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
       <p className="text-sm text-gray-600">
-        Except for your last name and date of birth, the following data will
+        Except for your last name and date of birth, the following data might
         appear on your profile.
       </p>
 

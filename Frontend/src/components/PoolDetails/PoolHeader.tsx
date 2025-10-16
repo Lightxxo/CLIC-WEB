@@ -1,4 +1,5 @@
 import PoolCTA from "./PoolCTA";
+import { options, toLocalString } from "@/lib/dateParser";
 
 interface Props {
   title: string;
@@ -19,14 +20,6 @@ export default function PoolHeader({
   setPoolStatus,
   eventId,
 }: Props) {
-  // Format date in European style: DD/MM/YYYY HH:mm
-  const formattedDate = new Date(date_time).toLocaleString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 
   return (
     <div className="p-6 bg-[#D9D9D9] mb-4 shadow-[0_3px_#8c8c8c]">
@@ -53,7 +46,7 @@ export default function PoolHeader({
       </div>
 
       {/* Time */}
-      <p className="text-gray-600 text-base">🕒 {formattedDate}</p>
+      <p className="text-gray-600 text-base">🕒 {new Date(toLocalString(date_time)).toLocaleString('en-GB', options)}</p>
 
       {/* Description */}
       <p className="text-gray-700 leading-relaxed text-base whitespace-pre-line">

@@ -64,7 +64,7 @@ export default function Invites() {
     action: "accepted" | "rejected"
   ) => {
     try {
-      const token = localStorage.getItem("user");
+      const token = localStorage.getItem("token");
       const res = await fetch(
         `http${
           REMOTE ? "s" : ""

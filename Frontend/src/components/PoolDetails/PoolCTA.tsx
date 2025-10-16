@@ -8,8 +8,8 @@ interface Props {
   poolStatus: string;
   setPoolStatus: (status: string) => void;
 }
-
-type Status = "loading" | "apply" | "pending" | "cancel";
+ 
+type Status = "loading" | "apply" | "pending" | "cancel" | "waiting" | "join waitlist" | "INVALID";
 
 export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
   const [loading, setLoading] = useState(false);
@@ -23,10 +23,14 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
         return "pending";
       case "approved":
         return "cancel";
-      case "cancel":
+      case "waiting":
+        return "waiting";
+      case "join waitlist":
+        return "join waitlist";
+      case "join":
         return "apply";
       default:
-        return "apply";
+        return "INVALID";
     }
   };
 
@@ -60,7 +64,7 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
     fetchStatus();
   }, []);
 
-  const handleAction = async (btnTxt: "join" | "cancel") => {
+  const handleAction = async (btnTxt: "join" | "cancel" | "waiting") => {
     const token = localStorage.getItem("token");
     if (!token || !eventId) return;
 
@@ -89,7 +93,7 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
       setLoading(false);
     }
   };
-
+  
   if (poolStatus === "loading" || loading) {
     return (
       <Button disabled className="w-full bg-gray-400 text-back">
@@ -98,7 +102,19 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
     );
   }
 
-  if (poolStatus === "pending") {
+  if (poolStatus === "waiting") {
+    return (
+      <Button
+        disabled
+        variant="secondary"
+        className="w-full bg-gray-400 text-back"
+      >
+        <Clock className="h-4 w-4 mr-2" /> RSVP Waiting
+      </Button>
+    );
+  }
+
+    if (poolStatus === "pending") {
     return (
       <Button
         disabled
@@ -121,12 +137,35 @@ export default function PoolCTA({ eventId, poolStatus, setPoolStatus }: Props) {
     );
   }
 
-  return (
+    if (poolStatus === "join waitlist") {
+    return (
+      <Button
+        onClick={() => handleAction("waiting")}
+        className="w-full cursor-pointer bg-[#005A2D] hover:bg-[#005A2D]/90 text-white"
+      >
+        <Plus className="h-4 w-4 mr-2" /> Join Waiting List
+      </Button>
+    );
+  }
+
+  if (poolStatus === "cancel") {
+    return (
+      <Button
+        onClick={() => handleAction("cancel")}
+        className="w-full cursor-pointer bg-[#F05A23] hover:bg-[#F05A23]/90 text-white"
+      >
+        <X className="h-4 w-4 mr-2" /> Cancel
+      </Button>
+    );
+  }
+
+    return (
     <Button
-      onClick={() => handleAction("cancel")}
-      className="w-full cursor-pointer bg-[#F05A23] hover:bg-[#F05A23]/90 text-white"
+      disabled
+        variant="secondary"
+        className="w-full bg-gray-400 text-back"
     >
-      <X className="h-4 w-4 mr-2" /> Cancel
+      <X className="h-4 w-4 mr-2" /> Invalid
     </Button>
   );
 }
