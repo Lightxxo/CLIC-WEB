@@ -20,13 +20,16 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import SocialMediaInp from "../SocialMediaInp/SocialMediaInp";
+import { toast } from "sonner";
 
 interface UserCredentialsProps {
   onValidityChange: (isValid: boolean) => void;
+  showWarning: boolean;
+  renderWarnings: number;
 }
 
 export default function UserCredentials({
-  onValidityChange,
+  onValidityChange, showWarning, renderWarnings,
 }: UserCredentialsProps) {
   const { data, setData } = useFormContext();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -68,6 +71,17 @@ export default function UserCredentials({
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  useEffect(() => {
+    if (showWarning) {
+      toast.error("Please fill up all required fields!", {
+        action: {
+          label: "Close",
+          onClick: () => void 0,
+        },
+      });
+    }
+  }, [renderWarnings])
 
   // --- Sync local state with global context + localStorage ---
   useEffect(() => {
@@ -156,12 +170,13 @@ export default function UserCredentials({
     else if (socialMediaObj == "other") return "Enter your handle";
     else return "";
   }
-
+  
   return (
     <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
       <p className="text-sm text-gray-600">
         Except for your last name and date of birth, the following data might
-        appear on your profile.
+        appear on your profile. <br /><br />
+        Require fields are marked with *
       </p>
 
       {/* Profile Picture */}

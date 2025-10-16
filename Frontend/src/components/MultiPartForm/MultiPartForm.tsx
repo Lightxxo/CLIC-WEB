@@ -21,6 +21,9 @@ type Props = {
 export default function MultiPartForm({ questions }: Props) {
   const [step, setStep] = useState(0);
 
+  const [showWarning, setShowWarning] = useState(false);
+  const [renderWarnings, setRenderWarnings] = useState(0);
+
   const [validityMap, setValidityMap] = useState<Record<number, boolean>>({ 0: false });
 
   const totalSteps = 1 + questions.length + 1;
@@ -32,24 +35,32 @@ export default function MultiPartForm({ questions }: Props) {
     });
   }, []);
 
-  const next = () => setStep((prev) => Math.min(prev + 1, totalSteps - 1));
+  const next = () => {
+    setShowWarning(false);
+    if (!validityMap[step]) {
+      setShowWarning(true); setRenderWarnings(renderWarnings + 1); return;
+    }
+    setStep((prev) => Math.min(prev + 1, totalSteps - 1));
+  }
   const prev = () => setStep((prev) => Math.max(prev - 1, 0));
 
   const currentComponent = () => {
     if (step === 0)
-      return <UserCredentials onValidityChange={(v) => setStepValidity(0, v)} />;
+      return <UserCredentials onValidityChange={(v) => setStepValidity(0, v)} showWarning={showWarning} 
+                renderWarnings={renderWarnings} />;
     if (step > 0 && step <= questions.length)
       return (
         <QuestionForm
           index={step - 1}
           question={questions[step - 1]}
           onValidityChange={(v) => setStepValidity(step, v)}
+          showWarning={showWarning} renderWarnings={renderWarnings}
         />
       );
     return <SubmitStep />;
   };
 
-  const isNextDisabled = !validityMap[step];
+  // const isNextDisabled = !validityMap[step];
 
   return (
     <div className="max-w-md mx-auto p-4">
@@ -65,7 +76,7 @@ export default function MultiPartForm({ questions }: Props) {
               <Button
                 className="bg-[#B46E28] hover:bg-[#945A21] text-white"
                 onClick={next}
-                disabled={isNextDisabled}
+                // disabled={isNextDisabled}
               >
                 Next
               </Button>

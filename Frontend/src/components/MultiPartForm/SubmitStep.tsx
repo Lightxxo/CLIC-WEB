@@ -29,6 +29,15 @@ export default function SubmitStep() {
   }
 
   const onSubmit = async (SubmitStepData: any) => {
+    if (disabled) {
+      toast.error("All fields are required!", {
+        action: {
+          label: "Close",
+          onClick: () => void 0,
+        },
+      });
+      return;
+    }
     try {
       setLoading(true);
 
@@ -222,7 +231,7 @@ export default function SubmitStep() {
 
       <Button
         onClick={() => onSubmit(data)}
-        disabled={disabled}
+        // disabled={disabled}
         className="mt-2 cursor-pointer bg-[#B46E28] hover:bg-[#945A21] text-white disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? (

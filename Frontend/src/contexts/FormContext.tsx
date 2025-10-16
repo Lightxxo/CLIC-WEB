@@ -31,7 +31,7 @@ export type FormDataType = {
 };
 
 const defaultFormData: FormDataType = {
-  email: "",
+  email: "abc@email.com",
   firstName: "",
   lastName: "",
   username: "",

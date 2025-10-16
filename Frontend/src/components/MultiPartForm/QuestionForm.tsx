@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useFormContext } from "@/contexts/FormContext";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 type Question = {
   question: string;
@@ -13,12 +14,14 @@ interface QuestionFormProps {
   index: number;
   question: Question;
   onValidityChange: (valid: boolean) => void;
+  showWarning: boolean;
+  renderWarnings: number;
 }
 
 export default function QuestionForm({
   index,
   question,
-  onValidityChange,
+  onValidityChange, showWarning, renderWarnings,
 }: QuestionFormProps) {
   const { data, setData } = useFormContext();
 
@@ -32,6 +35,17 @@ export default function QuestionForm({
     };
     setData({ ...data, answers: newAnswers });
   };
+
+    useEffect(() => {
+    if (showWarning) {
+      toast.error("Please select your answer!", {
+        action: {
+          label: "Close",
+          onClick: () => void 0,
+        },
+      });
+    }
+  }, [renderWarnings])
 
   // Report validity (answer selected)
   useEffect(() => {
