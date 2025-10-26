@@ -39,7 +39,7 @@ export default function Navbar() {
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex items-center">
-          <NavLink
+          {/* <NavLink
             to="/howitworks"
             className={({ isActive }) =>
               isActive
@@ -48,7 +48,7 @@ export default function Navbar() {
             }
           >
             How it works
-          </NavLink>
+          </NavLink> */}
 
           {data.token && localStorage.getItem("isApproved") ? (
             <>
@@ -160,7 +160,7 @@ export default function Navbar() {
               transition={{ type: "tween", duration: 0.3 }}
             >
               {/* <Button variant="ghost"> */}
-              <NavLink
+              {/* <NavLink
                 to="/howitworks"
                 className={({ isActive }) =>
                   isActive
@@ -169,7 +169,7 @@ export default function Navbar() {
                 }
               >
                 How it works
-              </NavLink>
+              </NavLink> */}
               {/* </Button> */}
 
               {data.token && localStorage.getItem("isApproved") ? (

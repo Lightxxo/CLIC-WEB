@@ -15,7 +15,7 @@ import Landing from "./pages/Landing/Landing";
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import MainLayout from "./layouts/MainLayout";
 // import Signup from "./pages/Signup/Signup";
-import HowItWorks from "./pages/HowItWorks/HowItWorks";
+// import HowItWorks from "./pages/HowItWorks/HowItWorks";
 import ApprovedLayout from "./layouts/ApprovedLayout";
 import Pools from "./pages/Pools/Pools";
 import PoolDetails from "./pages/PoolDetails/PoolDetails";
@@ -44,7 +44,7 @@ export default function App() {
           element={<PrivacyPolicy></PrivacyPolicy>}
         />
         <Route path="/termsofuse" element={<TermsOfUse></TermsOfUse>} />
-        <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
+        {/* <Route path="/howitworks" element={<HowItWorks></HowItWorks>} /> */}
         {/* Public routes with navbar */}
         {/*
         <Route
