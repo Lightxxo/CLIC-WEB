@@ -90,7 +90,7 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <NavLink
+              {/* <NavLink
                 to="/signup"
                 className={({ isActive }) =>
                   isActive
@@ -99,7 +99,7 @@ export default function Navbar() {
                 }
               >
                 Sign up
-              </NavLink>
+              </NavLink> */}
 
               <NavLink
                 to="/login"
@@ -210,7 +210,7 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  <NavLink
+                  {/* <NavLink
                     to="/signup"
                     className={({ isActive }) =>
                       isActive
@@ -219,7 +219,7 @@ export default function Navbar() {
                     }
                   >
                     Sign up
-                  </NavLink>
+                  </NavLink> */}
 
                   <NavLink
                     to="/login"

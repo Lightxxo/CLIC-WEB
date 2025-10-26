@@ -14,7 +14,7 @@ import Landing from "./pages/Landing/Landing";
 
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import MainLayout from "./layouts/MainLayout";
-import Signup from "./pages/Signup/Signup";
+// import Signup from "./pages/Signup/Signup";
 import HowItWorks from "./pages/HowItWorks/HowItWorks";
 import ApprovedLayout from "./layouts/ApprovedLayout";
 import Pools from "./pages/Pools/Pools";
@@ -36,7 +36,7 @@ export default function App() {
       {/* Routes WITH navbar */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<Landing />} />
-        <Route path="/signup" element={<Signup />} />
+        {/* <Route path="/signup" element={<Signup />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/forgotpass" element={<ForgotPass />} />
         <Route

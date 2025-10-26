@@ -256,8 +256,8 @@ const ForgotPass = () => {
              <section>
               <p className="my-5">
                 If your email is registered with us, you will receive a password reset code
-                at (<b>{email}</b>).
-                Check your spam/junk folder too.
+                at <b>{email}</b>. <br />
+                (Check your spam/junk folder too.)
               </p>
               <input
                 type="number"
