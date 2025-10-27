@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="flex flex-col items-center text-center">
             <div className="flex items-center divide-x divide-[#00C3FF] flex-wrap justify-center">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/the_clic_club/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 flex items-center gap-1 hover:text-white transition"
@@ -57,6 +57,7 @@ export default function Footer() {
               <Button
                 variant="outline"
                 className="cursor-pointer rounded-full px-5 text-base bg-[#005A2D] hover:text-white text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+                onClick={() => location.assign("https://testflight.apple.com/join/Af8rdyuN")}
               >
                 Download on iOS
               </Button>
@@ -77,6 +78,7 @@ export default function Footer() {
             <Button
               variant="outline"
               className="cursor-pointer rounded-full px-5 text-base bg-[#005A2D] hover:text-white text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+              onClick={() => location.assign("https://testflight.apple.com/join/Af8rdyuN")}
             >
               Download on iOS
             </Button>
@@ -84,7 +86,7 @@ export default function Footer() {
           {/* Middle content */}
           <div className="flex flex-wrap justify-center items-center divide-x divide-[#00C3FF]">
             <a
-              href="https://www.instagram.com/Clicclubcommunity/"
+              href="https://www.instagram.com/the_clic_club/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 flex items-center gap-1 hover:text-white transition"

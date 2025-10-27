@@ -52,7 +52,7 @@ export default function HowItWorks() {
           <br />
           <hr className="border-black" />
           <br />
-          <h4 className="gill-sans-bold text-2xl">4. Join the pool </h4>
+          <h4 className="gill-sans-bold text-2xl">4. Jump into the pool </h4>
           <p className="text-2xl">
             Turn on your video camera and show up on time. Go to the pool page
             in the App and press Join. Relax and be yourself. The app will start

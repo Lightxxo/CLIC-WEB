@@ -1,5 +1,5 @@
 "use client";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 
 export default function PoolFooter() {
   return (
@@ -16,20 +16,13 @@ export default function PoolFooter() {
             1
           </span>
           <p className="">
-            Download the app if you haven't already
+            Download the app and login
           </p>
         </div>
 
         <div className="flex items-start gap-3">
           <span className="">
             2
-          </span>
-          <p className="">Login to the app</p>
-        </div>
-
-        <div className="flex items-start gap-3">
-          <span className="">
-            3
           </span>
           <p className="">
             Click on the Pools icon (the waves in the middle of the bottom of
@@ -38,7 +31,7 @@ export default function PoolFooter() {
         </div>
         <div className="flex items-start gap-3">
           <span className="">
-            4
+            3
           </span>
           <p className="">
             Under Confirmed Pools, click on your pool & press the big “Go live”
@@ -48,9 +41,9 @@ export default function PoolFooter() {
       </div>
 
       {/* GO LIVE link */}
-      <div className="text-left mb-6">
+      {/* <div className="text-left mb-6"> */}
         {/* TODO: replace "#" with purple in-app Go Live URL */}
-        <a
+        {/* <a
           href="#"
           className="border border-[#031E59] px-3 pb-1 rounded-xl"
           onClick={(e) => {
@@ -60,7 +53,7 @@ export default function PoolFooter() {
         >
           Go to App
         </a>
-      </div>
+      </div> */}
 
       {/* Bottom quote */}
       {/* <p className="text-left text-gray-600  italic">
