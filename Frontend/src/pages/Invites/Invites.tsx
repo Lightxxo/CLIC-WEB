@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Progress } from "@/components/ui/progress";
+import { useInvite } from "@/contexts/InviteContext";
 
 const { API_BASE_URL, API_PORT, REMOTE } = config;
 
@@ -34,7 +35,7 @@ export default function Invites() {
   );
   const [activeFilter, setActiveFilter] = useState<FilterStatus>("all");
   const [loading, setLoading] = useState(true);
-
+  const {fetchInvitationCount} = useInvite();
 
   const fetchInvitations = async () => {
     try {
@@ -84,6 +85,7 @@ export default function Invites() {
             inv._id === invitationId ? { ...inv, status: action } : inv
           )
         );
+        fetchInvitationCount();
       }
     } catch (error) {
       console.error("Error updating invitation:", error);
@@ -102,7 +104,7 @@ export default function Invites() {
   );
 
   useEffect(() => {
-    fetchInvitations();
+    fetchInvitations(); fetchInvitationCount();
   }, []);
 
   useEffect(() => {

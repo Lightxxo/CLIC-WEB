@@ -7,8 +7,8 @@ interface Props {
   date_time: string;
   description: string;
   poolStatus: string;
-  setPoolStatus: (status: string) => void;
   eventId?: string;
+  fetchPool: any;
 }
 
 export default function PoolHeader({
@@ -17,8 +17,8 @@ export default function PoolHeader({
   date_time,
   description,
   poolStatus,
-  setPoolStatus,
   eventId,
+  fetchPool,
 }: Props) {
 
   return (
@@ -26,7 +26,7 @@ export default function PoolHeader({
  
       <div className="flex items-center gap-3 mb-10">
         <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
-        {poolStatus === "cancel" && (
+        {poolStatus === "approved" && (
           <span className="px-2 py-0.5 text-xs font-medium border border-green-500 text-green-600 rounded-full">
             Confirmed
           </span>
@@ -40,7 +40,7 @@ export default function PoolHeader({
           <PoolCTA
             eventId={eventId}
             poolStatus={poolStatus}
-            setPoolStatus={setPoolStatus}
+            fetchPool={fetchPool}
           />
         </div>
       </div>

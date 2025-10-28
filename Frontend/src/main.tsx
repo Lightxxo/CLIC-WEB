@@ -7,16 +7,19 @@ import { FormProvider } from "./contexts/FormContext.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { PoolProvider } from "./contexts/PoolContext.tsx";
 import ToasterLayout from "./layouts/ToasterLayout.tsx";
+import { InviteProvider } from "./contexts/InviteContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <PoolProvider>
       <FormProvider>
-        <BrowserRouter>
-          <ToasterLayout>
-            <App />
-          </ToasterLayout>
-        </BrowserRouter>
+        <InviteProvider>
+          <BrowserRouter>
+            <ToasterLayout>
+              <App />
+            </ToasterLayout>
+          </BrowserRouter>
+        </InviteProvider>
       </FormProvider>
     </PoolProvider>
   </StrictMode>

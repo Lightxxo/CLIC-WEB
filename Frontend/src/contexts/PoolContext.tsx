@@ -4,6 +4,7 @@ import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
 type Pool = {
+  userStatus: string;
   title: string;
   imgURL: string;
   description: string;
