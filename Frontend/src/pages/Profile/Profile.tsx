@@ -17,7 +17,7 @@ const Profile = () => {
     const { data, setData } = useFormContext();
     const [isHovering, setIsHovering] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [currentProfilePicture, setCurrentProfilePicture] = useState(`${apiUrl}/${data.imgURL}`)
+    const [currentProfilePicture, setCurrentProfilePicture] = useState(`https://twoclicclub.ams3.cdn.digitaloceanspaces.com/${data.imgURL}`)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

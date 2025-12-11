@@ -51,7 +51,7 @@ export default function PoolDetails() {
   }
   return (
     <div className="px-4 py-6 max-w-4xl mx-auto space-y-6">
-      <p className="flex justify-center m-0 p-6 bg-[#D9D9D9]"><img src={apiUrl + "/" + pool.imgURL} alt="Event banner" className="" /></p>
+      <p className="flex justify-center m-0 p-6 bg-[#D9D9D9]"><img src={"https://twoclicclub.ams3.cdn.digitaloceanspaces.com/" + pool.imgURL} alt="Event banner" className="" /></p>
       
       <PoolHeader
         title={pool.title}

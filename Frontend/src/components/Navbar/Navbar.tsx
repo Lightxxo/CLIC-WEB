@@ -1,5 +1,4 @@
 "use client";
-import config from "@/config";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
@@ -9,10 +8,6 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { data, setData } = useFormContext();
-    const { REMOTE, API_BASE_URL, API_PORT } = config;
-    const apiUrl = `http${REMOTE ? "s" : ""}://${API_BASE_URL}${
-      API_PORT ? `:${API_PORT}` : ""
-    }`;
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.clear();
@@ -86,7 +81,7 @@ export default function Navbar() {
             >
               Log out
             </button>
-            <NavLink to="/profile"><img className="w-10 h-10 rounded-full" src={`${apiUrl}/${data.imgURL}`} /></NavLink>
+            <NavLink to="/profile"><img className="w-10 h-10 rounded-full" src={`https://twoclicclub.ams3.cdn.digitaloceanspaces.com/${data.imgURL}`} /></NavLink>
             </>
           ) : (
             <>
@@ -206,7 +201,7 @@ export default function Navbar() {
                   >
                     Log out
                   </button>
-                  <NavLink to="/profile"><img className="w-15 h-15 rounded-full" src={`${apiUrl}/${data.imgURL}`} /></NavLink>
+                  <NavLink to="/profile"><img className="w-15 h-15 rounded-full" src={`https://twoclicclub.ams3.cdn.digitaloceanspaces.com/${data.imgURL}`} /></NavLink>
                 </>
               ) : (
                 <>

@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import config from "@/config";
 import { useNavigate } from "react-router-dom";
 import { options, toLocalString } from "@/lib/dateParser";
 
@@ -16,14 +15,10 @@ type Pool = {
 
 export function PoolCard({ pool }: { pool: Pool }) {
   const navigate = useNavigate();
-  const { REMOTE, API_BASE_URL, API_PORT } = config;
-  const apiUrl = `http${REMOTE ? "s" : ""}://${API_BASE_URL}${
-    API_PORT ? `:${API_PORT}` : ""
-  }`;
   const cleanPath = pool.imgURL.startsWith("/")
     ? pool.imgURL.slice(1)
     : pool.imgURL;
-  const fullImageUrl = `${apiUrl}/${cleanPath}`;
+  const fullImageUrl = `https://twoclicclub.ams3.cdn.digitaloceanspaces.com/${cleanPath}`;
 
   return (
     <motion.div
