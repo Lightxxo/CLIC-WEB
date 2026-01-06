@@ -25,12 +25,12 @@ const Profile = () => {
         if (file) {
             setIsLoading(true);
             // Create a preview URL for the selected image
-            const previewUrl = URL.createObjectURL(file)
-            setCurrentProfilePicture(previewUrl);
+            // const previewUrl = URL.createObjectURL(file)
+            // setCurrentProfilePicture(previewUrl);
 
             const formData = new FormData();
             formData.append("profilePicture", file);
-
+            formData.append("imgURL", data.imgURL);
             fetch(`${apiUrl}/user-app`, {
                 method: "PUT",
                 headers: {
@@ -41,6 +41,7 @@ const Profile = () => {
                 .then(data => {
                     if (data._id) {
                         localStorage.setItem("imgURL", data.imgURL);
+                        setCurrentProfilePicture(`https://twoclicclub.ams3.cdn.digitaloceanspaces.com/${data.imgURL}`);
                         setData((prev) => ({
                             ...prev,
                             imgURL: data.imgURL,
