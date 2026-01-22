@@ -20,7 +20,7 @@ export default function PoolDetails() {
       try {
         setLoading(true);
         const token = localStorage.getItem("token");
-        const res = await fetch(`${apiUrl}/eventForApp/${id}`, {
+        const res = await fetch(`${apiUrl}/eventForApp/${id}?web=true`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const json = await res.json();
@@ -58,7 +58,7 @@ export default function PoolDetails() {
         location={pool.location}
         date_time={pool.date_time}
         description={pool.description}
-        poolStatus={pool.userStatus}
+        poolStatus={pool.eventUserRelation}
         eventId={id}
         fetchPool={fetchPool}
       />

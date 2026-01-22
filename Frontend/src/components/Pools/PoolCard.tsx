@@ -10,7 +10,7 @@ type Pool = {
   description: string;
   date_time: string;
   location: string;
-  userStatus: string;
+  eventUserRelation: string;
 };
 
 export function PoolCard({ pool }: { pool: Pool }) {

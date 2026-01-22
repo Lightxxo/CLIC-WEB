@@ -1,10 +1,10 @@
-const API_BASE_URL = "api.clicclub.cc";
-const API_PORT = "";
-const REMOTE = true;
+// const API_BASE_URL = "api.clicclub.cc";
+// const API_PORT = "";
+// const REMOTE = true;
 
-// const API_BASE_URL = "localhost";
-// const API_PORT = "5000";
-// const REMOTE = false;
+const API_BASE_URL = "localhost";
+const API_PORT = "5000";
+const REMOTE = false;
 
 export default {
   API_BASE_URL,

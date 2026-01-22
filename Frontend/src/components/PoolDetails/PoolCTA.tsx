@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2, Plus, Clock, X } from "lucide-react";
+import { Loader2, Plus, Clock, X, Check  } from "lucide-react";
 import config from "@/config";
+import { useInvite } from "@/contexts/InviteContext";
 
 interface Props {
   eventId?: string;
@@ -11,7 +12,7 @@ interface Props {
 
 export default function PoolCTA({ eventId, poolStatus, fetchPool }: Props) {
   const [loading, setLoading] = useState(false);
-
+  const {fetchInvitationCount} = useInvite();
   const { REMOTE, API_BASE_URL, API_PORT } = config;
   const apiUrl = `http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}`;
   const handleAction = async (userStatus: string) => {
@@ -30,14 +31,17 @@ export default function PoolCTA({ eventId, poolStatus, fetchPool }: Props) {
       });
 
       if (!res.ok) throw new Error("Action failed");
-      else fetchPool();
+      else {
+        fetchPool();
+        if (userStatus == "invite-accept" || userStatus == "invite-reject") fetchInvitationCount();
+      }
     } catch (e) {
       console.error("Action failed", e);
     } finally {
       setLoading(false);
     }
   };
-  
+
   if (poolStatus === undefined || loading) {
     return (
       <Button disabled className="w-full bg-gray-400 text-back">
@@ -58,7 +62,7 @@ export default function PoolCTA({ eventId, poolStatus, fetchPool }: Props) {
     );
   }
 
-    if (poolStatus === "pending") {
+  if (poolStatus === "pending") {
     return (
       <Button
         disabled
@@ -81,7 +85,7 @@ export default function PoolCTA({ eventId, poolStatus, fetchPool }: Props) {
     );
   }
 
-    if (poolStatus === "closed") {
+  if (poolStatus === "closed") {
     return (
       <Button
         onClick={() => handleAction(poolStatus)}
@@ -103,11 +107,30 @@ export default function PoolCTA({ eventId, poolStatus, fetchPool }: Props) {
     );
   }
 
+  if (poolStatus === "invited") {
     return (
+      <div className="flex">
+        <Button
+          onClick={() => handleAction("invite-accept")}
+          className="cursor-pointer bg-[#005A2D] hover:bg-[#005A2D]/90 text-white"
+        >
+          <Check />Accept
+        </Button>
+        <Button
+          onClick={() => handleAction("invite-reject")}
+          className="ms-1 cursor-pointer bg-[#F05A23] hover:bg-[#F05A23]/90 text-white"
+        >
+         <X className="h-4 w-4" />Reject
+        </Button>
+      </div>
+    );
+  }
+
+  return (
     <Button
       disabled
-        variant="secondary"
-        className="w-full bg-gray-400 text-back"
+      variant="secondary"
+      className="w-full bg-gray-400 text-back"
     >
       <X className="h-4 w-4 mr-2" /> Invalid
     </Button>
