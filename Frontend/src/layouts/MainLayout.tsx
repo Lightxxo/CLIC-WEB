@@ -14,8 +14,8 @@ export default function MainLayout() {
   const location = useLocation();
   const token = localStorage.getItem("token");
   useEffect(() => {
-    fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/`)
-    .then(res => console.log( "Backend status:", res.status))
+    // fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/`)
+    // .then(res => console.log( "Backend status:", res.status))
     if (localStorage.length && token && token.length > 0) {
       setData((prev) => ({
         ...prev,

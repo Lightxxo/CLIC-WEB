@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import logo from "../../assets/CLICCLUB.Logo_Blue.svg";
+import logo from "../../assets/2CLICCLUB.svg";
 import { useFormContext } from "@/contexts/FormContext";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
@@ -26,15 +26,15 @@ export default function Navbar() {
   
   return (
     <>
-      <nav className="relative z-50 w-full nav-bg-color px-6 py-4 flex items-center justify-between">
+      <nav className="relative z-50 w-full nav-bg-color px-3 md:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold text-figma-blue">
-          <img src={logo} width="65" />
+          <img src={logo} width="100" />
         </Link>
 
         {/* Desktop nav buttons */}
         <div className="hidden space-x-4 md:flex items-center">
-          {/* <NavLink
+          <NavLink
             to="/howitworks"
             className={({ isActive }) =>
               isActive
@@ -43,7 +43,7 @@ export default function Navbar() {
             }
           >
             How it works
-          </NavLink> */}
+          </NavLink>
 
           {data.token && localStorage.getItem("isApproved") ? (
             <>
@@ -85,7 +85,7 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              {/* <NavLink
+              <NavLink
                 to="/signup"
                 className={({ isActive }) =>
                   isActive
@@ -94,7 +94,7 @@ export default function Navbar() {
                 }
               >
                 Sign up
-              </NavLink> */}
+              </NavLink>
 
               <NavLink
                 to="/login"
@@ -155,7 +155,7 @@ export default function Navbar() {
               transition={{ type: "tween", duration: 0.3 }}
             >
               {/* <Button variant="ghost"> */}
-              {/* <NavLink
+              <NavLink
                 to="/howitworks"
                 className={({ isActive }) =>
                   isActive
@@ -164,7 +164,7 @@ export default function Navbar() {
                 }
               >
                 How it works
-              </NavLink> */}
+              </NavLink>
               {/* </Button> */}
 
               {data.token && localStorage.getItem("isApproved") ? (
@@ -205,7 +205,7 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  {/* <NavLink
+                  <NavLink
                     to="/signup"
                     className={({ isActive }) =>
                       isActive
@@ -214,7 +214,7 @@ export default function Navbar() {
                     }
                   >
                     Sign up
-                  </NavLink> */}
+                  </NavLink>
 
                   <NavLink
                     to="/login"
