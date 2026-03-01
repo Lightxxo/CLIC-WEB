@@ -27,7 +27,7 @@ export default function HowItWorks() {
         <article className="">
           <h4 className="gill-sans-bold text-2xl">1. Sign up</h4>
           <p className="text-2xl">
-            Complete a questionnaire to become a Clic Club member. Membership
+            Complete a questionnaire to become a Two Clic Club member. Membership
             gives you access to live online events - called pools - at which you
             speak to members we pooled together especially for that event.
           </p>

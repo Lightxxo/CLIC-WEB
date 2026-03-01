@@ -38,7 +38,7 @@ export default function Footer() {
                 Terms of Use
               </Link>
               <span className="px-4 text-xs whitespace-normal">
-                <a href="mailto:hello@cliclub.cc" className="hover:text-white">
+                <a href="mailto:hello@twoclicclub.com" className="hover:text-white">
                   Email us for support or enquiries
                 </a>
               </span>

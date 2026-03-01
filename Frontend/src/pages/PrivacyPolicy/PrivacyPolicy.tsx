@@ -22,10 +22,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
                 <li>
                   <p className="mt-3 text-sm">
                     This privacy policy or notice (referred to as the “notice")
-                    applies to the Clic Club platform, including its website,
+                    applies to the Two Clic Club platform, including its website,
                     the app for mobile devices (the "App") and any live events,
                     collectively referred to as, the “Platform", which has been
-                    developed by Clic Club Ltd., a company incorporated in the
+                    developed by Two Clic Club Ltd., a company incorporated in the
                     United Kingdom (the "Service Provider", “us" or "we"). This
                     service is provided "AS IS".
                   </p>
@@ -465,7 +465,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
                       Service Provider will immediately delete this from their
                       servers. If you are a parent or guardian and you are aware
                       that your child has provided us with personal information,
-                      please contact the Service Provider (hello@clicclub.cc) so
+                      please contact the Service Provider (hello@twoclicclub.com) so
                       that they will be able to take the necessary actions.
                     </p>
                   </li>
@@ -523,7 +523,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
                       European Economic Area, we ensure that there is an
                       appropriate transfer mechanism in place to protect your
                       personal data and comply with our data protection
-                      obligations. Please contact us at hello@clicclub.cc.if you
+                      obligations. Please contact us at hello@twoclicclub.com.if you
                       want further information on the countries to which we may
                       transfer personal data and the specific mechanism used by
                       us when transferring your personal data outside the EEA.
@@ -544,7 +544,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
                     <p>
                       You can halt all collection of personal information by the
                       Platform easily by uninstalling the App and deleting your
-                      Clic Club account.
+                      Two Clic Club account.
                     </p>
                   </li>
                 </ul>
@@ -567,7 +567,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
                       24 months and thereafter may store it in aggregate. If
                       you'd like the Service Provider to delete User Provided
                       Data that you have provided via the websites(s) or App,
-                      please contact them at hello@clicclub.cc and we will
+                      please contact them at hello@twoclicclub.com and we will
                       respond in a reasonable time. Please note that some or all
                       of the User Provided Data may be required in order for the
                       App to function properly.
@@ -628,9 +628,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
                       please contact the Service Provider via email at
                       <a
                         className="underline ml-1"
-                        href="mailto:hello@clicclub.cc"
+                        href="mailto:hello@twoclicclub.com"
                       >
-                        hello@clicclub.cc
+                        hello@twoclicclub.com
                       </a>
                       .
                     </p>

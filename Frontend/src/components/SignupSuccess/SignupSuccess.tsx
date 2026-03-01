@@ -18,7 +18,7 @@ export default function SignupSuccess() {
           How it works
         </Link>{" "}
         under the navigation bar on the top right hand on your screen to find
-        out more about Clic Club.
+        out more about Two Clic Club.
       </p>
     </div>
   );

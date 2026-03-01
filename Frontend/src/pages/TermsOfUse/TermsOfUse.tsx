@@ -20,10 +20,10 @@ const TermsOfUse: React.FC<TermsOfUseProps> = () => {
               <ul className="list-disc pl-5 mt-3">
                 <li>
                   <p className="mt-3 text-sm">
-                    These terms and conditions apply to the Clic Club platform,
+                    These terms and conditions apply to the Two Clic Club platform,
                     including its website(s), the app for mobile devices (the
                     "App") and any live events, collectively referred to as the
-                    “Platform”, which has been developed by Clic Club Ltd., a
+                    “Platform”, which has been developed by Two Clic Club Ltd., a
                     company incorporated in the United Kingdom (the "Service
                     Provider”, “us” or “we”).
                   </p>
@@ -401,8 +401,8 @@ const TermsOfUse: React.FC<TermsOfUseProps> = () => {
                   <p className="mt-2 ml-6">
                     If you have any questions or suggestions about the Terms and Conditions, 
                     please do not hesitate to contact the Service Provider at {" "}
-                    <a className="underline" href="mailto:hello@clicclub.cc">
-                      hello@clicclub.cc
+                    <a className="underline" href="mailto:hello@twoclicclub.com">
+                      hello@twoclicclub.com
                     </a>
                     .
                   </p>
