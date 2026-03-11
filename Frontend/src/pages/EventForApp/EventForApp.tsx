@@ -1,0 +1,50 @@
+import { useFormContext } from "@/contexts/FormContext";
+import { useParams } from "react-router-dom";
+
+
+const EventForApp = () => {
+    const { data } = useFormContext();
+    const { id } = useParams<{ id: string }>();
+    console.log(data); console.log(id);
+    return (
+        <section className="py-12 px-4 sm:px-8">
+            <p className="max-w-3xl mx-auto mb-5">
+            App isn't installed on your phone!
+          </p>
+            {data.token ?
+                <div className="max-w-3xl mx-auto ">
+                    <p className="text-2xl">
+                        1. Download the app
+                    </p>
+                    <p className="text-2xl">
+                        2. Press the <a href={"https://twoclicclub.com/eventForApp/" + id}
+                            className="text-blue-700">
+                            link
+                        </a> again 
+                    </p>
+                </div>
+                :
+                <div className="max-w-3xl mx-auto ">
+                    <p className="text-2xl">
+                        1. Create an account & Login in
+                    </p>
+                    <p className="text-2xl">
+                        2. Get Approved
+                    </p>
+                    <p className="text-2xl">
+                        3. Download the app
+                    </p>
+                    <p className="text-2xl">
+                        4. Press the <a href={"https://twoclicclub.com/eventForApp/" + id}
+                            className="text-blue-700">
+                            link
+                        </a> again 
+                    </p>
+                </div>}
+
+
+        </section>
+    );
+};
+
+export default EventForApp;

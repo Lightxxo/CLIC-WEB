@@ -27,6 +27,7 @@ import TermsOfUse from "./pages/TermsOfUse/TermsOfUse";
 import ForgotPass from "./pages/ForgotPass/ForgotPass";
 import Invites from "./pages/Invites/Invites";
 import Profile from "./pages/Profile/Profile";
+import EventForApp from "./pages/EventForApp/EventForApp";
 
 export default function App() {
   return (
@@ -45,6 +46,7 @@ export default function App() {
         />
         <Route path="/termsofuse" element={<TermsOfUse></TermsOfUse>} />
         <Route path="/howitworks" element={<HowItWorks></HowItWorks>} />
+        <Route path="/eventForApp/:id" element={<EventForApp />} />
         {/* Public routes with navbar */}
         {/*
         <Route
