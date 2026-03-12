@@ -1,6 +1,6 @@
 import { useFormContext } from "@/contexts/FormContext";
 import { useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const EventForApp = () => {
     const { data } = useFormContext();
@@ -26,7 +26,8 @@ const EventForApp = () => {
                 :
                 <div className="max-w-3xl mx-auto ">
                     <p className="text-2xl">
-                        1. Create an account & Login in
+                        1. <Link to="/signup" className="text-blue-600">Create an account</Link> &&nbsp;
+                        <Link to="/login" className="text-blue-600">Login</Link>
                     </p>
                     <p className="text-2xl">
                         2. Get Approved
