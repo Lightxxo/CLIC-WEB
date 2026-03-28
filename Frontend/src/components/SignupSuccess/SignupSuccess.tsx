@@ -10,15 +10,14 @@ export default function SignupSuccess() {
 
       <h2 className="text-xl font-semibold">Thanks!</h2>
 
-      <p className="text-muted-foreground text-sm max-w-md mx-auto">
+      <p className="text-muted-foreground max-w-md mx-auto">
         Your application is under review. You’ll hear from us shortly.
         <br />
         Click on{" "}
         <Link to="/howitworks" className="underline font-medium text-blue-400">
           How it works
         </Link>{" "}
-        under the navigation bar on the top right hand on your screen to find
-        out more about Two Clic Club.
+        above right to find out more.
       </p>
     </div>
   );

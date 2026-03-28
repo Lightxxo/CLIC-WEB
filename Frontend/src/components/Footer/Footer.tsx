@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="hidden md:flex justify-between items-center gap-4 flex-nowrap">
           {/* Left */}
           <div className="text-lg font-semibold whitespace-nowrap">
-            Clic - Don't Swipe
+            Don’t swipe - Clic!
           </div>
 
           {/* Middle */}
