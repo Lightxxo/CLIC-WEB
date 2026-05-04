@@ -1,4 +1,4 @@
-const API_BASE_URL = "api.clicclub.cc";
+const API_BASE_URL = "api.twoclicclub.com";
 const API_PORT = "";
 const REMOTE = true;
 

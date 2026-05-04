@@ -11,7 +11,7 @@ import SubmitStep from "./SubmitStep";
 
 type Question = {
   question: string;
-  options: string[];
+  options?: string[];
 };
 
 type Props = {

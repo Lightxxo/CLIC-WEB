@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="flex flex-col items-center text-center">
             <div className="flex items-center divide-x divide-[#00C3FF] flex-wrap justify-center">
               <a
-                href="https://www.instagram.com/the_clic_club/"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 flex items-center gap-1 hover:text-white transition"

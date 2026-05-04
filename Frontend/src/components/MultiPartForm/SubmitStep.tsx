@@ -55,16 +55,20 @@ export default function SubmitStep() {
       formData.append("password", SubmitStepData.password);
       formData.append("dateOfBirth", SubmitStepData.dateOfBirth);
       formData.append("gender", SubmitStepData.gender || "");
+      formData.append("otherGender", SubmitStepData.otherGender || "");
+      formData.append("sexualOrientation", SubmitStepData.sexualOrientation || "");
+      formData.append("otherSexualOrientation", SubmitStepData.otherSexualOrientation || "");
       formData.append("occupation", SubmitStepData.occupation || "");
-      formData.append("where_live", SubmitStepData.live || "");
-      formData.append("where_from", SubmitStepData.from || "");
+      formData.append("otherOccupation", SubmitStepData.occupation || "");
       formData.append("referredBy", SubmitStepData.referredBy || "");
       formData.append("socialMediaObj", SubmitStepData.socialMediaObj || "");
       formData.append("socialMediaHandle", SubmitStepData.socialMediaHandle || "");
-      formData.append("cities_frequent", SubmitStepData.cities || "");
       formData.append("about", SubmitStepData.about || "");
+      formData.append("whereLiveCountry", JSON.stringify(SubmitStepData.whereLiveCountry || {}));
+      formData.append("whereLiveCity", JSON.stringify(SubmitStepData.whereLiveCity || {}));
+      formData.append("whereFromCountry", JSON.stringify(SubmitStepData.whereFromCountry || {}));
+      formData.append("whereFromCity", JSON.stringify(SubmitStepData.whereFromCity || {}));
       formData.append("hearingPlatform", SubmitStepData.hearingPlatform || "");
-      formData.append("city", "n/a");
       formData.append("ques_ans", JSON.stringify(SubmitStepData.answers || {}));
       formData.append("interests", JSON.stringify([]));
 
@@ -111,6 +115,9 @@ export default function SubmitStep() {
           "firstName",
           "lastName",
           "gender",
+          "otherGender",
+          "sexualOrientation",
+          "otherSexualOrientation",
           "dateOfBirth",
           "password",
           "confirmPassword",
@@ -119,10 +126,12 @@ export default function SubmitStep() {
           "socialMediaObj",
           "socialMediaHandle",
           "occupation",
-          "live",
-          "from",
-          "cities",
+          "otherOccupation",
           "about",
+          "whereLiveCountry",
+          "whereLiveCity",
+          "whereFromCountry",
+          "whereFromCity",
           "profileImage",
           "answers",
         ];
@@ -142,18 +151,23 @@ export default function SubmitStep() {
           firstName: "",
           lastName: "",
           gender: "",
+          otherGender: "",
+          sexualOrientation: "",
+          otherSexualOrientation: "",
           dateOfBirth: "",
           password: null,
           confirmPassword: null,
           occupation: "",
-          live: "",
-          from: "",
+          otherOccupation: "",
           hearingPlatform: "",
           referredBy: "",
           socialMediaObj: "",
           socialMediaHandle: "",
-          cities: "",
           about: "",
+          whereLiveCountry: null,
+          whereLiveCity: null,
+          whereFromCountry: null,
+          whereFromCity: null,
           profileImage: null,
         }));
       } else {

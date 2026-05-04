@@ -21,6 +21,23 @@ import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import SocialMediaInp from "../SocialMediaInp/SocialMediaInp";
 import { toast } from "sonner";
+import SearchSelect from "./CityAndCountryInput";
+import config from "@/config";
+
+type Country = {
+  id: number;
+  name: string;
+  iso2: string;
+  emoji: string;
+};
+
+type City = {
+  id: number;
+  name: string;
+  state_name: string;
+  latitude: string;
+  longitude: string;
+};
 
 interface UserCredentialsProps {
   onValidityChange: (isValid: boolean) => void;
@@ -42,18 +59,6 @@ export default function UserCredentials({
   const [confirmPassword, setConfirmPassword] = useState<string>(
     data.confirmPassword || ""
   );
-  const [occupation, setOccupation] = useState<string>(
-    localStorage.getItem("occupation") || data.occupation || ""
-  );
-  const [live, setLive] = useState<string>(
-    localStorage.getItem("live") || data.live || ""
-  );
-  const [from, setFrom] = useState<string>(
-    localStorage.getItem("from") || data.from || ""
-  );
-  const [cities, setCities] = useState<string>(
-    localStorage.getItem("cities") || data.cities || ""
-  );
   const [about, setAbout] = useState<string>(
     localStorage.getItem("about") || data.about || ""
   );
@@ -65,6 +70,12 @@ export default function UserCredentials({
   const [socialMediaHandle, setSocialMediaHandle] = useState<string>(
     localStorage.getItem("socialMediaHandle") || data.socialMediaHandle || ""
   );
+
+  const [whereLiveCountry, setWhereLiveCountry] = useState<Country | null>(null);
+  const [whereLiveCity, setWhereLiveCity] = useState<City | null>(null);
+
+  const [whereFromCountry, setWhereFromCountry] = useState<Country | null>(null);
+  const [whereFromCity, setWhereFromCity] = useState<City | null>(null);
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null); // removed localStorage
@@ -98,15 +109,15 @@ export default function UserCredentials({
   }, [confirmPassword, setData]);
 
   useEffect(() => {
-    setData((prev) => ({ ...prev, occupation, live, from, cities, about, socialMediaObj, socialMediaHandle }));
-    localStorage.setItem("occupation", occupation);
-    localStorage.setItem("live", live);
-    localStorage.setItem("from", from);
-    localStorage.setItem("cities", cities);
+    setData((prev) => ({ ...prev, whereLiveCountry, whereLiveCity, whereFromCountry, whereFromCity, about, socialMediaObj, socialMediaHandle }));
+    localStorage.setItem("whereLiveCountry", JSON.stringify(whereLiveCountry));
+    localStorage.setItem("whereLiveCity", JSON.stringify(whereLiveCity));
+    localStorage.setItem("whereFromCountry", JSON.stringify(whereFromCountry));
+    localStorage.setItem("whereFromCity", JSON.stringify(whereFromCity));
     localStorage.setItem("about", about);
     localStorage.setItem("socialMediaObj", socialMediaObj);
     localStorage.setItem("socialMediaHandle", socialMediaHandle);
-  }, [occupation, live, from, cities, about, socialMediaObj, socialMediaHandle, setData]);
+  }, [whereLiveCountry, whereLiveCity, whereFromCountry, whereFromCity, about, socialMediaObj, socialMediaHandle, setData]);
 
   useEffect(() => {
     setData((prev) => ({
@@ -139,15 +150,21 @@ export default function UserCredentials({
   }, []);
 
   // --- Validity check ---
-  const isValid =
-    !!data.firstName?.trim() &&
+  const isValid = 
+  !!data.firstName?.trim() &&
     !!data.lastName?.trim() &&
     !!dob &&
+    !!whereLiveCountry &&
+    !!whereLiveCity &&
+    !!whereFromCountry &&
+    !!whereFromCity &&
     !!password &&
     !!confirmPassword &&
     password === confirmPassword &&
     !!data.gender &&
-    !!from &&
+    (data.gender == "Other" ? !!data.otherGender : true) &&
+    !!data.sexualOrientation &&
+    (data.sexualOrientation == "Other" ? !!data.otherSexualOrientation : true) &&
     (!!selectedImage || !!imagePreview);
 
   useEffect(() => {
@@ -165,11 +182,14 @@ export default function UserCredentials({
   );
   function socialMediaPlaceholderInput() {
     if (socialMediaObj == "instagram") return "@username";
-    else if (socialMediaObj == "twitter") return "@username";
+    else if (socialMediaObj == "x") return "@username";
     else if (socialMediaObj == "facebook") return "facebook.com/username";
-    else if (socialMediaObj == "other") return "Enter your handle";
+    else if (socialMediaObj == "substack") return "@username";
+    else if (socialMediaObj == "linkedin") return "@username";
     else return "";
   }
+
+  const { REMOTE, API_BASE_URL, API_PORT } = config;
   
   return (
     <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
@@ -282,28 +302,56 @@ export default function UserCredentials({
       </div>
 
       {/* Other inputs */}
+
+      <label className="text-sm font-medium">Where do you live? *</label>
+<SearchSelect<Country>
+  label="Country"
+  placeholder="Search country"
+  endpoint={`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/countries`}
+  value={whereLiveCountry}
+  onChange={(c) => {
+    setWhereLiveCountry(c);
+  }}
+  getLabel={(c) => `${c.emoji} ${c.name}`}
+/>
+
+<SearchSelect<City>
+  label="City"
+  placeholder="Search city"
+  endpoint={
+    `http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}${whereLiveCountry ? `/cities?countryId=${whereLiveCountry.id}` : "/cities"}`
+  }
+  value={whereLiveCity}
+  onChange={setWhereLiveCity}
+  disabled={!whereLiveCountry}
+  getLabel={(c) => `${c.name}, ${c.state_name}`}
+/>
+<label className="text-sm font-medium">Where are you from? *</label>
+<SearchSelect<Country>
+  label="Country"
+  placeholder="Search country"
+  endpoint={`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/countries`}
+  value={whereFromCountry}
+  onChange={(c) => {
+    setWhereFromCountry(c);
+  }}
+  getLabel={(c) => `${c.emoji} ${c.name}`}
+/>
+
+<SearchSelect<City>
+  label="City"
+  placeholder="Search city"
+  endpoint={
+    `http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}${whereFromCountry ? `/cities?countryId=${whereFromCountry.id}` : "/cities"}`
+  }
+  value={whereFromCity}
+  onChange={setWhereFromCity}
+  disabled={!whereFromCountry}
+  getLabel={(c) => `${c.name}, ${c.state_name}`}
+/>
+
       <Input
-        placeholder="Occupation"
-        value={occupation}
-        onChange={(e) => setOccupation(e.target.value)}
-      />
-      <Input
-        placeholder="Where do you live?"
-        value={live}
-        onChange={(e) => setLive(e.target.value)}
-      />
-      <Input
-        placeholder="Where are you from? *"
-        value={from}
-        onChange={(e) => setFrom(e.target.value)}
-      />
-      <Input
-        placeholder="Cities you frequent"
-        value={cities}
-        onChange={(e) => setCities(e.target.value)}
-      />
-      <Input
-        placeholder="Add what you want other members to know about you"
+        placeholder="Add a tagline about yourself"
         value={about}
         onChange={(e) => setAbout(e.target.value)}
       />
@@ -372,7 +420,48 @@ export default function UserCredentials({
         <option value="">Select Gender *</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
+        <option value="Other">Other</option>
       </select>
+      {(data.gender != "Male" && data.gender != "Female" && data.gender != "")
+        &&
+        <Input
+          placeholder="Please specify your gender"
+          value={data.otherGender || localStorage.getItem("otherGender") || ""}
+          onChange={(e) => {
+          setData({ ...data, otherGender: e.target.value });
+          localStorage.setItem("otherGender", e.target.value);
+        }}
+        />}
+
+        {/* Sexual Orientation */}
+      <select
+        value={data.sexualOrientation || localStorage.getItem("sexualOrientation") || ""}
+        onChange={(e) => {
+          setData({ ...data, sexualOrientation: e.target.value });
+          localStorage.setItem("sexualOrientation", e.target.value);
+        }}
+        className="w-full border rounded-md p-2 focus:outline-none"
+      >
+        <option value="">Select Sexual Orientation *</option>
+        <option value="Heterosexual">Heterosexual</option>
+        <option value="Homosexual">Homosexual</option>
+        <option value="Bisexual">Bisexual</option>
+        <option value="Other">Other</option>
+      </select>
+      {(
+        data.sexualOrientation != "Heterosexual" && data.sexualOrientation != "Homosexual"
+        && data.sexualOrientation != "Bisexual" && data.sexualOrientation != ""
+      )
+        &&
+        <Input
+          placeholder="Please specify your sexual orientation"
+          value={data.otherSexualOrientation || localStorage.getItem("otherSexualOrientation") || ""}
+          onChange={(e) => {
+          setData({ ...data, otherSexualOrientation: e.target.value });
+          localStorage.setItem("otherSexualOrientation", e.target.value);
+        }}
+        />}
+      
     </form>
   );
 }

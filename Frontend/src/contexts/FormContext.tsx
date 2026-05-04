@@ -10,19 +10,24 @@ export type FormDataType = {
   username: string;
   imgURL: string;
   gender: string;
+  otherGender: string;
+  sexualOrientation: string;
+  otherSexualOrientation: string;
   answers: { question: string; selectedAns: string }[];
   verificationStatus: boolean;
   newUser: boolean;
   dateOfBirth: string;
+  whereLiveCountry: object | null;
+  whereLiveCity: object | null;
+  whereFromCountry: object | null;
+  whereFromCity: object | null;
   password: string | null;
   confirmPassword: string | null;
-  occupation?: string;
-  live?: string;
-  from?: string;
+  occupation: string;
+  otherOccupation: string;
   referredBy: string;
   socialMediaObj: string;
   socialMediaHandle: string;
-  cities?: string;
   about?: string;
   hearingPlatform: string;
   signupSuccess: boolean;
@@ -37,19 +42,24 @@ const defaultFormData: FormDataType = {
   username: "",
   imgURL: "",
   gender: "",
+  otherGender: "",
+  sexualOrientation: "",
+  otherSexualOrientation: "",
   answers: [],
   verificationStatus: false,
   newUser: true,
   dateOfBirth: "",
+  whereLiveCountry: null,
+  whereLiveCity: null,
+  whereFromCountry: null,
+  whereFromCity: null,
   password: null,
   confirmPassword: null,
   occupation: "",
-  live: "",
-  from: "",
+  otherOccupation: "",
   referredBy: "",
   socialMediaObj: "",
   socialMediaHandle: "",
-  cities: "",
   about: "",
   hearingPlatform: "",
   signupSuccess: false,
