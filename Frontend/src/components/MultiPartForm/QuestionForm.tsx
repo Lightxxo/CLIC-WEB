@@ -176,14 +176,24 @@ export default function QuestionForm({
     if (question.options) onValidityChange(selected.trim() !== "");
   }, [selected, onValidityChange]);
 
-  useEffect(() => {
-    if (!question.options) {
-      setData((prev) => ({ ...prev, occupation, otherOccupation }));
-      localStorage.setItem("occupation", occupation); localStorage.setItem("otherOccupation", otherOccupation);
-      if (occupation == "Other") onValidityChange(Boolean(occupation) && Boolean(otherOccupation));
-      else onValidityChange(Boolean(occupation));
+useEffect(() => {
+  if (!question.options) {
+    setData((prev) => ({
+      ...prev,
+      occupation,
+      otherOccupation,
+    }));
+
+    localStorage.setItem("occupation", occupation);
+    localStorage.setItem("otherOccupation", otherOccupation);
+
+    if (occupation === "Other") {
+      onValidityChange(Boolean(otherOccupation));
+    } else {
+      onValidityChange(Boolean(occupation) && Boolean(otherOccupation));
     }
-  }, [occupation, otherOccupation]);
+  }
+}, [occupation, otherOccupation]);
 
   return (
     <div className="space-y-4">
@@ -203,7 +213,24 @@ export default function QuestionForm({
       {!question.options ? 
       <>
       <div className="w-full max-w-md space-y-2">
-      <Select.Root value={occupation} onValueChange={setOccupation}>
+<Select.Root
+  value={occupation === "Other" ? "Other" : otherOccupation}
+  onValueChange={(value) => {
+    const selectedGroup = occupationGroups.find((group) =>
+      group.options.includes(value)
+    );
+
+    if (!selectedGroup) return;
+
+    setOccupation(selectedGroup.label);
+
+    if (selectedGroup.label === "Other") {
+      setOtherOccupation("");
+    } else {
+      setOtherOccupation(value);
+    }
+  }}
+>
         <Select.Trigger className="flex h-11 w-full items-center justify-between rounded-xl border border-zinc-300 bg-white px-3 text-sm shadow-sm outline-none focus:ring-2 focus:ring-zinc-900">
           <Select.Value placeholder="Select your occupation" />
           <Select.Icon>

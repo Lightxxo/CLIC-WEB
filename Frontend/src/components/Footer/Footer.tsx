@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="flex flex-col items-center text-center">
             <div className="flex items-center divide-x divide-[#00C3FF] flex-wrap justify-center">
               <a
-                href="#"
+                href="https://www.instagram.com/2clicclub/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 flex items-center gap-1 hover:text-white transition"
@@ -51,6 +51,7 @@ export default function Footer() {
               <Button
                 variant="outline"
                 className="cursor-pointer rounded-full px-5 text-base bg-[#005A2D] hover:text-white text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+                onClick={() => location.assign("https://drive.google.com/file/d/1m6FJS9BLmSNMU1wcjVKgFuyeaMlVQS1a/view?usp=sharing")}
               >
                 Download on Android
               </Button>
@@ -72,6 +73,7 @@ export default function Footer() {
             <Button
               variant="outline"
               className="cursor-pointer rounded-full px-5 text-base bg-[#005A2D] hover:text-white text-[#00C3FF] border-2 border-[#00C3FF] hover:bg-[#004a25] focus-visible:ring-[#00C3FF]"
+              onClick={() => location.assign("https://drive.google.com/file/d/1m6FJS9BLmSNMU1wcjVKgFuyeaMlVQS1a/view?usp=sharing")}
             >
               Download on Android
             </Button>
@@ -86,7 +88,7 @@ export default function Footer() {
           {/* Middle content */}
           <div className="flex flex-wrap justify-center items-center divide-x divide-[#00C3FF]">
             <a
-              href="https://www.instagram.com/the_clic_club/"
+              href="https://www.instagram.com/2clicclub/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 flex items-center gap-1 hover:text-white transition"

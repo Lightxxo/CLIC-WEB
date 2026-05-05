@@ -58,8 +58,8 @@ export default function SubmitStep() {
       formData.append("otherGender", SubmitStepData.otherGender || "");
       formData.append("sexualOrientation", SubmitStepData.sexualOrientation || "");
       formData.append("otherSexualOrientation", SubmitStepData.otherSexualOrientation || "");
-      formData.append("occupation", SubmitStepData.occupation || "");
-      formData.append("otherOccupation", SubmitStepData.occupation || "");
+      formData.append("industry", SubmitStepData.occupation || "");
+      formData.append("occupation", SubmitStepData.otherOccupation || "");
       formData.append("referredBy", SubmitStepData.referredBy || "");
       formData.append("socialMediaObj", SubmitStepData.socialMediaObj || "");
       formData.append("socialMediaHandle", SubmitStepData.socialMediaHandle || "");
