@@ -70,7 +70,6 @@ export default function SubmitStep() {
       formData.append("whereFromCity", JSON.stringify(SubmitStepData.whereFromCity || {}));
       formData.append("hearingPlatform", SubmitStepData.hearingPlatform || "");
       formData.append("ques_ans", JSON.stringify(SubmitStepData.answers || {}));
-      formData.append("interests", JSON.stringify([]));
 
       if (SubmitStepData.profileImage) {
         formData.append(

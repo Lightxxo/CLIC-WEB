@@ -448,10 +448,10 @@ export default function UserCredentials({
         <option value="Bisexual">Bisexual</option>
         <option value="Other">Other</option>
       </select>
-      {(
+      {
         data.sexualOrientation != "Heterosexual" && data.sexualOrientation != "Homosexual"
         && data.sexualOrientation != "Bisexual" && data.sexualOrientation != ""
-      )
+      
         &&
         <Input
           placeholder="Please specify your sexual orientation"
