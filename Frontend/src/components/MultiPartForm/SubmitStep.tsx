@@ -61,6 +61,7 @@ export default function SubmitStep() {
       formData.append("industry", SubmitStepData.occupation || "");
       formData.append("occupation", SubmitStepData.otherOccupation || "");
       formData.append("referredBy", SubmitStepData.referredBy || "");
+      formData.append("referredUserId", localStorage.getItem("refid") || "");
       formData.append("socialMediaObj", SubmitStepData.socialMediaObj || "");
       formData.append("socialMediaHandle", SubmitStepData.socialMediaHandle || "");
       formData.append("about", SubmitStepData.about || "");
@@ -122,6 +123,7 @@ export default function SubmitStep() {
           "confirmPassword",
           "hearingPlatform",
           "referredBy",
+          "refid",
           "socialMediaObj",
           "socialMediaHandle",
           "occupation",

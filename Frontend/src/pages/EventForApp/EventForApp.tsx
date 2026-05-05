@@ -1,11 +1,13 @@
 import { useFormContext } from "@/contexts/FormContext";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const EventForApp = () => {
     const { data } = useFormContext();
     const { id } = useParams<{ id: string }>();
-    console.log(data); console.log(id);
+      const [searchParams] = useSearchParams();
+  const refid = searchParams.get("refid");
+  if (refid) localStorage.setItem("refid", refid);
     return (
         <section className="py-12 px-4 sm:px-8">
             <p className="max-w-3xl mx-auto mb-5">
