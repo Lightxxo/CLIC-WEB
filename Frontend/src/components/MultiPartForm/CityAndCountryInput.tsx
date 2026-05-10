@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-type BaseOption = { id: number };
+type BaseOption = { id: number, name: string };
 
 export default function SearchSelect<T extends BaseOption>({
     label,
@@ -104,7 +104,7 @@ export default function SearchSelect<T extends BaseOption>({
                             }}
                             className="block w-full px-3 py-2 text-left hover:bg-zinc-100"
                         >
-                            {getLabel(option)}
+                            {option.name}
                         </button>
                     ))}
                 </div>

@@ -118,7 +118,7 @@ export default function UserCredentials({
     localStorage.setItem("socialMediaObj", socialMediaObj);
     localStorage.setItem("socialMediaHandle", socialMediaHandle);
   }, [whereLiveCountry, whereLiveCity, whereFromCountry, whereFromCity, about, socialMediaObj, socialMediaHandle, setData]);
-
+  
   useEffect(() => {
     setData((prev) => ({
       ...prev,
@@ -312,7 +312,7 @@ export default function UserCredentials({
   onChange={(c) => {
     setWhereLiveCountry(c);
   }}
-  getLabel={(c) => `${c.emoji} ${c.name}`}
+  getLabel={(c) => c.name}
 />
 
 <SearchSelect<City>
@@ -324,7 +324,7 @@ export default function UserCredentials({
   value={whereLiveCity}
   onChange={setWhereLiveCity}
   disabled={!whereLiveCountry}
-  getLabel={(c) => `${c.name}, ${c.state_name}`}
+  getLabel={(c) => c.name}
 />
 <label className="text-sm font-medium">Where are you from? *</label>
 <SearchSelect<Country>
@@ -335,7 +335,7 @@ export default function UserCredentials({
   onChange={(c) => {
     setWhereFromCountry(c);
   }}
-  getLabel={(c) => `${c.emoji} ${c.name}`}
+  getLabel={(c) => c.name}
 />
 
 <SearchSelect<City>
@@ -347,7 +347,7 @@ export default function UserCredentials({
   value={whereFromCity}
   onChange={setWhereFromCity}
   disabled={!whereFromCountry}
-  getLabel={(c) => `${c.name}, ${c.state_name}`}
+  getLabel={(c) => c.name}
 />
 
       <Input
