@@ -8,10 +8,11 @@ import ProgressDots from "./ProgressDots";
 import UserCredentials from "./UserCredentials";
 import QuestionForm from "./QuestionForm";
 import SubmitStep from "./SubmitStep";
+import Occupation from "./Occupation";
 
 type Question = {
   question: string;
-  options?: string[];
+  options: string[];
 };
 
 type Props = {
@@ -26,7 +27,7 @@ export default function MultiPartForm({ questions }: Props) {
 
   const [validityMap, setValidityMap] = useState<Record<number, boolean>>({ 0: false });
 
-  const totalSteps = 1 + questions.length + 1;
+  const totalSteps = questions.length + 3;
 
   const setStepValidity = useCallback((stepIndex: number, isValid: boolean) => {
     setValidityMap((prev) => {
@@ -48,11 +49,18 @@ export default function MultiPartForm({ questions }: Props) {
     if (step === 0)
       return <UserCredentials onValidityChange={(v) => setStepValidity(0, v)} showWarning={showWarning} 
                 renderWarnings={renderWarnings} />;
-    if (step > 0 && step <= questions.length)
+    if (step === 1)
+      return (
+        <Occupation
+          onValidityChange={(v) => setStepValidity(step, v)}
+          showWarning={showWarning} renderWarnings={renderWarnings}
+        />
+      );
+    if (step > 1 && step <= questions.length + 1)
       return (
         <QuestionForm
           index={step - 1}
-          question={questions[step - 1]}
+          question={questions[step - 2]}
           onValidityChange={(v) => setStepValidity(step, v)}
           showWarning={showWarning} renderWarnings={renderWarnings}
         />

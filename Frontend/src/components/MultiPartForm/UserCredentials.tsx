@@ -71,11 +71,19 @@ export default function UserCredentials({
     localStorage.getItem("socialMediaHandle") || data.socialMediaHandle || ""
   );
 
-  const [whereLiveCountry, setWhereLiveCountry] = useState<Country | null>(null);
-  const [whereLiveCity, setWhereLiveCity] = useState<City | null>(null);
+  const [whereLiveCountry, setWhereLiveCountry] = useState<Country | null>(
+    JSON.parse(localStorage.getItem("whereLiveCountry") || "null") || data.whereLiveCountry
+  );
+  const [whereLiveCity, setWhereLiveCity] = useState<City | null>(
+    JSON.parse(localStorage.getItem("whereLiveCity") || "null") || data.whereLiveCity
+  );
 
-  const [whereFromCountry, setWhereFromCountry] = useState<Country | null>(null);
-  const [whereFromCity, setWhereFromCity] = useState<City | null>(null);
+  const [whereFromCountry, setWhereFromCountry] = useState<Country | null>(
+    JSON.parse(localStorage.getItem("whereFromCountry") || "null") || data.whereFromCountry
+  );
+  const [whereFromCity, setWhereFromCity] = useState<City | null>(
+    JSON.parse(localStorage.getItem("whereFromCity") || "null") || data.whereFromCity
+  );
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null); // removed localStorage

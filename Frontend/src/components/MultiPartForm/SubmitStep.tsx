@@ -39,7 +39,6 @@ export default function SubmitStep() {
       return;
     }
     try {
-      setLoading(true);
 
       const formData = new FormData();
 
@@ -92,7 +91,7 @@ export default function SubmitStep() {
           );
         }
       }
-
+      setLoading(true);
       const response = await fetch(
         `http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/register`,
         {
