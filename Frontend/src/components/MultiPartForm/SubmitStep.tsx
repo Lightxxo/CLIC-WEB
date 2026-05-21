@@ -74,8 +74,7 @@ export default function SubmitStep() {
       if (SubmitStepData.profileImage) {
         formData.append(
           "profilePicture",
-          SubmitStepData.profileImage,
-          SubmitStepData.profileImage.name
+          SubmitStepData.profileImage
         );
       } else {
         const fallbackUri = "default_user.jpg";
@@ -91,6 +90,7 @@ export default function SubmitStep() {
           );
         }
       }
+
       setLoading(true);
       const response = await fetch(
         `http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/register`,
