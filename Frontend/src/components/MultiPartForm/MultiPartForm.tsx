@@ -9,10 +9,11 @@ import UserCredentials from "./UserCredentials";
 import QuestionForm from "./QuestionForm";
 import SubmitStep from "./SubmitStep";
 import Occupation from "./Occupation";
+import PersonalityScoring from "./PersonalityScoring";
 
 type Question = {
   question: string;
-  options: string[];
+  options?: string[];
 };
 
 type Props = {
@@ -56,9 +57,18 @@ export default function MultiPartForm({ questions }: Props) {
           showWarning={showWarning} renderWarnings={renderWarnings}
         />
       );
-    if (step > 1 && step <= questions.length + 1)
+    if (step > 1 && step < 4)
       return (
         <QuestionForm
+          index={step - 1}
+          question={questions[step - 2]}
+          onValidityChange={(v) => setStepValidity(step, v)}
+          showWarning={showWarning} renderWarnings={renderWarnings}
+        />
+      );
+    if (step > 3 && step <= questions.length + 1)
+      return (
+        <PersonalityScoring
           index={step - 1}
           question={questions[step - 2]}
           onValidityChange={(v) => setStepValidity(step, v)}

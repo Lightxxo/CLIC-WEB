@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 type Question = {
   question: string;
-  options: string[];
+  options?: string[];
 };
 
 interface QuestionFormProps {
@@ -48,7 +48,7 @@ export default function QuestionForm({
 
   // Report validity (answer selected)
   useEffect(() => {
-    onValidityChange(selected.trim() !== "");
+    onValidityChange(Boolean(selected));
   }, [selected, onValidityChange]);
 
 
@@ -59,7 +59,7 @@ export default function QuestionForm({
         {index + 1}. {question.question}
       </p>
 
-      {question.options.map((opt, i) => {
+      {question.options && question.options.map((opt, i) => {
         const letter = String.fromCharCode(97 + i); // 97 = 'a'
         return (
           <button

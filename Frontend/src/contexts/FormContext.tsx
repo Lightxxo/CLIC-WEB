@@ -13,7 +13,7 @@ export type FormDataType = {
   otherGender: string;
   sexualOrientation: string;
   otherSexualOrientation: string;
-  answers: { question: string; selectedAns: string }[];
+  answers: { question: string; selectedAns: string | number }[];
   verificationStatus: boolean;
   newUser: boolean;
   dateOfBirth: string;

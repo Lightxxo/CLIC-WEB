@@ -39,6 +39,46 @@ const quiz = [
       "I don’t care / whatever is playing is fine",
     ],
   },
+  {
+    id: 3,
+    question: "I see myself as someone who is reserved.",
+  },
+    {
+    id: 4,
+    question: "I see myself as someone who is generally trusting.",
+  },
+  {
+    id: 5,
+    question: "I see myself as someone who tends to be lazy.",
+  },
+    {
+    id: 6,
+    question: "I see myself as someone who is relaxed, handles stress well.",
+  },
+  {
+    id: 7,
+    question: "I see myself as someone who has few artistic interests.",
+  },
+    {
+    id: 8,
+    question: "I see myself as someone who is outgoing, sociable.",
+  },
+  {
+    id: 9,
+    question: "I see myself as someone who tends to find fault with others.",
+  },
+    {
+    id: 10,
+    question: "I see myself as someone who does a thorough job.",
+  },
+  {
+    id: 11,
+    question: "I see myself as someone who gets nervous easily.",
+  },
+    {
+    id: 12,
+    question: "I see myself as someone who has an active imagination.",
+  },
 ];
 
 const Signup = () => {
