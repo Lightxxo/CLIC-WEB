@@ -1,15 +1,20 @@
 "use client";
-// import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
-// import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import config from "@/config";
 import { useFormContext } from "@/contexts/FormContext";
 import { toast } from "sonner";
+import {
+  EyeOpenIcon,
+  EyeClosedIcon
+} from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
 
 const Login = () => {
   const [emailError, setEmailError] = useState("");
-  // const [passError, setPassError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { REMOTE, API_BASE_URL, API_PORT } = config;
   const { setData } = useFormContext();
   const navigate = useNavigate();
@@ -17,8 +22,8 @@ const Login = () => {
     e.preventDefault();
     setEmailError(""); // setPassError("");
     const form = e.target;
-    const email = form.email.value;
-    const password = form.pass.value;
+    const email = form.email.value.trim().toLowerCase();
+    const password = form.pass.value.trim();
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
       setEmailError("Please enter a valid email address!");
       return;
@@ -103,12 +108,25 @@ const Login = () => {
           </p>
         )}
         <br />
-        <input type="password" placeholder="Password" name="pass" className="w-full bg-[#D9D9D9] mb-3 p-1 shadow-[0_3px_#8c8c8c]" required />
-        {/* {passError != "" && (
-                <p className="text-left w-1/2 m-auto text-red-600 text-xs">
-                  {passError}
-                </p>
-              )} */}
+
+        <div className="relative">
+          <Input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            name="pass"
+            className={cn("w-full bg-[#D9D9D9] mb-3 p-1 shadow-[0_3px_#8c8c8c] text-base md:text-base rounded-none")} 
+            required
+          />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded-full ml-1 bg-gray-200"
+            type="button"
+          >
+            {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
+          </Button>
+        </div>
         <button type="submit" className="cursor-pointer w-full text-left bg-[#B46E28] p-1 px-2">
           Login
         </button>

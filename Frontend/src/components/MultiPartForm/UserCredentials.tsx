@@ -376,7 +376,7 @@ export default function UserCredentials({
             type={showPassword ? "text" : "password"}
             placeholder="Password *"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value.trim())}
             autoComplete="new-password"
           />
           <Button
@@ -395,7 +395,7 @@ export default function UserCredentials({
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Confirm Password *"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value.trim())}
             className={
               password !== confirmPassword && confirmPassword !== ""
                 ? "border-red-600 ring-0 focus-visible:border-red-400"

@@ -228,7 +228,7 @@ const EmailVerification = () => {
                 type="email"
                 className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
                 onKeyDown={emailInput}
-                onChange={(e) => setEmail(e.target.value.trim())}
+                onChange={(e) => setEmail(e.target.value.trim().toLowerCase())}
                 placeholder="Email"
               />
               {error != "" && (

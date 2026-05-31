@@ -20,14 +20,6 @@ export default function SubmitStep() {
     else setDisabled(false);
   }, [agreed, loading, data.hearingPlatform, data.referredBy])
 
-  function generateRandomString(length = 8) {
-    const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from(
-      { length },
-      () => chars[Math.floor(Math.random() * chars.length)]
-    ).join("");
-  }
-
   const onSubmit = async (SubmitStepData: any) => {
     if (disabled) {
       toast.error("All fields are required!", {
@@ -45,7 +37,7 @@ export default function SubmitStep() {
       const email =
         SubmitStepData.email?.trim() !== ""
           ? SubmitStepData.email
-          : `${generateRandomString()}@${generateRandomString()}.com`;
+          : "abc@email.com";
 
       formData.append("userName", SubmitStepData.username);
       formData.append("email", email);

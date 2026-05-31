@@ -3,6 +3,14 @@ import config from "@/config";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  EyeOpenIcon,
+  EyeClosedIcon
+} from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
+
 
 const ForgotPass = () => {
   const [error, setError] = useState("");
@@ -15,6 +23,7 @@ const ForgotPass = () => {
   const [conformPass, setConformPass] = useState("");
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { REMOTE, API_BASE_URL, API_PORT } = config;
   const navigate = useNavigate();
 
@@ -28,16 +37,14 @@ const ForgotPass = () => {
       }
       setIsLoading(true);
       fetch(
-        `http${
-          REMOTE ? "s" : ""
+        `http${REMOTE ? "s" : ""
         }://${API_BASE_URL}:${API_PORT}/checkUser?email=${email}`
       )
         .then((res) => res.json())
         .then((data) => {
           if (data.message == "User Email exists") {
             fetch(
-              `http${
-                REMOTE ? "s" : ""
+              `http${REMOTE ? "s" : ""
               }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
               {
                 method: "POST",
@@ -78,45 +85,43 @@ const ForgotPass = () => {
     }
     setIsLoading(true);
     fetch(
-      `http${
-        REMOTE ? "s" : ""
+      `http${REMOTE ? "s" : ""
       }://${API_BASE_URL}:${API_PORT}/checkUser?email=${email}`
     )
       .then((res) => res.json())
       .then((data) => {
-          if (data.message == "User Email exists") {
-            fetch(
-              `http${
-                REMOTE ? "s" : ""
-              }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
-              {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify({ email, fp: "yes" }),
-              }
-            ).then((res) => {
-              if (res.status == 200) setEnteredEmail(true);
-              else {
-                toast("an error occurred!", {
-                  action: {
-                    label: "Close",
-                    onClick: () => void 0,
-                  },
-                });
-              }
-              setIsLoading(false);
-            });
-          } else {
-            setIsLoading(false);
-            toast("No account found with the email!", {
-              action: {
-                label: "Close",
-                onClick: () => void 0,
+        if (data.message == "User Email exists") {
+          fetch(
+            `http${REMOTE ? "s" : ""
+            }://${API_BASE_URL}:${API_PORT}/email-verification-code`,
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
               },
-            });
-          }
+              body: JSON.stringify({ email, fp: "yes" }),
+            }
+          ).then((res) => {
+            if (res.status == 200) setEnteredEmail(true);
+            else {
+              toast("an error occurred!", {
+                action: {
+                  label: "Close",
+                  onClick: () => void 0,
+                },
+              });
+            }
+            setIsLoading(false);
+          });
+        } else {
+          setIsLoading(false);
+          toast("No account found with the email!", {
+            action: {
+              label: "Close",
+              onClick: () => void 0,
+            },
+          });
+        }
       });
   }
   function codeInput(e: any) {
@@ -128,8 +133,7 @@ const ForgotPass = () => {
       }
       setIsLoading(true);
       fetch(
-        `http${
-          REMOTE ? "s" : ""
+        `http${REMOTE ? "s" : ""
         }://${API_BASE_URL}:${API_PORT}/match-verification-code`,
         {
           method: "POST",
@@ -140,7 +144,7 @@ const ForgotPass = () => {
         }
       ).then((res) => {
         if (res.status == 201) {
-            setCodeMatched(true);
+          setCodeMatched(true);
         }
         else setCodeError("Code didn't match!");
         setIsLoading(false);
@@ -155,8 +159,7 @@ const ForgotPass = () => {
     }
     setIsLoading(true);
     fetch(
-      `http${
-        REMOTE ? "s" : ""
+      `http${REMOTE ? "s" : ""
       }://${API_BASE_URL}:${API_PORT}/match-verification-code`,
       {
         method: "POST",
@@ -173,29 +176,29 @@ const ForgotPass = () => {
       setIsLoading(false);
     });
   }
-  function handleSubmit () {
+  function handleSubmit() {
     setPassError("");
     if (password == conformPass) {
-        fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/reset_pass?email=${email}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ password }),
-        }).then(res => {
-            if (res.status == 200) {
-                toast("Password reset successful!", {
-              action: {
-                label: "Close",
-                onClick: () => void 0,
-              },
-            });
-            navigate("/login");
-            }
-        });
+      fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/reset_pass?email=${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      }).then(res => {
+        if (res.status == 200) {
+          toast("Password reset successful!", {
+            action: {
+              label: "Close",
+              onClick: () => void 0,
+            },
+          });
+          navigate("/login");
+        }
+      });
     }
     else {
-        setPassError("Password didn't match");
+      setPassError("Password didn't match");
     }
   }
   return (
@@ -216,7 +219,7 @@ const ForgotPass = () => {
                 type="email"
                 className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
                 onKeyDown={emailInput}
-                onChange={(e) => setEmail(e.target.value.trim())}
+                onChange={(e) => setEmail(e.target.value.trim().toLowerCase())}
                 placeholder="Email"
               />
               {error != "" && (
@@ -234,52 +237,74 @@ const ForgotPass = () => {
             </section>
           ) : (
             <>{codeMatched ? <section>
-                <p className="mb-2"><b>Enter Password</b></p>
-                <input
-                type="password"
-                className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
-                onChange={(e) => setPassword(e.target.value.trim())}
-              />
-                <p className="my-2"><b>Confirm Password</b></p>
-            <input
-                type="password"
-                className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
-                onChange={(e) => setConformPass(e.target.value.trim())}
-              />
+              <p className="mb-2"><b>Enter Password</b></p>
+              <div className="relative">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  className={cn("w-full bg-[#D9D9D9] mb-3 p-1 shadow-[0_3px_#8c8c8c] text-base md:text-base rounded-none")}
+                  onChange={(e) => setPassword(e.target.value.trim())}
+                />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded-full ml-1 bg-gray-200"
+                  type="button"
+                >
+                  {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
+                </Button>
+              </div>
+              <p className="my-2"><b>Confirm Password</b></p>
+              <div className="relative">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  className={cn("w-full bg-[#D9D9D9] mb-3 p-1 shadow-[0_3px_#8c8c8c] text-base md:text-base rounded-none")}
+                  onChange={(e) => setConformPass(e.target.value.trim())}
+                />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded-full ml-1 bg-gray-200"
+                  type="button"
+                >
+                  {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
+                </Button>
+              </div>
               {passError != "" && (
                 <p className="text-left text-red-600 text-xs m-0">
                   {passError}
                 </p>
               )}
               <button type="submit" className="cursor-pointer mt-4 text-left bg-[#B46E28] p-1 px-2 w-full" onClick={handleSubmit}>Submit</button>
-            </section> : 
-             <section>
-              <p className="my-5">
-                If your email is registered with us, you will receive a password reset code
-                at <b>{email}</b>. <br />
-                (Check your spam/junk folder too.)
-              </p>
-              <input
-                type="number"
-                className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
-                min="100000"
-                max="999999"
-                onKeyDown={codeInput}
-                onChange={(e) => setCode(e.target.value.trim())}
-                placeholder="enter your code"
-              />
-              {codeError != "" && (
-                <p className="text-left text-red-600 text-xs m-0">
-                  {codeError}
+            </section> :
+              <section>
+                <p className="my-5">
+                  If your email is registered with us, you will receive a password reset code
+                  at <b>{email}</b>. <br />
+                  (Check your spam/junk folder too.)
                 </p>
-              )}<br />
-              <button
-                className="cursor-pointer mt-4 text-left bg-[#B46E28] p-1 px-2 w-full"
-                onClick={codeSubmit}
-              >
-                Submit
-              </button>
-            </section>
+                <input
+                  type="number"
+                  className="bg-[#D9D9D9] p-1 shadow-[0_3px_#8c8c8c] w-full"
+                  min="100000"
+                  max="999999"
+                  onKeyDown={codeInput}
+                  onChange={(e) => setCode(e.target.value.trim())}
+                  placeholder="enter your code"
+                />
+                {codeError != "" && (
+                  <p className="text-left text-red-600 text-xs m-0">
+                    {codeError}
+                  </p>
+                )}<br />
+                <button
+                  className="cursor-pointer mt-4 text-left bg-[#B46E28] p-1 px-2 w-full"
+                  onClick={codeSubmit}
+                >
+                  Submit
+                </button>
+              </section>
             }</>
 
           )}
