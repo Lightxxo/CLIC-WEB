@@ -16,7 +16,7 @@ export default function MainLayout() {
   useEffect(() => {
     // fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/`)
     // .then(res => console.log( "Backend status:", res.status))
-    if (localStorage.length && token && token.length > 0) {
+    if (localStorage.length && token) {
       setData((prev) => ({
         ...prev,
         verificationStatus: true,

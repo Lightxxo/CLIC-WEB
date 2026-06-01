@@ -82,16 +82,18 @@ export const useFormContext = () => useContext(FormContext);
 type FormProviderProps = { children: ReactNode };
 
 export const FormProvider = ({ children }: FormProviderProps) => {
-  // Initialize from localStorage if available
+
   const [data, setData] = useState<FormDataType>(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("formData");
-      if (saved) return JSON.parse(saved);
+      if (localStorage.getItem("token")) {
+        const saved = localStorage.getItem("formData");
+        if (saved) return JSON.parse(saved);
+      }
+      else localStorage.clear();
     }
     return defaultFormData;
   });
-
-  // Persist to localStorage whenever data changes
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("formData", JSON.stringify(data));
