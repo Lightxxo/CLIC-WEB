@@ -39,6 +39,37 @@ type City = {
   longitude: string;
 };
 
+const readStoredValue = (key: string) => localStorage.getItem(key);
+
+const readStoredJson = <T,>(key: string) => {
+  const value = readStoredValue(key);
+
+  if (value === null || value === "" || value === "null") return null;
+
+  try {
+    const parsed = JSON.parse(value);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed)
+      ? (parsed as T)
+      : null;
+  } catch {
+    return null;
+  }
+};
+
+const readStoredDate = (key: string) => {
+  const value = readStoredValue(key);
+
+  if (!value) return "";
+
+  return Number.isNaN(new Date(value).getTime()) ? "" : value;
+};
+
+const normalizeDateValue = (value: string | null | undefined) => {
+  if (!value) return "";
+
+  return Number.isNaN(new Date(value).getTime()) ? "" : value;
+};
+
 interface UserCredentialsProps {
   onValidityChange: (isValid: boolean) => void;
   showWarning: boolean;
@@ -52,37 +83,37 @@ export default function UserCredentials({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // --- Local states ---
-  const [dob, setDob] = useState<string>(
-    localStorage.getItem("dateOfBirth") || data.dateOfBirth
+  const [dob, setDob] = useState<string>(() =>
+    readStoredDate("dateOfBirth") || normalizeDateValue(data.dateOfBirth)
   );
   const [password, setPassword] = useState<string>(data.password || "");
   const [confirmPassword, setConfirmPassword] = useState<string>(
     data.confirmPassword || ""
   );
-  const [about, setAbout] = useState<string>(
-    localStorage.getItem("about") || data.about || ""
+  const [about, setAbout] = useState<string>(() =>
+    readStoredValue("about") || data.about || ""
   );
 
-  const [socialMediaObj, setSocialMediaObj] = useState<string>(
-    localStorage.getItem("socialMediaObj") || data.socialMediaObj || ""
+  const [socialMediaObj, setSocialMediaObj] = useState<string>(() =>
+    readStoredValue("socialMediaObj") || data.socialMediaObj || ""
   );
 
-  const [socialMediaHandle, setSocialMediaHandle] = useState<string>(
-    localStorage.getItem("socialMediaHandle") || data.socialMediaHandle || ""
+  const [socialMediaHandle, setSocialMediaHandle] = useState<string>(() =>
+    readStoredValue("socialMediaHandle") || data.socialMediaHandle || ""
   );
 
-  const [whereLiveCountry, setWhereLiveCountry] = useState<Country | null>(
-    JSON.parse(localStorage.getItem("whereLiveCountry") || "null") || data.whereLiveCountry
+  const [whereLiveCountry, setWhereLiveCountry] = useState<Country | null>(() =>
+    readStoredJson<Country>("whereLiveCountry") || data.whereLiveCountry as Country | null
   );
-  const [whereLiveCity, setWhereLiveCity] = useState<City | null>(
-    JSON.parse(localStorage.getItem("whereLiveCity") || "null") || data.whereLiveCity
+  const [whereLiveCity, setWhereLiveCity] = useState<City | null>(() =>
+    readStoredJson<City>("whereLiveCity") || data.whereLiveCity as City | null
   );
 
-  const [whereFromCountry, setWhereFromCountry] = useState<Country | null>(
-    JSON.parse(localStorage.getItem("whereFromCountry") || "null") || data.whereFromCountry
+  const [whereFromCountry, setWhereFromCountry] = useState<Country | null>(() =>
+    readStoredJson<Country>("whereFromCountry") || data.whereFromCountry as Country | null
   );
-  const [whereFromCity, setWhereFromCity] = useState<City | null>(
-    JSON.parse(localStorage.getItem("whereFromCity") || "null") || data.whereFromCity
+  const [whereFromCity, setWhereFromCity] = useState<City | null>(() =>
+    readStoredJson<City>("whereFromCity") || data.whereFromCity as City | null
   );
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -157,11 +188,14 @@ export default function UserCredentials({
     fileInputRef.current?.click();
   }, []);
 
+  const parsedDob = dob ? new Date(dob) : null;
+  const hasValidDob = parsedDob ? !Number.isNaN(parsedDob.getTime()) : false;
+
   // --- Validity check ---
   const isValid = 
   !!data.firstName?.trim() &&
     !!data.lastName?.trim() &&
-    !!dob &&
+    hasValidDob &&
     !!whereLiveCountry &&
     !!whereLiveCity &&
     !!whereFromCountry &&
@@ -185,7 +219,7 @@ export default function UserCredentials({
   }, []);
 
   const formattedDob = useMemo(
-    () => (dob ? format(new Date(dob), "PPP") : "Pick a date"),
+    () => (hasValidDob && parsedDob ? format(parsedDob, "PPP") : "Pick a date"),
     [dob]
   );
   function socialMediaPlaceholderInput() {
@@ -299,7 +333,7 @@ export default function UserCredentials({
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
               mode="single"
-              selected={dob == "" ? new Date() : new Date(dob)}
+              selected={hasValidDob && parsedDob ? parsedDob : undefined}
               onSelect={onDateSelect}
               disabled={(date) => date > new Date()}
               autoFocus

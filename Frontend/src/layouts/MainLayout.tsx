@@ -13,6 +13,7 @@ export default function MainLayout() {
   const {invitationCount} = useInvite();
   const location = useLocation();
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     // fetch(`http${REMOTE ? "s" : ""}://${API_BASE_URL}:${API_PORT}/`)
     // .then(res => console.log( "Backend status:", res.status))
