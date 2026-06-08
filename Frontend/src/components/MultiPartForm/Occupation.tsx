@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "@/contexts/FormContext";
-import * as Select from "@radix-ui/react-select";
-import { ChevronDownIcon, CheckIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
 
 
@@ -164,11 +162,7 @@ const Occupation = ({
       localStorage.setItem("occupation", occupation);
       localStorage.setItem("otherOccupation", otherOccupation);
   
-      if (occupation === "Other") {
-        onValidityChange(Boolean(otherOccupation));
-      } else {
-        onValidityChange(Boolean(occupation) && Boolean(otherOccupation));
-      }
+      onValidityChange(Boolean(occupation) && Boolean(otherOccupation));
   }, [occupation, otherOccupation]);
 
     return (
@@ -182,58 +176,32 @@ const Occupation = ({
                 1. Your occupation:
             </p>
                   <div className="w-full max-w-md space-y-2">
-<Select.Root
-  value={occupation === "Other" ? "Other" : otherOccupation}
-  onValueChange={(value) => {
-    const selectedGroup = occupationGroups.find((group) =>
-      group.options.includes(value)
-    );
 
-    if (!selectedGroup) return;
+          <select
+            value={occupation}
+            onChange={(e) => setOccupation(e.target.value)}
+            className="w-full border rounded-md p-2 focus:outline-none"
+          >
+            <option value="">Select Industry *</option>
+            {occupationGroups.map((x, y) => (
+              <option key={y} value={x.label}>{x.label}</option>
+            ))}
+          </select>
 
-    setOccupation(selectedGroup.label);
-
-    if (selectedGroup.label === "Other") {
-      setOtherOccupation("");
-    } else {
-      setOtherOccupation(value);
-    }
-  }}
->
-        <Select.Trigger className="flex h-11 w-full items-center justify-between rounded-xl border border-zinc-300 bg-white px-3 text-sm shadow-sm outline-none focus:ring-2 focus:ring-zinc-900">
-          <Select.Value placeholder="Select your occupation" />
-          <Select.Icon>
-            <ChevronDownIcon />
-          </Select.Icon>
-        </Select.Trigger>
-
-        <Select.Portal>
-          <Select.Content className="z-50 max-h-80 overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-lg">
-            <Select.Viewport className="p-2">
-              {occupationGroups.map((group) => (
-                <Select.Group key={group.label}>
-                  <Select.Label className="px-2 py-1.5 text-xs font-semibold uppercase text-zinc-500">
-                    {group.label}
-                  </Select.Label>
-
-                  {group.options.map((option) => (
-                    <Select.Item
-                      key={`${group.label}-${option}`}
-                      value={option}
-                      className="relative flex cursor-pointer select-none items-center rounded-lg px-8 py-2 text-sm text-zinc-900 outline-none hover:bg-zinc-100 focus:bg-zinc-100"
-                    >
-                      <Select.ItemIndicator className="absolute left-2">
-                        <CheckIcon />
-                      </Select.ItemIndicator>
-                      <Select.ItemText>{option}</Select.ItemText>
-                    </Select.Item>
-                  ))}
-                </Select.Group>
-              ))}
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Portal>
-      </Select.Root>
+          {occupation && occupation !== "Other" && 
+              <select
+            value={otherOccupation}
+            onChange={(e) => setOtherOccupation(e.target.value)}
+            className="w-full border rounded-md p-2 focus:outline-none"
+          >
+            <option value="">Select Occupation *</option>
+            {occupationGroups.find((group) =>
+                group.label == occupation
+              )?.options.map((x, y) => (
+              <option key={y} value={x}>{x}</option>
+            ))}
+          </select>
+          }
 
       {occupation === "Other" && (
         <input
@@ -241,7 +209,7 @@ const Occupation = ({
           onChange={(e) => setOtherOccupationValue(e.target.value)}
           onBlur={(e) => setOtherOccupation(e.target.value)}
           placeholder="Please enter your occupation"
-          className="h-11 w-full rounded-xl border border-zinc-300 px-3 text-sm shadow-sm outline-none focus:ring-2 focus:ring-zinc-900"
+          className="h-11 w-full rounded-md border border-zinc-300 px-3 text-sm shadow-sm outline-none focus:ring-2 focus:ring-zinc-900"
         />
       )}
     </div>

@@ -16,8 +16,13 @@ export default function SubmitStep() {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    if (loading || !agreed || !data.hearingPlatform || !data.referredBy) setDisabled(true);
-    else setDisabled(false);
+    if (data.hearingPlatform == "Friends or Family") {
+      if (loading || !agreed || !data.hearingPlatform || !data.referredBy) setDisabled(true);
+      else setDisabled(false);
+    } else {
+      if (loading || !agreed || !data.hearingPlatform) setDisabled(true);
+      else setDisabled(false);
+    }
   }, [agreed, loading, data.hearingPlatform, data.referredBy])
 
   const onSubmit = async (SubmitStepData: any) => {
@@ -205,14 +210,14 @@ export default function SubmitStep() {
         <option value="Other">Other</option>
       </select>
 
-      <Input
+      {data.hearingPlatform == "Friends or Family" && <Input
         placeholder="Enter the name of the person who referred you *"
         value={data.referredBy || localStorage.getItem("referredBy") || ""}
         onChange={(e) => {
           setData({ ...data, referredBy: e.target.value });
           localStorage.setItem("referredBy", e.target.value);
         }}
-      />
+      />}
 
       <div className="flex items-start justify-center gap-2 text-left max-w-md mx-auto">
         <input
