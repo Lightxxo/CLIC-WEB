@@ -19,7 +19,7 @@ export function PoolCard({ pool }: { pool: Pool }) {
     ? pool.imgURL.slice(1)
     : pool.imgURL;
   const fullImageUrl = `https://twoclicclub.ams3.cdn.digitaloceanspaces.com/${cleanPath}`;
-  const flag = new Date(pool.date_time).getTime() > Date.now();
+  const flag = new Date(pool.date_time + "Z").getTime() > Date.now();
   return (
     <motion.div
       // initial={{ opacity: 0, y: 20 }}

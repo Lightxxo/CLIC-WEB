@@ -11,6 +11,7 @@ import {
   EyeClosedIcon
 } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
+import { useInvite } from "@/contexts/InviteContext";
 
 const Login = () => {
   const [emailError, setEmailError] = useState("");
@@ -18,6 +19,7 @@ const Login = () => {
   const { REMOTE, API_BASE_URL, API_PORT } = config;
   const { setData } = useFormContext();
   const navigate = useNavigate();
+  const {fetchInvitationCount} = useInvite();
   function handleSubmit(e: { preventDefault: () => void; target: any }) {
     e.preventDefault();
     setEmailError(""); // setPassError("");
@@ -54,21 +56,9 @@ const Login = () => {
             username: data.isExists.userName,
             token: data.token,
           }));
-          fetch(
-            `http${
-              REMOTE ? "s" : ""
-            }://${API_BASE_URL}:${API_PORT}/user_approved`,
-            {
-              headers: {
-                Authorization: `Bearer ${data.token}`,
-              },
-            }
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.approved == "approved") {
+              if (data.isExists.approved == "approved") {
                 localStorage.setItem("isApproved", "true");
-
+                fetchInvitationCount();
                 navigate("/pools");
               } else {
                 navigate("/");
@@ -79,7 +69,6 @@ const Login = () => {
                   onClick: () => void 0,
                 },
               });
-            });
         } else if (data.message == "Incorrect password") {
           toast("Incorrect password", {
             action: {
