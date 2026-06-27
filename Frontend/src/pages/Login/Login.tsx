@@ -19,7 +19,7 @@ const Login = () => {
   const { REMOTE, API_BASE_URL, API_PORT } = config;
   const { setData } = useFormContext();
   const navigate = useNavigate();
-  const {fetchInvitationCount} = useInvite();
+  const {fetchInvitationCount, setIsLoggedIn} = useInvite();
   function handleSubmit(e: { preventDefault: () => void; target: any }) {
     e.preventDefault();
     setEmailError(""); // setPassError("");
@@ -58,7 +58,7 @@ const Login = () => {
           }));
               if (data.isExists.approved == "approved") {
                 localStorage.setItem("isApproved", "true");
-                fetchInvitationCount();
+                fetchInvitationCount(); setIsLoggedIn(true);
                 navigate("/pools");
               } else {
                 navigate("/");

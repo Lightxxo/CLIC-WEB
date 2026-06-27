@@ -10,7 +10,7 @@ import { useInvite } from "@/contexts/InviteContext";
 const { REMOTE, API_BASE_URL, API_PORT } = config;
 export default function MainLayout() {
   const { setData } = useFormContext();
-  const {invitationCount} = useInvite();
+  const {showNotificationBanner} = useInvite();
   const location = useLocation();
   const token = localStorage.getItem("token");
 
@@ -50,7 +50,7 @@ export default function MainLayout() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 bg-transparent">
-        {token && (location.pathname != "/myinvites") && (invitationCount > 0) && <NotificationBanner />}
+        {showNotificationBanner && location.pathname != "/myinvites" && <NotificationBanner />}
         <Outlet />
       </main>
       <Footer />
